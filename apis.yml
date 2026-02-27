@@ -1,0 +1,135 @@
+name: Microsoft Windows Server
+description: APIs and integration points for Microsoft Windows Server operating system
+image: https://www.microsoft.com/favicon.ico
+url: https://www.microsoft.com/windows-server
+tags:
+- Windows Server
+- Operating System
+- Enterprise
+- Infrastructure
+- Microsoft
+created: '2024'
+modified: '2024'
+specificationVersion: '0.18'
+apis:
+- name: Windows Server Management API
+  description: PowerShell and WMI-based management APIs for Windows Server administration
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/administration/
+  baseURL: https://localhost
+  tags:
+  - Management
+  - PowerShell
+  - WMI
+  - Administration
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/powershell/windows/get-started
+  - type: OpenAPI
+    url: https://docs.microsoft.com/rest/api/windows/
+  contact:
+  - FN: Microsoft Support
+    email: support@microsoft.com
+    url: https://support.microsoft.com
+- name: Windows Remote Management (WinRM)
+  description: WS-Management protocol implementation for remote management of Windows servers
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows/win32/winrm/portal
+  baseURL: http://localhost:5985
+  tags:
+  - Remote Management
+  - WS-Management
+  - SOAP
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/windows/win32/winrm/windows-remote-management-portal
+  - type: Specification
+    url: https://www.dmtf.org/standards/ws-man
+- name: Active Directory Domain Services API
+  description: LDAP and REST APIs for Active Directory management and authentication
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/identity/ad-ds/
+  baseURL: ldap://localhost:389
+  tags:
+  - Active Directory
+  - LDAP
+  - Authentication
+  - Directory Services
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/windows/win32/ad/active-directory-domain-services
+  - type: SDK
+    url: https://docs.microsoft.com/dotnet/api/system.directoryservices
+- name: Hyper-V Management API
+  description: APIs for managing Hyper-V virtualization platform
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/virtualization/hyper-v-on-windows/
+  baseURL: https://localhost
+  tags:
+  - Hyper-V
+  - Virtualization
+  - Virtual Machines
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/virtualization/api/
+  - type: PowerShell
+    url: https://docs.microsoft.com/powershell/module/hyper-v/
+- name: Windows Server Update Services (WSUS) API
+  description: APIs for managing Windows updates across enterprise environments
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/administration/windows-server-update-services/
+  baseURL: https://localhost:8530
+  tags:
+  - Updates
+  - WSUS
+  - Patch Management
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/previous-versions/windows/desktop/aa354519(v=vs.85)
+  - type: SDK
+    url: https://docs.microsoft.com/dotnet/api/microsoft.updateservices.administration
+- name: Windows Admin Center API
+  description: Modern web-based management interface REST API for Windows Server
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/manage/windows-admin-center/
+  baseURL: https://localhost:6516
+  tags:
+  - Admin Center
+  - REST API
+  - Web Management
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/windows-server/manage/windows-admin-center/extend/extensibility-overview
+  - type: GitHub
+    url: https://github.com/Microsoft/windows-admin-center-sdk
+- name: DNS Server Management API
+  description: APIs for managing Windows DNS Server services
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/networking/dns/
+  baseURL: https://localhost
+  tags:
+  - DNS
+  - Networking
+  - Name Resolution
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/powershell/module/dnsserver/
+  - type: WMI
+    url: https://docs.microsoft.com/previous-versions/windows/desktop/dnsprov/dns-wmi-provider
+common:
+- type: Portal
+  url: https://portal.azure.com
+- type: Documentation
+  url: https://docs.microsoft.com/windows-server/
+- type: Support
+  url: https://support.microsoft.com/windows-server
+- type: Downloads
+  url: https://www.microsoft.com/evalcenter/evaluate-windows-server
+- type: Blog
+  url: https://techcommunity.microsoft.com/t5/windows-server/bg-p/WindowsServer
+- type: Terms of Service
+  url: https://www.microsoft.com/licensing/terms/
+maintainers:
+- FN: Microsoft Corporation
+  email: support@microsoft.com
+  url: https://www.microsoft.com
