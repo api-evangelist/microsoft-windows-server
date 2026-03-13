@@ -1,0 +1,275 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "iis": "https://learn.microsoft.com/en-us/iis-administration/api/",
+    "ms": "https://learn.microsoft.com/en-us/windows-server/",
+    "WebSite": {
+      "@id": "iis:sites",
+      "@context": {
+        "name": "https://schema.org/name",
+        "id": "https://schema.org/identifier",
+        "physical_path": {
+          "@id": "iis:sites#physical_path",
+          "@type": "https://schema.org/Text"
+        },
+        "key": {
+          "@id": "iis:sites#key",
+          "@type": "https://schema.org/Text"
+        },
+        "status": {
+          "@id": "iis:sites#status",
+          "@type": "https://schema.org/Text"
+        },
+        "server_auto_start": {
+          "@id": "iis:sites#server_auto_start",
+          "@type": "https://schema.org/Boolean"
+        },
+        "enabled_protocols": {
+          "@id": "iis:sites#enabled_protocols",
+          "@type": "https://schema.org/Text"
+        },
+        "limits": {
+          "@id": "iis:sites#limits",
+          "@context": {
+            "connection_timeout": {
+              "@id": "iis:sites#connection_timeout",
+              "@type": "https://schema.org/Integer"
+            },
+            "max_bandwidth": {
+              "@id": "iis:sites#max_bandwidth",
+              "@type": "https://schema.org/Integer"
+            },
+            "max_connections": {
+              "@id": "iis:sites#max_connections",
+              "@type": "https://schema.org/Integer"
+            },
+            "max_url_segments": {
+              "@id": "iis:sites#max_url_segments",
+              "@type": "https://schema.org/Integer"
+            }
+          }
+        },
+        "bindings": {
+          "@id": "iis:sites#bindings",
+          "@container": "@list",
+          "@context": {
+            "protocol": {
+              "@id": "iis:sites#binding_protocol",
+              "@type": "https://schema.org/Text"
+            },
+            "binding_information": {
+              "@id": "iis:sites#binding_information",
+              "@type": "https://schema.org/Text"
+            },
+            "ip_address": {
+              "@id": "iis:sites#ip_address",
+              "@type": "https://schema.org/Text"
+            },
+            "port": {
+              "@id": "iis:sites#port",
+              "@type": "https://schema.org/Integer"
+            },
+            "hostname": {
+              "@id": "iis:sites#hostname",
+              "@type": "https://schema.org/Text"
+            },
+            "require_sni": {
+              "@id": "iis:sites#require_sni",
+              "@type": "https://schema.org/Boolean"
+            },
+            "certificate": {
+              "@id": "iis:sites#certificate",
+              "@context": {
+                "name": "https://schema.org/name",
+                "id": "https://schema.org/identifier",
+                "issued_by": {
+                  "@id": "iis:sites#cert_issued_by",
+                  "@type": "https://schema.org/Text"
+                },
+                "subject": {
+                  "@id": "iis:sites#cert_subject",
+                  "@type": "https://schema.org/Text"
+                },
+                "thumbprint": {
+                  "@id": "iis:sites#cert_thumbprint",
+                  "@type": "https://schema.org/Text"
+                },
+                "valid_to": {
+                  "@id": "iis:sites#cert_valid_to",
+                  "@type": "https://schema.org/DateTime"
+                }
+              }
+            }
+          }
+        },
+        "application_pool": {
+          "@id": "iis:application-pools",
+          "@type": "@id"
+        }
+      }
+    },
+    "Application": {
+      "@id": "iis:applications",
+      "@context": {
+        "location": {
+          "@id": "iis:applications#location",
+          "@type": "https://schema.org/Text"
+        },
+        "path": {
+          "@id": "iis:applications#path",
+          "@type": "https://schema.org/Text"
+        },
+        "id": "https://schema.org/identifier",
+        "physical_path": {
+          "@id": "iis:applications#physical_path",
+          "@type": "https://schema.org/Text"
+        },
+        "enabled_protocols": {
+          "@id": "iis:applications#enabled_protocols",
+          "@type": "https://schema.org/Text"
+        },
+        "website": {
+          "@id": "iis:sites",
+          "@type": "@id"
+        },
+        "application_pool": {
+          "@id": "iis:application-pools",
+          "@type": "@id"
+        }
+      }
+    },
+    "ApplicationPool": {
+      "@id": "iis:application-pools",
+      "@context": {
+        "name": "https://schema.org/name",
+        "id": "https://schema.org/identifier",
+        "status": {
+          "@id": "iis:application-pools#status",
+          "@type": "https://schema.org/Text"
+        },
+        "auto_start": {
+          "@id": "iis:application-pools#auto_start",
+          "@type": "https://schema.org/Boolean"
+        },
+        "pipeline_mode": {
+          "@id": "iis:application-pools#pipeline_mode",
+          "@type": "https://schema.org/Text"
+        },
+        "managed_runtime_version": {
+          "@id": "iis:application-pools#managed_runtime_version",
+          "@type": "https://schema.org/Text"
+        },
+        "enable_32bit_win64": {
+          "@id": "iis:application-pools#enable_32bit_win64",
+          "@type": "https://schema.org/Boolean"
+        },
+        "queue_length": {
+          "@id": "iis:application-pools#queue_length",
+          "@type": "https://schema.org/Integer"
+        },
+        "cpu": {
+          "@id": "iis:application-pools#cpu",
+          "@context": {
+            "limit": {
+              "@id": "iis:application-pools#cpu_limit",
+              "@type": "https://schema.org/Integer"
+            },
+            "limit_interval": {
+              "@id": "iis:application-pools#cpu_limit_interval",
+              "@type": "https://schema.org/Integer"
+            },
+            "action": {
+              "@id": "iis:application-pools#cpu_action",
+              "@type": "https://schema.org/Text"
+            }
+          }
+        },
+        "process_model": {
+          "@id": "iis:application-pools#process_model",
+          "@context": {
+            "idle_timeout": {
+              "@id": "iis:application-pools#idle_timeout",
+              "@type": "https://schema.org/Integer"
+            },
+            "max_processes": {
+              "@id": "iis:application-pools#max_processes",
+              "@type": "https://schema.org/Integer"
+            },
+            "pinging_enabled": {
+              "@id": "iis:application-pools#pinging_enabled",
+              "@type": "https://schema.org/Boolean"
+            },
+            "ping_interval": {
+              "@id": "iis:application-pools#ping_interval",
+              "@type": "https://schema.org/Integer"
+            },
+            "idle_timeout_action": {
+              "@id": "iis:application-pools#idle_timeout_action",
+              "@type": "https://schema.org/Text"
+            }
+          }
+        },
+        "identity": {
+          "@id": "iis:application-pools#identity",
+          "@context": {
+            "identity_type": {
+              "@id": "iis:application-pools#identity_type",
+              "@type": "https://schema.org/Text"
+            },
+            "username": {
+              "@id": "iis:application-pools#username",
+              "@type": "https://schema.org/Text"
+            },
+            "load_user_profile": {
+              "@id": "iis:application-pools#load_user_profile",
+              "@type": "https://schema.org/Boolean"
+            }
+          }
+        },
+        "recycling": {
+          "@id": "iis:application-pools#recycling",
+          "@context": {
+            "disable_overlapped_recycle": {
+              "@id": "iis:application-pools#disable_overlapped_recycle",
+              "@type": "https://schema.org/Boolean"
+            },
+            "periodic_restart": {
+              "@id": "iis:application-pools#periodic_restart",
+              "@context": {
+                "time_interval": {
+                  "@id": "iis:application-pools#restart_time_interval",
+                  "@type": "https://schema.org/Integer"
+                },
+                "private_memory": {
+                  "@id": "iis:application-pools#restart_private_memory",
+                  "@type": "https://schema.org/Integer"
+                },
+                "request_limit": {
+                  "@id": "iis:application-pools#restart_request_limit",
+                  "@type": "https://schema.org/Integer"
+                }
+              }
+            }
+          }
+        },
+        "rapid_fail_protection": {
+          "@id": "iis:application-pools#rapid_fail_protection",
+          "@context": {
+            "enabled": {
+              "@id": "iis:application-pools#rfp_enabled",
+              "@type": "https://schema.org/Boolean"
+            },
+            "interval": {
+              "@id": "iis:application-pools#rfp_interval",
+              "@type": "https://schema.org/Integer"
+            },
+            "max_crashes": {
+              "@id": "iis:application-pools#rfp_max_crashes",
+              "@type": "https://schema.org/Integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}

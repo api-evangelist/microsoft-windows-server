@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/microsoft-windows-server/json-schema/microsoft-windows-server-site-schema.json",
+  "title": "IIS Web Site",
+  "description": "Schema for an IIS web site resource as exposed by the Microsoft IIS Administration API. Web sites are a core entity of IIS that determine where and how HTTP requests will be handled, including binding configuration, application pool assignment, and resource limits.",
+  "type": "object",
+  "required": [
+    "name",
+    "physical_path",
+    "bindings"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The display name of the web site.",
+      "examples": [
+        "Default Web Site",
+        "Demonstration Site"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier assigned to the web site by the IIS Administration API."
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the web site root directory. Environment variables such as %SystemDrive% are supported.",
+      "examples": [
+        "%SystemDrive%\\inetpub\\wwwroot",
+        "C:\\inetpub\\wwwroot\\DemonstrationSite"
+      ]
+    },
+    "key": {
+      "type": "string",
+      "description": "The IIS site key identifier, corresponding to the site ID in IIS configuration.",
+      "examples": [
+        "1"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current operational status of the web site.",
+      "enum": [
+        "started",
+        "stopped",
+        "starting",
+        "stopping"
+      ]
+    },
+    "server_auto_start": {
+      "type": "boolean",
+      "description": "Whether the web site starts automatically when the IIS service starts.",
+      "default": true
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "description": "A comma-separated list of protocols enabled for this web site.",
+      "examples": [
+        "http",
+        "http,https",
+        "http,net.tcp"
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "description": "Resource limits governing connection behavior and URL processing for the web site.",
+      "properties": {
+        "connection_timeout": {
+          "type": "integer",
+          "description": "The time in seconds after which an inactive connection is closed.",
+          "minimum": 0,
+          "default": 120
+        },
+        "max_bandwidth": {
+          "type": "integer",
+          "description": "The maximum bandwidth in bytes per second allowed for the web site. A value of 4294967295 indicates no limit.",
+          "minimum": 0,
+          "default": 4294967295
+        },
+        "max_connections": {
+          "type": "integer",
+          "description": "The maximum number of concurrent connections allowed for the web site. A value of 4294967295 indicates no limit.",
+          "minimum": 0,
+          "default": 4294967295
+        },
+        "max_url_segments": {
+          "type": "integer",
+          "description": "The maximum number of segments allowed in a URL path.",
+          "minimum": 0,
+          "default": 32
+        }
+      },
+      "additionalProperties": false
+    },
+    "bindings": {
+      "type": "array",
+      "description": "The bindings that define the protocols, IP addresses, ports, and hostnames the web site listens on. At minimum, a binding must specify a protocol, IP address, and port.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "protocol"
+        ],
+        "properties": {
+          "protocol": {
+            "type": "string",
+            "description": "The network protocol for this binding.",
+            "examples": [
+              "http",
+              "https",
+              "net.tcp"
+            ]
+          },
+          "binding_information": {
+            "type": "string",
+            "description": "Combined binding string in the format '{ip_address}:{port}:{hostname}' for HTTP/HTTPS protocols.",
+            "examples": [
+              "*:80:",
+              "*:443:",
+              "808:*"
+            ]
+          },
+          "ip_address": {
+            "type": "string",
+            "description": "The IP address the binding listens on. Use '*' to listen on all available addresses.",
+            "examples": [
+              "*",
+              "192.168.1.1",
+              "10.0.0.1"
+            ]
+          },
+          "port": {
+            "type": "integer",
+            "description": "The TCP port number the binding listens on.",
+            "minimum": 1,
+            "maximum": 65535,
+            "examples": [
+              80,
+              443,
+              8080,
+              8443
+            ]
+          },
+          "hostname": {
+            "type": "string",
+            "description": "The hostname for host header-based routing. An empty string matches all hostnames.",
+            "examples": [
+              "",
+              "www.example.com",
+              "api.example.com"
+            ]
+          },
+          "certificate": {
+            "type": "object",
+            "description": "The SSL/TLS certificate associated with an HTTPS binding. Required when protocol is HTTPS.",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The friendly name of the certificate.",
+                "examples": [
+                  "Web Hosting Certificate"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "The unique identifier of the certificate resource in the IIS Administration API."
+              },
+              "issued_by": {
+                "type": "string",
+                "description": "The distinguished name of the certificate issuer.",
+                "examples": [
+                  "CN=localhost"
+                ]
+              },
+              "subject": {
+                "type": "string",
+                "description": "The distinguished name of the certificate subject.",
+                "examples": [
+                  "CN=localhost"
+                ]
+              },
+              "thumbprint": {
+                "type": "string",
+                "description": "The SHA-1 thumbprint of the certificate.",
+                "pattern": "^[0-9A-Fa-f]{40}$",
+                "examples": [
+                  "2F6C0E796B8DAC4A1DDBF59F1714A19D9520B88A"
+                ]
+              },
+              "valid_to": {
+                "type": "string",
+                "format": "date-time",
+                "description": "The expiration date and time of the certificate in ISO 8601 format.",
+                "examples": [
+                  "2025-01-09T00:00:00Z"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "require_sni": {
+            "type": "boolean",
+            "description": "Whether Server Name Indication (SNI) is required for this HTTPS binding.",
+            "default": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "application_pool": {
+      "type": "object",
+      "description": "The application pool assigned to handle requests for this web site.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the application pool.",
+          "examples": [
+            "DefaultAppPool"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the application pool."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current operational status of the application pool.",
+          "enum": [
+            "started",
+            "stopped",
+            "starting",
+            "stopping"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "_links": {
+      "type": "object",
+      "description": "HAL-style hypermedia links to related resources.",
+      "properties": {
+        "authentication": {
+          "$ref": "#/$defs/halLink"
+        },
+        "authorization": {
+          "$ref": "#/$defs/halLink"
+        },
+        "default_document": {
+          "$ref": "#/$defs/halLink"
+        },
+        "delegation": {
+          "$ref": "#/$defs/halLink"
+        },
+        "directory_browsing": {
+          "$ref": "#/$defs/halLink"
+        },
+        "files": {
+          "$ref": "#/$defs/halLink"
+        },
+        "handlers": {
+          "$ref": "#/$defs/halLink"
+        },
+        "ip_restrictions": {
+          "$ref": "#/$defs/halLink"
+        },
+        "logging": {
+          "$ref": "#/$defs/halLink"
+        },
+        "modules": {
+          "$ref": "#/$defs/halLink"
+        },
+        "request_filtering": {
+          "$ref": "#/$defs/halLink"
+        },
+        "request_monitor": {
+          "$ref": "#/$defs/halLink"
+        },
+        "request_tracing": {
+          "$ref": "#/$defs/halLink"
+        },
+        "response_compression": {
+          "$ref": "#/$defs/halLink"
+        },
+        "response_headers": {
+          "$ref": "#/$defs/halLink"
+        },
+        "ssl": {
+          "$ref": "#/$defs/halLink"
+        },
+        "static_content": {
+          "$ref": "#/$defs/halLink"
+        },
+        "vdirs": {
+          "$ref": "#/$defs/halLink"
+        },
+        "webapps": {
+          "$ref": "#/$defs/halLink"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "halLink": {
+      "type": "object",
+      "description": "A HAL-style hyperlink to a related resource.",
+      "properties": {
+        "href": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "The URI of the linked resource."
+        }
+      },
+      "required": [
+        "href"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

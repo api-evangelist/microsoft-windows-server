@@ -1,0 +1,1384 @@
+openapi: 3.1.0
+info:
+  title: IIS Administration API
+  description: >-
+    REST API for managing Internet Information Services (IIS) web servers.
+    The IIS Administration API enables configuration and monitoring of IIS
+    web sites, applications, and application pools from any HTTP client.
+    Based on the Microsoft IIS Administration documentation at
+    https://learn.microsoft.com/en-us/iis-administration/.
+  version: 2.3.0
+  contact:
+    name: Microsoft Support
+    url: https://support.microsoft.com
+    email: support@microsoft.com
+  license:
+    name: MIT
+    url: https://github.com/microsoft/IIS.Administration/blob/main/LICENSE
+  x-logo:
+    url: https://www.microsoft.com/favicon.ico
+servers:
+  - url: https://localhost:55539
+    description: Default IIS Administration API server
+security:
+  - accessToken: []
+tags:
+  - name: Web Sites
+    description: >-
+      Web sites are a core entity of IIS that determine where and how requests
+      will be handled. The web site API allows consumers to create, read,
+      delete, or update their web sites.
+  - name: Applications
+    description: >-
+      Applications provide a method to differentiate sections of a web site.
+      An application belongs to a single web site and will handle requests
+      for the web site at the application path.
+  - name: Application Pools
+    description: >-
+      Application pools provide an isolation mechanism for processes on the
+      web server. There are many different settings available to fine-tune
+      the behavior of the worker processes used to serve requests through IIS.
+paths:
+  /api/webserver/websites:
+    get:
+      operationId: listWebSites
+      summary: List all web sites
+      description: Retrieves a list of all web sites configured on the IIS server.
+      tags:
+        - Web Sites
+      parameters:
+        - name: application_pool.id
+          in: query
+          description: Filter web sites by application pool identifier.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of web sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  websites:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebSiteSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createWebSite
+      summary: Create a web site
+      description: >-
+        Creates a new web site on the IIS server. Requires a physical path,
+        the name of the web site, and a set of bindings that the web site
+        should listen on.
+      tags:
+        - Web Sites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebSiteCreate'
+      responses:
+        '201':
+          description: The web site was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: A web site with the specified name or bindings already exists.
+  /api/webserver/websites/{id}:
+    get:
+      operationId: getWebSite
+      summary: Get a web site
+      description: Retrieves the details of a specific web site by its identifier.
+      tags:
+        - Web Sites
+      parameters:
+        - $ref: '#/components/parameters/WebSiteId'
+      responses:
+        '200':
+          description: The web site details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateWebSite
+      summary: Update a web site
+      description: >-
+        Updates the configuration of an existing web site. Sending a patch
+        request with the web site in the desired state will update the web
+        site on the server to match. List properties such as bindings must
+        include all desired entries since the entire list is replaced.
+      tags:
+        - Web Sites
+      parameters:
+        - $ref: '#/components/parameters/WebSiteId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebSiteUpdate'
+      responses:
+        '200':
+          description: The web site was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: A conflict occurred with the specified bindings.
+    delete:
+      operationId: deleteWebSite
+      summary: Delete a web site
+      description: Deletes a web site from the IIS server.
+      tags:
+        - Web Sites
+      parameters:
+        - $ref: '#/components/parameters/WebSiteId'
+      responses:
+        '204':
+          description: The web site was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/webserver/webapps:
+    get:
+      operationId: listApplications
+      summary: List all applications
+      description: >-
+        Retrieves a list of all web applications. Optionally filter by web
+        site or application pool.
+      tags:
+        - Applications
+      parameters:
+        - name: website.id
+          in: query
+          description: Filter applications by web site identifier.
+          required: false
+          schema:
+            type: string
+        - name: application_pool.id
+          in: query
+          description: Filter applications by application pool identifier.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of web applications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webapps:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApplicationSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createApplication
+      summary: Create an application
+      description: >-
+        Creates a new web application. Requires the web site that the
+        application should belong to, the virtual path, and the physical
+        path in the file system. The directory must exist.
+      tags:
+        - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: The application was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: The specified web site or application pool was not found.
+  /api/webserver/webapps/{id}:
+    get:
+      operationId: getApplication
+      summary: Get an application
+      description: Retrieves the details of a specific web application by its identifier.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/ApplicationId'
+      responses:
+        '200':
+          description: The application details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateApplication
+      summary: Update an application
+      description: Updates the configuration of an existing web application.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/ApplicationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdate'
+      responses:
+        '200':
+          description: The application was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteApplication
+      summary: Delete an application
+      description: Deletes a web application from the IIS server.
+      tags:
+        - Applications
+      parameters:
+        - $ref: '#/components/parameters/ApplicationId'
+      responses:
+        '204':
+          description: The application was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/webserver/application-pools:
+    get:
+      operationId: listApplicationPools
+      summary: List all application pools
+      description: Retrieves a list of all application pools configured on the IIS server.
+      tags:
+        - Application Pools
+      responses:
+        '200':
+          description: A list of application pools.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  application_pools:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApplicationPoolSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: createApplicationPool
+      summary: Create an application pool
+      description: >-
+        Creates a new application pool. The only required information is
+        the name of the application pool.
+      tags:
+        - Application Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPoolCreate'
+      responses:
+        '201':
+          description: The application pool was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: An application pool with the specified name already exists.
+  /api/webserver/application-pools/{id}:
+    get:
+      operationId: getApplicationPool
+      summary: Get an application pool
+      description: Retrieves the details of a specific application pool by its identifier.
+      tags:
+        - Application Pools
+      parameters:
+        - $ref: '#/components/parameters/ApplicationPoolId'
+      responses:
+        '200':
+          description: The application pool details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateApplicationPool
+      summary: Update an application pool
+      description: Updates the configuration of an existing application pool.
+      tags:
+        - Application Pools
+      parameters:
+        - $ref: '#/components/parameters/ApplicationPoolId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPoolUpdate'
+      responses:
+        '200':
+          description: The application pool was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteApplicationPool
+      summary: Delete an application pool
+      description: Deletes an application pool from the IIS server.
+      tags:
+        - Application Pools
+      parameters:
+        - $ref: '#/components/parameters/ApplicationPoolId'
+      responses:
+        '204':
+          description: The application pool was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+      description: >-
+        Access token for authenticating with the IIS Administration API.
+        Tokens are generated through the API management portal at
+        https://localhost:55539.
+  parameters:
+    WebSiteId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the web site.
+      schema:
+        type: string
+    ApplicationId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the web application.
+      schema:
+        type: string
+    ApplicationPoolId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the application pool.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+        detail:
+          type: string
+          description: A detailed description of the error.
+        status:
+          type: integer
+          description: The HTTP status code.
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+    Certificate:
+      type: object
+      description: An SSL/TLS certificate associated with an HTTPS binding.
+      properties:
+        name:
+          type: string
+          description: The friendly name of the certificate.
+        id:
+          type: string
+          description: The unique identifier of the certificate resource.
+        issued_by:
+          type: string
+          description: The certificate issuer distinguished name.
+        subject:
+          type: string
+          description: The certificate subject distinguished name.
+        thumbprint:
+          type: string
+          description: The SHA-1 thumbprint of the certificate.
+        valid_to:
+          type: string
+          format: date-time
+          description: The expiration date of the certificate.
+    Binding:
+      type: object
+      description: >-
+        Defines the protocol, IP address, port, and optional hostname that
+        a web site listens on. The binding_information property format is
+        '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.
+      required:
+        - protocol
+      properties:
+        protocol:
+          type: string
+          description: The protocol for this binding (e.g., http, https, net.tcp).
+          examples:
+            - http
+            - https
+            - net.tcp
+        binding_information:
+          type: string
+          description: >-
+            Combined binding string in the format
+            '{ip_address}:{port}:{hostname}'.
+          examples:
+            - '*:80:'
+            - '*:443:'
+        ip_address:
+          type: string
+          description: The IP address to bind to. Use '*' for all addresses.
+          examples:
+            - '*'
+            - '192.168.1.1'
+        port:
+          type: integer
+          description: The port number to listen on.
+          minimum: 1
+          maximum: 65535
+          examples:
+            - 80
+            - 443
+            - 8080
+        hostname:
+          type: string
+          description: The hostname for host header-based routing.
+        certificate:
+          $ref: '#/components/schemas/Certificate'
+        require_sni:
+          type: boolean
+          description: Whether Server Name Indication (SNI) is required for this binding.
+          default: false
+    WebSiteLimits:
+      type: object
+      description: Resource limits for the web site.
+      properties:
+        connection_timeout:
+          type: integer
+          description: The connection timeout in seconds.
+          default: 120
+        max_bandwidth:
+          type: integer
+          description: The maximum bandwidth in bytes per second.
+          format: int64
+          default: 4294967295
+        max_connections:
+          type: integer
+          description: The maximum number of concurrent connections.
+          format: int64
+          default: 4294967295
+        max_url_segments:
+          type: integer
+          description: The maximum number of URL segments allowed.
+          default: 32
+    ApplicationPoolReference:
+      type: object
+      description: A reference to an application pool resource.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+    WebSiteReference:
+      type: object
+      description: A reference to a web site resource.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+        id:
+          type: string
+          description: The unique identifier of the web site.
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+    WebSiteLinks:
+      type: object
+      description: HAL-style links to related resources for a web site.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/HalLink'
+        authorization:
+          $ref: '#/components/schemas/HalLink'
+        default_document:
+          $ref: '#/components/schemas/HalLink'
+        delegation:
+          $ref: '#/components/schemas/HalLink'
+        directory_browsing:
+          $ref: '#/components/schemas/HalLink'
+        files:
+          $ref: '#/components/schemas/HalLink'
+        handlers:
+          $ref: '#/components/schemas/HalLink'
+        ip_restrictions:
+          $ref: '#/components/schemas/HalLink'
+        logging:
+          $ref: '#/components/schemas/HalLink'
+        modules:
+          $ref: '#/components/schemas/HalLink'
+        request_filtering:
+          $ref: '#/components/schemas/HalLink'
+        request_monitor:
+          $ref: '#/components/schemas/HalLink'
+        request_tracing:
+          $ref: '#/components/schemas/HalLink'
+        response_compression:
+          $ref: '#/components/schemas/HalLink'
+        response_headers:
+          $ref: '#/components/schemas/HalLink'
+        ssl:
+          $ref: '#/components/schemas/HalLink'
+        static_content:
+          $ref: '#/components/schemas/HalLink'
+        vdirs:
+          $ref: '#/components/schemas/HalLink'
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+    WebSite:
+      type: object
+      description: >-
+        A complete IIS web site resource including configuration, bindings,
+        application pool assignment, and HAL links to related resources.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          examples:
+            - Default Web Site
+        id:
+          type: string
+          description: The unique identifier of the web site.
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root.
+          examples:
+            - '%SystemDrive%\inetpub\wwwroot'
+        key:
+          type: string
+          description: The IIS site key identifier.
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+        enabled_protocols:
+          type: string
+          description: >-
+            The protocols enabled for this web site, as a comma-separated
+            list.
+          examples:
+            - http
+            - http,https
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
+        bindings:
+          type: array
+          description: The list of bindings configured for this web site.
+          items:
+            $ref: '#/components/schemas/Binding'
+        application_pool:
+          $ref: '#/components/schemas/ApplicationPoolReference'
+        _links:
+          $ref: '#/components/schemas/WebSiteLinks'
+    WebSiteSummary:
+      type: object
+      description: A summary representation of a web site in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+        id:
+          type: string
+          description: The unique identifier of the web site.
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+    WebSiteCreate:
+      type: object
+      description: Request body for creating a new web site.
+      required:
+        - name
+        - physical_path
+        - bindings
+      properties:
+        name:
+          type: string
+          description: The name of the web site to create.
+          examples:
+            - Demonstration Site
+        physical_path:
+          type: string
+          description: >-
+            The physical file system path for the web site root directory.
+            The directory must exist.
+          examples:
+            - 'C:\inetpub\wwwroot\DemonstrationSite'
+        bindings:
+          type: array
+          description: The bindings for the web site.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Binding'
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this web site.
+          default: http
+    WebSiteUpdate:
+      type: object
+      description: >-
+        Request body for updating a web site. Only include properties that
+        should be changed. Note that list properties like bindings replace
+        the entire list.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root.
+        bindings:
+          type: array
+          description: >-
+            The full list of desired bindings. Existing bindings not included
+            in this list will be removed.
+          items:
+            $ref: '#/components/schemas/Binding'
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+        server_auto_start:
+          type: boolean
+        enabled_protocols:
+          type: string
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
+    ApplicationLinks:
+      type: object
+      description: HAL-style links to related resources for an application.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/HalLink'
+        authorization:
+          $ref: '#/components/schemas/HalLink'
+        default_document:
+          $ref: '#/components/schemas/HalLink'
+        directory_browsing:
+          $ref: '#/components/schemas/HalLink'
+        handlers:
+          $ref: '#/components/schemas/HalLink'
+        ip_restrictions:
+          $ref: '#/components/schemas/HalLink'
+        modules:
+          $ref: '#/components/schemas/HalLink'
+        request_filtering:
+          $ref: '#/components/schemas/HalLink'
+        request_tracing:
+          $ref: '#/components/schemas/HalLink'
+        response_compression:
+          $ref: '#/components/schemas/HalLink'
+        response_headers:
+          $ref: '#/components/schemas/HalLink'
+        ssl:
+          $ref: '#/components/schemas/HalLink'
+        static_content:
+          $ref: '#/components/schemas/HalLink'
+        vdirs:
+          $ref: '#/components/schemas/HalLink'
+    Application:
+      type: object
+      description: >-
+        A complete IIS web application resource. Applications belong to a
+        single web site and handle requests at a specific virtual path.
+      properties:
+        location:
+          type: string
+          description: >-
+            The full location path combining the web site name and
+            application path.
+          examples:
+            - Default Web Site/demo-app
+        path:
+          type: string
+          description: >-
+            The virtual path of the application relative to the web site
+            root.
+          examples:
+            - /demo-app
+        id:
+          type: string
+          description: The unique identifier of the application.
+        physical_path:
+          type: string
+          description: The physical file system path for the application.
+          examples:
+            - 'c:\inetpub\wwwroot\demo-app'
+        enabled_protocols:
+          type: string
+          description: >-
+            The protocols enabled for this application, as a
+            comma-separated list.
+          examples:
+            - http
+        website:
+          $ref: '#/components/schemas/WebSiteReference'
+        application_pool:
+          $ref: '#/components/schemas/ApplicationPoolReference'
+        _links:
+          $ref: '#/components/schemas/ApplicationLinks'
+    ApplicationSummary:
+      type: object
+      description: A summary representation of an application in list responses.
+      properties:
+        location:
+          type: string
+          description: The full location path.
+        path:
+          type: string
+          description: The virtual path of the application.
+        id:
+          type: string
+          description: The unique identifier of the application.
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+    ApplicationCreate:
+      type: object
+      description: Request body for creating a new web application.
+      required:
+        - path
+        - physical_path
+        - website
+      properties:
+        path:
+          type: string
+          description: >-
+            The virtual path for the application relative to the web site
+            root.
+          examples:
+            - demo-app
+        physical_path:
+          type: string
+          description: >-
+            The physical file system path for the application. The
+            directory must exist.
+          examples:
+            - 'C:\inetpub\wwwroot\demo-app'
+        website:
+          type: object
+          description: The web site that the application should belong to.
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              description: The identifier of the web site.
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this application.
+          default: http
+    ApplicationUpdate:
+      type: object
+      description: >-
+        Request body for updating a web application. Only include properties
+        that should be changed.
+      properties:
+        path:
+          type: string
+          description: The virtual path for the application.
+        physical_path:
+          type: string
+          description: The physical file system path for the application.
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+        enabled_protocols:
+          type: string
+    CpuSettings:
+      type: object
+      description: CPU usage settings for the application pool.
+      properties:
+        limit:
+          type: integer
+          description: >-
+            The maximum CPU usage percentage (in 1/1000ths of a percent)
+            allowed for the application pool.
+          default: 0
+        limit_interval:
+          type: integer
+          description: The interval in minutes for CPU limit monitoring.
+          default: 5
+        action:
+          type: string
+          description: The action to take when the CPU limit is exceeded.
+          enum:
+            - NoAction
+            - KillW3wp
+            - Throttle
+            - ThrottleUnderLoad
+          default: NoAction
+        processor_affinity_enabled:
+          type: boolean
+          description: Whether processor affinity is enabled.
+          default: false
+        processor_affinity_mask32:
+          type: string
+          description: The 32-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+        processor_affinity_mask64:
+          type: string
+          description: The 64-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+    ProcessModel:
+      type: object
+      description: Process model settings for the application pool worker processes.
+      properties:
+        idle_timeout:
+          type: integer
+          description: The idle timeout in minutes before a worker process is shut down.
+          default: 20
+        max_processes:
+          type: integer
+          description: >-
+            The maximum number of worker processes for the application pool
+            (web garden).
+          default: 1
+        pinging_enabled:
+          type: boolean
+          description: Whether health monitoring pings are enabled.
+          default: true
+        ping_interval:
+          type: integer
+          description: The interval in seconds between health monitoring pings.
+          default: 30
+        ping_response_time:
+          type: integer
+          description: >-
+            The maximum time in seconds allowed for a worker process to
+            respond to a health ping.
+          default: 90
+        shutdown_time_limit:
+          type: integer
+          description: >-
+            The time in seconds allowed for a worker process to gracefully
+            shut down.
+          default: 90
+        startup_time_limit:
+          type: integer
+          description: >-
+            The time in seconds allowed for a worker process to start up.
+          default: 90
+        idle_timeout_action:
+          type: string
+          description: The action to take when the idle timeout is reached.
+          enum:
+            - Terminate
+            - Suspend
+          default: Terminate
+    Identity:
+      type: object
+      description: The identity configuration for the application pool worker process.
+      properties:
+        identity_type:
+          type: string
+          description: The type of identity used by the application pool.
+          enum:
+            - ApplicationPoolIdentity
+            - LocalSystem
+            - LocalService
+            - NetworkService
+            - SpecificUser
+          default: ApplicationPoolIdentity
+        username:
+          type: string
+          description: >-
+            The username for the identity when using SpecificUser identity
+            type.
+        load_user_profile:
+          type: boolean
+          description: Whether to load the user profile for the worker process.
+          default: true
+    RecyclingLogEvents:
+      type: object
+      description: Configuration for which recycling events are logged.
+      properties:
+        time:
+          type: boolean
+          default: true
+        requests:
+          type: boolean
+          default: true
+        schedule:
+          type: boolean
+          default: true
+        memory:
+          type: boolean
+          default: true
+        isapi_unhealthy:
+          type: boolean
+          default: true
+        on_demand:
+          type: boolean
+          default: true
+        config_change:
+          type: boolean
+          default: true
+        private_memory:
+          type: boolean
+          default: true
+    PeriodicRestart:
+      type: object
+      description: Periodic restart configuration for the application pool.
+      properties:
+        time_interval:
+          type: integer
+          description: >-
+            The time interval in minutes after which the application pool
+            recycles.
+          default: 1740
+        private_memory:
+          type: integer
+          description: >-
+            The private memory threshold in kilobytes that triggers
+            recycling. 0 means disabled.
+          default: 0
+        request_limit:
+          type: integer
+          description: >-
+            The number of requests after which the application pool
+            recycles. 0 means disabled.
+          default: 0
+        virtual_memory:
+          type: integer
+          description: >-
+            The virtual memory threshold in kilobytes that triggers
+            recycling. 0 means disabled.
+          default: 0
+        schedule:
+          type: array
+          description: Scheduled times for recycling the application pool.
+          items:
+            type: string
+            format: time
+    Recycling:
+      type: object
+      description: Recycling settings for the application pool.
+      properties:
+        disable_overlapped_recycle:
+          type: boolean
+          description: Whether to disable overlapped recycling.
+          default: false
+        disable_recycle_on_config_change:
+          type: boolean
+          description: Whether to disable recycling on configuration changes.
+          default: false
+        log_events:
+          $ref: '#/components/schemas/RecyclingLogEvents'
+        periodic_restart:
+          $ref: '#/components/schemas/PeriodicRestart'
+    RapidFailProtection:
+      type: object
+      description: >-
+        Rapid fail protection settings that determine how IIS responds to
+        repeated worker process failures.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether rapid fail protection is enabled.
+          default: true
+        load_balancer_capabilities:
+          type: string
+          description: The load balancer capabilities response type.
+          enum:
+            - HttpLevel
+            - TcpLevel
+          default: HttpLevel
+        interval:
+          type: integer
+          description: >-
+            The time interval in minutes during which the max crash count
+            is monitored.
+          default: 5
+        max_crashes:
+          type: integer
+          description: >-
+            The maximum number of worker process crashes allowed within
+            the interval.
+          default: 5
+        auto_shutdown_exe:
+          type: string
+          description: >-
+            The path to an executable to run when the application pool is
+            shut down due to rapid fail protection.
+        auto_shutdown_params:
+          type: string
+          description: Parameters for the auto shutdown executable.
+    ProcessOrphaning:
+      type: object
+      description: >-
+        Process orphaning settings that control behavior when a worker
+        process cannot be shut down gracefully.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether process orphaning is enabled.
+          default: false
+        orphan_action_exe:
+          type: string
+          description: >-
+            The path to an executable to run when a worker process is
+            orphaned.
+        orphan_action_params:
+          type: string
+          description: Parameters for the orphan action executable.
+    ApplicationPoolLinks:
+      type: object
+      description: HAL-style links to related resources for an application pool.
+      properties:
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+        websites:
+          $ref: '#/components/schemas/HalLink'
+        worker_processes:
+          $ref: '#/components/schemas/HalLink'
+    ApplicationPool:
+      type: object
+      description: >-
+        A complete IIS application pool resource with all configuration
+        settings for worker process isolation and management.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          examples:
+            - DefaultAppPool
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+        auto_start:
+          type: boolean
+          description: >-
+            Whether the application pool starts automatically when IIS
+            starts.
+          default: true
+        pipeline_mode:
+          type: string
+          description: The managed pipeline mode for the application pool.
+          enum:
+            - integrated
+            - classic
+          default: integrated
+        managed_runtime_version:
+          type: string
+          description: >-
+            The version of the .NET CLR loaded by the application pool.
+            Empty string for unmanaged code.
+          examples:
+            - v4.0
+            - v2.0
+            - ''
+        enable_32bit_win64:
+          type: boolean
+          description: >-
+            Whether to enable 32-bit applications on 64-bit Windows.
+          default: false
+        queue_length:
+          type: integer
+          description: >-
+            The maximum number of requests that can be queued for the
+            application pool before requests are rejected.
+          default: 1000
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+        _links:
+          $ref: '#/components/schemas/ApplicationPoolLinks'
+    ApplicationPoolSummary:
+      type: object
+      description: >-
+        A summary representation of an application pool in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+            - started
+            - stopped
+            - starting
+            - stopping
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+    ApplicationPoolCreate:
+      type: object
+      description: Request body for creating a new application pool.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the application pool to create.
+          examples:
+            - Demonstration App Pool
+        auto_start:
+          type: boolean
+          default: true
+        pipeline_mode:
+          type: string
+          enum:
+            - integrated
+            - classic
+          default: integrated
+        managed_runtime_version:
+          type: string
+          default: v4.0
+        enable_32bit_win64:
+          type: boolean
+          default: false
+        queue_length:
+          type: integer
+          default: 1000
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+    ApplicationPoolUpdate:
+      type: object
+      description: >-
+        Request body for updating an application pool. Only include
+        properties that should be changed.
+      properties:
+        name:
+          type: string
+        auto_start:
+          type: boolean
+        pipeline_mode:
+          type: string
+          enum:
+            - integrated
+            - classic
+        managed_runtime_version:
+          type: string
+        enable_32bit_win64:
+          type: boolean
+        queue_length:
+          type: integer
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
