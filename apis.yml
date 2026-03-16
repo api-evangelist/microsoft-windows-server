@@ -1,8 +1,10 @@
+aid: microsoft-windows-server
 name: Microsoft Windows Server
 description: APIs and integration points for Microsoft Windows Server operating system
   including management, networking, storage, virtualization, security, and remote
   administration capabilities for enterprise server infrastructure.
-image: https://www.microsoft.com/favicon.ico
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://www.microsoft.com/windows-server
 tags:
 - Windows Server
@@ -14,8 +16,8 @@ tags:
 - Server Management
 - Datacenter
 created: '2024'
-modified: '2026-03-03'
-specificationVersion: '0.18'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Windows Server Management API
   description: PowerShell and WMI-based management APIs for Windows Server administration
