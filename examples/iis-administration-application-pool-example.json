@@ -1,0 +1,10 @@
+{
+  "name": "Example Title",
+  "id": "abc123",
+  "status": "example_value",
+  "auto_start": true,
+  "pipeline_mode": "example_value",
+  "managed_runtime_version": "example_value",
+  "enable_32bit_win64": true,
+  "queue_length": 10
+}

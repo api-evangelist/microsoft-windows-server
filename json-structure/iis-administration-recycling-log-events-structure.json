@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RecyclingLogEvents",
+  "type": "object",
+  "properties": {
+    "time": {
+      "type": "boolean"
+    },
+    "requests": {
+      "type": "boolean"
+    },
+    "schedule": {
+      "type": "boolean"
+    },
+    "memory": {
+      "type": "boolean"
+    },
+    "isapi_unhealthy": {
+      "type": "boolean"
+    },
+    "on_demand": {
+      "type": "boolean"
+    },
+    "config_change": {
+      "type": "boolean"
+    },
+    "private_memory": {
+      "type": "boolean"
+    }
+  }
+}

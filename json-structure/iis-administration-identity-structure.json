@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Identity",
+  "type": "object",
+  "properties": {
+    "identity_type": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "load_user_profile": {
+      "type": "boolean"
+    }
+  }
+}

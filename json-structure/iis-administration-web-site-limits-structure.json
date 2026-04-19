@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WebSiteLimits",
+  "type": "object",
+  "properties": {
+    "connection_timeout": {
+      "type": "integer"
+    },
+    "max_bandwidth": {
+      "type": "integer"
+    },
+    "max_connections": {
+      "type": "integer"
+    },
+    "max_url_segments": {
+      "type": "integer"
+    }
+  }
+}

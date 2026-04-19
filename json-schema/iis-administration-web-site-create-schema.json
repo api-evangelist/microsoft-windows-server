@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSiteCreate",
+  "type": "object",
+  "description": "Request body for creating a new web site.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site to create."
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the web site root directory. The directory must exist."
+    },
+    "bindings": {
+      "type": "array",
+      "description": "The bindings for the web site."
+    },
+    "application_pool": {
+      "type": "object",
+      "description": "Optional application pool assignment."
+    },
+    "server_auto_start": {
+      "type": "boolean",
+      "description": "Whether the web site starts automatically when IIS starts."
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "description": "The protocols enabled for this web site."
+    }
+  }
+}

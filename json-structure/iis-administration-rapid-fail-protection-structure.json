@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RapidFailProtection",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    },
+    "load_balancer_capabilities": {
+      "type": "string"
+    },
+    "interval": {
+      "type": "integer"
+    },
+    "max_crashes": {
+      "type": "integer"
+    },
+    "auto_shutdown_exe": {
+      "type": "string"
+    },
+    "auto_shutdown_params": {
+      "type": "string"
+    }
+  }
+}

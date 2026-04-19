@@ -1,0 +1,10 @@
+{
+  "time": true,
+  "requests": true,
+  "schedule": true,
+  "memory": true,
+  "isapi_unhealthy": true,
+  "on_demand": true,
+  "config_change": true,
+  "private_memory": true
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ProcessModel",
+  "type": "object",
+  "properties": {
+    "idle_timeout": {
+      "type": "integer"
+    },
+    "max_processes": {
+      "type": "integer"
+    },
+    "pinging_enabled": {
+      "type": "boolean"
+    },
+    "ping_interval": {
+      "type": "integer"
+    },
+    "ping_response_time": {
+      "type": "integer"
+    },
+    "shutdown_time_limit": {
+      "type": "integer"
+    },
+    "startup_time_limit": {
+      "type": "integer"
+    },
+    "idle_timeout_action": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,273 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Windows Server Web Management"
+  description: "Unified workflow for IT administrators to manage IIS web sites, applications, and application pools for enterprise web hosting on Windows Server."
+  tags:
+    - Microsoft
+    - Windows Server
+    - IIS
+    - Web Server
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+binds:
+  - namespace: env
+    keys:
+      IIS_ACCESS_TOKEN: IIS_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - import: iis-administration
+      location: ./shared/iis-administration.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: web-server-api
+      description: "Unified REST API for IIS web server management."
+      resources:
+        - path: /v1/websites
+          name: websites
+          description: "Web site management"
+          operations:
+            - method: GET
+              name: list-websites
+              description: "List all web sites"
+              call: "iis-administration.list-websites"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-website
+              description: "Create a web site"
+              call: "iis-administration.create-website"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/websites/{id}
+          name: website-detail
+          description: "Single web site operations"
+          operations:
+            - method: GET
+              name: get-website
+              description: "Get web site details"
+              call: "iis-administration.get-website"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PATCH
+              name: update-website
+              description: "Update a web site"
+              call: "iis-administration.update-website"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-website
+              description: "Delete a web site"
+              call: "iis-administration.delete-website"
+              with:
+                id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/applications
+          name: applications
+          description: "Web application management"
+          operations:
+            - method: GET
+              name: list-applications
+              description: "List all applications"
+              call: "iis-administration.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-application
+              description: "Create an application"
+              call: "iis-administration.create-application"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/application-pools
+          name: application-pools
+          description: "Application pool management"
+          operations:
+            - method: GET
+              name: list-application-pools
+              description: "List all application pools"
+              call: "iis-administration.list-application-pools"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-application-pool
+              description: "Create an application pool"
+              call: "iis-administration.create-application-pool"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: web-server-mcp
+      transport: http
+      description: "MCP server for AI-assisted IIS web server management."
+      tools:
+        - name: list-websites
+          description: "List all IIS web sites on the server"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "iis-administration.list-websites"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-website
+          description: "Create a new IIS web site"
+          hints:
+            readOnly: false
+          call: "iis-administration.create-website"
+          with:
+            name: "tools.name"
+            physical_path: "tools.physical_path"
+            bindings: "tools.bindings"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-website
+          description: "Get details for a specific web site"
+          hints:
+            readOnly: true
+          call: "iis-administration.get-website"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-website
+          description: "Update an IIS web site configuration"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "iis-administration.update-website"
+          with:
+            id: "tools.id"
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-website
+          description: "Delete an IIS web site"
+          hints:
+            destructive: true
+          call: "iis-administration.delete-website"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: "List all web applications"
+          hints:
+            readOnly: true
+          call: "iis-administration.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-application
+          description: "Create a new web application"
+          hints:
+            readOnly: false
+          call: "iis-administration.create-application"
+          with:
+            path: "tools.path"
+            physical_path: "tools.physical_path"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-application
+          description: "Get web application details"
+          hints:
+            readOnly: true
+          call: "iis-administration.get-application"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-application
+          description: "Update a web application"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "iis-administration.update-application"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-application
+          description: "Delete a web application"
+          hints:
+            destructive: true
+          call: "iis-administration.delete-application"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-application-pools
+          description: "List all IIS application pools"
+          hints:
+            readOnly: true
+          call: "iis-administration.list-application-pools"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-application-pool
+          description: "Create an IIS application pool"
+          hints:
+            readOnly: false
+          call: "iis-administration.create-application-pool"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-application-pool
+          description: "Get application pool details"
+          hints:
+            readOnly: true
+          call: "iis-administration.get-application-pool"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-application-pool
+          description: "Update an application pool configuration"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "iis-administration.update-application-pool"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-application-pool
+          description: "Delete an application pool"
+          hints:
+            destructive: true
+          call: "iis-administration.delete-application-pool"
+          with:
+            id: "tools.id"
+          outputParameters:
+            - type: object
+              mapping: "$."

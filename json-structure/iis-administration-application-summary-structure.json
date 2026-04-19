@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ApplicationSummary",
+  "type": "object",
+  "properties": {
+    "location": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}

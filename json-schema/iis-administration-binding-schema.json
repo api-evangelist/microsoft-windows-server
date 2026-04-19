@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Binding",
+  "type": "object",
+  "description": "Defines the protocol, IP address, port, and optional hostname that a web site listens on. The binding_information property format is '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.",
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "description": "The protocol for this binding (e.g., http, https, net.tcp)."
+    },
+    "binding_information": {
+      "type": "string",
+      "description": "Combined binding string in the format '{ip_address}:{port}:{hostname}'."
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address to bind to. Use '*' for all addresses."
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port number to listen on."
+    },
+    "hostname": {
+      "type": "string",
+      "description": "The hostname for host header-based routing."
+    },
+    "require_sni": {
+      "type": "boolean",
+      "description": "Whether Server Name Indication (SNI) is required for this binding."
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ApplicationCreate",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "physical_path": {
+      "type": "string"
+    },
+    "website": {
+      "type": "object"
+    },
+    "application_pool": {
+      "type": "object"
+    },
+    "enabled_protocols": {
+      "type": "string"
+    }
+  }
+}

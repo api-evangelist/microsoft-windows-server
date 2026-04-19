@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "load_balancer_capabilities": "example_value",
+  "interval": 10,
+  "max_crashes": 10,
+  "auto_shutdown_exe": "example_value",
+  "auto_shutdown_params": "example_value"
+}

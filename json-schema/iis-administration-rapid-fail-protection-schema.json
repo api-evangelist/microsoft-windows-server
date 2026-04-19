@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RapidFailProtection",
+  "type": "object",
+  "description": "Rapid fail protection settings that determine how IIS responds to repeated worker process failures.",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether rapid fail protection is enabled."
+    },
+    "load_balancer_capabilities": {
+      "type": "string",
+      "description": "The load balancer capabilities response type."
+    },
+    "interval": {
+      "type": "integer",
+      "description": "The time interval in minutes during which the max crash count is monitored."
+    },
+    "max_crashes": {
+      "type": "integer",
+      "description": "The maximum number of worker process crashes allowed within the interval."
+    },
+    "auto_shutdown_exe": {
+      "type": "string",
+      "description": "The path to an executable to run when the application pool is shut down due to rapid fail protection."
+    },
+    "auto_shutdown_params": {
+      "type": "string",
+      "description": "Parameters for the auto shutdown executable."
+    }
+  }
+}

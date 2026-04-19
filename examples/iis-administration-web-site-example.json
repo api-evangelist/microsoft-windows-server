@@ -1,0 +1,10 @@
+{
+  "name": "Example Title",
+  "id": "abc123",
+  "physical_path": "example_value",
+  "key": "example_value",
+  "status": "example_value",
+  "server_auto_start": true,
+  "enabled_protocols": "example_value",
+  "bindings": []
+}

@@ -1,0 +1,10 @@
+name: microsoft-windows-server API Vocabulary
+provider: microsoft-windows-server
+created: '2026-04-19'
+modified: '2026-04-19'
+operations: 15
+schemas: 30
+tags:
+- Application Pools
+- Applications
+- Web Sites

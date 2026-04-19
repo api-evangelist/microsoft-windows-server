@@ -1,0 +1,10 @@
+{
+  "idle_timeout": 10,
+  "max_processes": 10,
+  "pinging_enabled": true,
+  "ping_interval": 10,
+  "ping_response_time": 10,
+  "shutdown_time_limit": 10,
+  "startup_time_limit": 10,
+  "idle_timeout_action": "example_value"
+}

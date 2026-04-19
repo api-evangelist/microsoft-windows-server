@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PeriodicRestart",
+  "type": "object",
+  "properties": {
+    "time_interval": {
+      "type": "integer"
+    },
+    "private_memory": {
+      "type": "integer"
+    },
+    "request_limit": {
+      "type": "integer"
+    },
+    "virtual_memory": {
+      "type": "integer"
+    },
+    "schedule": {
+      "type": "array"
+    }
+  }
+}

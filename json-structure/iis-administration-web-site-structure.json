@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "WebSite",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "physical_path": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "server_auto_start": {
+      "type": "boolean"
+    },
+    "enabled_protocols": {
+      "type": "string"
+    },
+    "bindings": {
+      "type": "array"
+    }
+  }
+}

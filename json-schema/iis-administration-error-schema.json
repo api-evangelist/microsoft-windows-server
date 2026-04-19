@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Error",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "A short description of the error."
+    },
+    "detail": {
+      "type": "string",
+      "description": "A detailed description of the error."
+    },
+    "status": {
+      "type": "integer",
+      "description": "The HTTP status code."
+    }
+  }
+}

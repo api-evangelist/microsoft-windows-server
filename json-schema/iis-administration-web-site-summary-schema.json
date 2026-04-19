@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSiteSummary",
+  "type": "object",
+  "description": "A summary representation of a web site in list responses.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the web site."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the web site."
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}

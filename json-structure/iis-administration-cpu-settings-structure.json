@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "CpuSettings",
+  "type": "object",
+  "properties": {
+    "limit": {
+      "type": "integer"
+    },
+    "limit_interval": {
+      "type": "integer"
+    },
+    "action": {
+      "type": "string"
+    },
+    "processor_affinity_enabled": {
+      "type": "boolean"
+    },
+    "processor_affinity_mask32": {
+      "type": "string"
+    },
+    "processor_affinity_mask64": {
+      "type": "string"
+    }
+  }
+}

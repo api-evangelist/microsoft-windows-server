@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationPoolUpdate",
+  "type": "object",
+  "description": "Request body for updating an application pool. Only include properties that should be changed.",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "auto_start": {
+      "type": "boolean"
+    },
+    "pipeline_mode": {
+      "type": "string"
+    },
+    "managed_runtime_version": {
+      "type": "string"
+    },
+    "enable_32bit_win64": {
+      "type": "boolean"
+    },
+    "queue_length": {
+      "type": "integer"
+    }
+  }
+}

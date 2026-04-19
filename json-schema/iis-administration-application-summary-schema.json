@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationSummary",
+  "type": "object",
+  "description": "A summary representation of an application in list responses.",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "The full location path."
+    },
+    "path": {
+      "type": "string",
+      "description": "The virtual path of the application."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application."
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}

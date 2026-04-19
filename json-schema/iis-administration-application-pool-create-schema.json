@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationPoolCreate",
+  "type": "object",
+  "description": "Request body for creating a new application pool.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application pool to create."
+    },
+    "auto_start": {
+      "type": "boolean"
+    },
+    "pipeline_mode": {
+      "type": "string"
+    },
+    "managed_runtime_version": {
+      "type": "string"
+    },
+    "enable_32bit_win64": {
+      "type": "boolean"
+    },
+    "queue_length": {
+      "type": "integer"
+    }
+  }
+}

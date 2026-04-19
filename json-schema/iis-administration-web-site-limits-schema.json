@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSiteLimits",
+  "type": "object",
+  "description": "Resource limits for the web site.",
+  "properties": {
+    "connection_timeout": {
+      "type": "integer",
+      "description": "The connection timeout in seconds."
+    },
+    "max_bandwidth": {
+      "type": "integer",
+      "description": "The maximum bandwidth in bytes per second."
+    },
+    "max_connections": {
+      "type": "integer",
+      "description": "The maximum number of concurrent connections."
+    },
+    "max_url_segments": {
+      "type": "integer",
+      "description": "The maximum number of URL segments allowed."
+    }
+  }
+}

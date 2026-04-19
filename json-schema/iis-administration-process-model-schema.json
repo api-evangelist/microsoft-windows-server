@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProcessModel",
+  "type": "object",
+  "description": "Process model settings for the application pool worker processes.",
+  "properties": {
+    "idle_timeout": {
+      "type": "integer",
+      "description": "The idle timeout in minutes before a worker process is shut down."
+    },
+    "max_processes": {
+      "type": "integer",
+      "description": "The maximum number of worker processes for the application pool (web garden)."
+    },
+    "pinging_enabled": {
+      "type": "boolean",
+      "description": "Whether health monitoring pings are enabled."
+    },
+    "ping_interval": {
+      "type": "integer",
+      "description": "The interval in seconds between health monitoring pings."
+    },
+    "ping_response_time": {
+      "type": "integer",
+      "description": "The maximum time in seconds allowed for a worker process to respond to a health ping."
+    },
+    "shutdown_time_limit": {
+      "type": "integer",
+      "description": "The time in seconds allowed for a worker process to gracefully shut down."
+    },
+    "startup_time_limit": {
+      "type": "integer",
+      "description": "The time in seconds allowed for a worker process to start up."
+    },
+    "idle_timeout_action": {
+      "type": "string",
+      "description": "The action to take when the idle timeout is reached."
+    }
+  }
+}

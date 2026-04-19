@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Certificate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "issued_by": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "thumbprint": {
+      "type": "string"
+    },
+    "valid_to": {
+      "type": "string"
+    }
+  }
+}

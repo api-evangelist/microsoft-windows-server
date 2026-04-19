@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Recycling",
+  "type": "object",
+  "properties": {
+    "disable_overlapped_recycle": {
+      "type": "boolean"
+    },
+    "disable_recycle_on_config_change": {
+      "type": "boolean"
+    }
+  }
+}

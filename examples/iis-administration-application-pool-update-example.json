@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "auto_start": true,
+  "pipeline_mode": "example_value",
+  "managed_runtime_version": "example_value",
+  "enable_32bit_win64": true,
+  "queue_length": 10
+}

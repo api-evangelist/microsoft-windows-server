@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ApplicationPoolUpdate",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "auto_start": {
+      "type": "boolean"
+    },
+    "pipeline_mode": {
+      "type": "string"
+    },
+    "managed_runtime_version": {
+      "type": "string"
+    },
+    "enable_32bit_win64": {
+      "type": "boolean"
+    },
+    "queue_length": {
+      "type": "integer"
+    }
+  }
+}

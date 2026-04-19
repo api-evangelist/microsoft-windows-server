@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationPool",
+  "type": "object",
+  "description": "A complete IIS application pool resource with all configuration settings for worker process isolation and management.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application pool."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application pool."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the application pool."
+    },
+    "auto_start": {
+      "type": "boolean",
+      "description": "Whether the application pool starts automatically when IIS starts."
+    },
+    "pipeline_mode": {
+      "type": "string",
+      "description": "The managed pipeline mode for the application pool."
+    },
+    "managed_runtime_version": {
+      "type": "string",
+      "description": "The version of the .NET CLR loaded by the application pool. Empty string for unmanaged code."
+    },
+    "enable_32bit_win64": {
+      "type": "boolean",
+      "description": "Whether to enable 32-bit applications on 64-bit Windows."
+    },
+    "queue_length": {
+      "type": "integer",
+      "description": "The maximum number of requests that can be queued for the application pool before requests are rejected."
+    }
+  }
+}

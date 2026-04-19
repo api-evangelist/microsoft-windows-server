@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "Binding",
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "string"
+    },
+    "binding_information": {
+      "type": "string"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer"
+    },
+    "hostname": {
+      "type": "string"
+    },
+    "require_sni": {
+      "type": "boolean"
+    }
+  }
+}

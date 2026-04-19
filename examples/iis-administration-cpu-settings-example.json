@@ -1,0 +1,8 @@
+{
+  "limit": 10,
+  "limit_interval": 10,
+  "action": "example_value",
+  "processor_affinity_enabled": true,
+  "processor_affinity_mask32": "example_value",
+  "processor_affinity_mask64": "example_value"
+}

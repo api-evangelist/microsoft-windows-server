@@ -1,0 +1,7 @@
+{
+  "path": "example_value",
+  "physical_path": "example_value",
+  "website": "example_value",
+  "application_pool": "example_value",
+  "enabled_protocols": "example_value"
+}

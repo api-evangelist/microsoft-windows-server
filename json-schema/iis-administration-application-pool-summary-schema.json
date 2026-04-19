@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ApplicationPoolSummary",
+  "type": "object",
+  "description": "A summary representation of an application pool in list responses.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application pool."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application pool."
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the application pool."
+    },
+    "_links": {
+      "type": "object"
+    }
+  }
+}

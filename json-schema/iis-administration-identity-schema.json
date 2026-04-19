@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Identity",
+  "type": "object",
+  "description": "The identity configuration for the application pool worker process.",
+  "properties": {
+    "identity_type": {
+      "type": "string",
+      "description": "The type of identity used by the application pool."
+    },
+    "username": {
+      "type": "string",
+      "description": "The username for the identity when using SpecificUser identity type."
+    },
+    "load_user_profile": {
+      "type": "boolean",
+      "description": "Whether to load the user profile for the worker process."
+    }
+  }
+}

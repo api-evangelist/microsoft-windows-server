@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "physical_path": "example_value",
+  "bindings": [],
+  "application_pool": "example_value",
+  "server_auto_start": true,
+  "enabled_protocols": "example_value"
+}

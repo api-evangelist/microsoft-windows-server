@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Certificate",
+  "type": "object",
+  "description": "An SSL/TLS certificate associated with an HTTPS binding.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The friendly name of the certificate."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the certificate resource."
+    },
+    "issued_by": {
+      "type": "string",
+      "description": "The certificate issuer distinguished name."
+    },
+    "subject": {
+      "type": "string",
+      "description": "The certificate subject distinguished name."
+    },
+    "thumbprint": {
+      "type": "string",
+      "description": "The SHA-1 thumbprint of the certificate."
+    },
+    "valid_to": {
+      "type": "string",
+      "description": "The expiration date of the certificate."
+    }
+  }
+}

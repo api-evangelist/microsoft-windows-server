@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WebSiteUpdate",
+  "type": "object",
+  "description": "Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site."
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the web site root."
+    },
+    "bindings": {
+      "type": "array",
+      "description": "The full list of desired bindings. Existing bindings not included in this list will be removed."
+    },
+    "application_pool": {
+      "type": "object"
+    },
+    "server_auto_start": {
+      "type": "boolean"
+    },
+    "enabled_protocols": {
+      "type": "string"
+    }
+  }
+}

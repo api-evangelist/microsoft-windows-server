@@ -1,0 +1,6 @@
+{
+  "connection_timeout": 10,
+  "max_bandwidth": 10,
+  "max_connections": 10,
+  "max_url_segments": "https://www.example.com"
+}

@@ -1,0 +1,8 @@
+{
+  "protocol": "example_value",
+  "binding_information": "example_value",
+  "ip_address": "example_value",
+  "port": 10,
+  "hostname": "example_value",
+  "require_sni": true
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Example Title",
+  "id": "abc123",
+  "issued_by": "example_value",
+  "subject": "example_value",
+  "thumbprint": "example_value",
+  "valid_to": "example_value"
+}

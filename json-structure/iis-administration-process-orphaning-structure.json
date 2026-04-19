@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ProcessOrphaning",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean"
+    },
+    "orphan_action_exe": {
+      "type": "string"
+    },
+    "orphan_action_params": {
+      "type": "string"
+    }
+  }
+}

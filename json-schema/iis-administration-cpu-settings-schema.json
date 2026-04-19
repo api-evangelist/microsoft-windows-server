@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CpuSettings",
+  "type": "object",
+  "description": "CPU usage settings for the application pool.",
+  "properties": {
+    "limit": {
+      "type": "integer",
+      "description": "The maximum CPU usage percentage (in 1/1000ths of a percent) allowed for the application pool."
+    },
+    "limit_interval": {
+      "type": "integer",
+      "description": "The interval in minutes for CPU limit monitoring."
+    },
+    "action": {
+      "type": "string",
+      "description": "The action to take when the CPU limit is exceeded."
+    },
+    "processor_affinity_enabled": {
+      "type": "boolean",
+      "description": "Whether processor affinity is enabled."
+    },
+    "processor_affinity_mask32": {
+      "type": "string",
+      "description": "The 32-bit processor affinity mask."
+    },
+    "processor_affinity_mask64": {
+      "type": "string",
+      "description": "The 64-bit processor affinity mask."
+    }
+  }
+}
