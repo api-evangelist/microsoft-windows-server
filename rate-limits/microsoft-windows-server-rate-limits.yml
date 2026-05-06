@@ -4,165 +4,54 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Windows Server
 providerId: microsoft-windows-server
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Datacenter
-  - Enterprise
-  - Infrastructure
-  - Microsoft
-  - Operating System
-  - Server Management
-  - Windows Server
-  - Windows Server 2025
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Windows Server API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  - Server
+  - Operating System
+  - Windows
+  - Microsoft
+description: Windows Server platform APIs (PowerShell remoting, WinRM, WMI, IIS, ADWS) are typically
+  consumed within the customer's own fabric over Kerberos / NTLM and are not subject to a Microsoft-imposed
+  per-second rate limit. Throughput is bound by the customer's hardware, IIS request queue, WinRM
+  MaxConcurrentOperations, and Active Directory throttling. There is no public throttling SLA for the
+  OS itself.
+sources:
+  - https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/winrm
+  - https://learn.microsoft.com/en-us/windows/win32/winrm/portal
+notes: Windows Server is customer-operated; rate limits are configured locally rather than published
+  by Microsoft as service-level numbers.
+responseCodes: {}
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Windows Server Management API
-      - Windows Remote Management (WinRM)
-      - Active Directory Domain Services API
-      - Hyper-V Management API
-      - Windows Server Update Services (WSUS) API
-      - Windows Admin Center API
-      - DNS Server Management API
-      - Windows Management Instrumentation (WMI) API
-      - IIS Administration API
-      - Remote Desktop Services API
-      - Failover Clustering API
-      - DHCP Server Management API
-      - SMB File Server API
-      - Windows Event Log API
-      - Storage Spaces Direct API
-      - Network Policy Server (NPS) RADIUS API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Windows Server Management API
-      - Windows Remote Management (WinRM)
-      - Active Directory Domain Services API
-      - Hyper-V Management API
-      - Windows Server Update Services (WSUS) API
-      - Windows Admin Center API
-      - DNS Server Management API
-      - Windows Management Instrumentation (WMI) API
-      - IIS Administration API
-      - Remote Desktop Services API
-      - Failover Clustering API
-      - DHCP Server Management API
-      - SMB File Server API
-      - Windows Event Log API
-      - Storage Spaces Direct API
-      - Network Policy Server (NPS) RADIUS API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Windows Server Management API
-      - Windows Remote Management (WinRM)
-      - Active Directory Domain Services API
-      - Hyper-V Management API
-      - Windows Server Update Services (WSUS) API
-      - Windows Admin Center API
-      - DNS Server Management API
-      - Windows Management Instrumentation (WMI) API
-      - IIS Administration API
-      - Remote Desktop Services API
-      - Failover Clustering API
-      - DHCP Server Management API
-      - SMB File Server API
-      - Windows Event Log API
-      - Storage Spaces Direct API
-      - Network Policy Server (NPS) RADIUS API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Windows Server Management API
-      - Windows Remote Management (WinRM)
-      - Active Directory Domain Services API
-      - Hyper-V Management API
-      - Windows Server Update Services (WSUS) API
-      - Windows Admin Center API
-      - DNS Server Management API
-      - Windows Management Instrumentation (WMI) API
-      - IIS Administration API
-      - Remote Desktop Services API
-      - Failover Clustering API
-      - DHCP Server Management API
-      - SMB File Server API
-      - Windows Event Log API
-      - Storage Spaces Direct API
-      - Network Policy Server (NPS) RADIUS API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Windows Server Management API
-      - Windows Remote Management (WinRM)
-      - Active Directory Domain Services API
-      - Hyper-V Management API
-      - Windows Server Update Services (WSUS) API
-      - Windows Admin Center API
-      - DNS Server Management API
-      - Windows Management Instrumentation (WMI) API
-      - IIS Administration API
-      - Remote Desktop Services API
-      - Failover Clustering API
-      - DHCP Server Management API
-      - SMB File Server API
-      - Windows Event Log API
-      - Storage Spaces Direct API
-      - Network Policy Server (NPS) RADIUS API
+  - name: WinRM concurrent operations (default)
+    scope: account
+    metric: concurrent_requests
+    limit: 1500
+    notes: Default MaxConcurrentOperationsPerUser per WinRM listener; tunable via Set-WSManInstance.
+  - name: WinRM connections per user (default)
+    scope: account
+    metric: concurrent_requests
+    limit: 25
+    notes: Default MaxConcurrentUsers; configurable.
+  - name: IIS HTTP request queue
+    scope: account
+    metric: varies
+    limit: 'Set per application pool via queueLength (default 1000); responses can be 503 when full'
+  - name: Active Directory LDAP MaxPageSize
+    scope: account
+    metric: varies
+    limit: '1,000 entries per page (default); MaxPageSize / MaxQueryDuration tunable on the DC'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Tune WinRM service quotas
+    description: WSMan provider settings (MaxConcurrentOperationsPerUser, MaxConnections,
+      MaxConcurrentUsers) cap parallel remoting; tune per workload.
+  - name: AD policy throttling
+    description: Active Directory enforces LdapAdminLimits (MaxPageSize, MaxQueryDuration,
+      MaxConnIdleTime). Honor these in client query patterns.
+  - name: 503 from IIS
+    description: IIS returns 503 when application pool queues are full; clients should backoff and
+      retry.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
