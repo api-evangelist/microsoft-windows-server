@@ -1,0 +1,212 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: IIS Administration API — Applications
+  description: 'IIS Administration API — Applications. 5 operations. Lead operation: List All Applications. Self-contained
+    Naftiko capability covering one Microsoft Windows Server business surface.'
+  tags:
+  - Microsoft Windows Server
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_WINDOWS_SERVER_API_KEY: MICROSOFT_WINDOWS_SERVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: iis-administration-applications
+    baseUri: https://localhost:55539
+    description: IIS Administration API — Applications business capability. Self-contained, no shared references.
+    resources:
+    - name: api-webserver-webapps
+      path: /api/webserver/webapps
+      operations:
+      - name: listapplications
+        method: GET
+        description: List All Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: website.id
+          in: query
+          type: string
+          description: Filter applications by web site identifier.
+        - name: application_pool.id
+          in: query
+          type: string
+          description: Filter applications by application pool identifier.
+      - name: createapplication
+        method: POST
+        description: Create an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-webserver-webapps-id
+      path: /api/webserver/webapps/{id}
+      operations:
+      - name: getapplication
+        method: GET
+        description: Get an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateapplication
+        method: PATCH
+        description: Update an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplication
+        method: DELETE
+        description: Delete an Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_WINDOWS_SERVER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: iis-administration-applications-rest
+    port: 8080
+    description: REST adapter for IIS Administration API — Applications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/webserver/webapps
+      name: api-webserver-webapps
+      description: REST surface for api-webserver-webapps.
+      operations:
+      - method: GET
+        name: listapplications
+        description: List All Applications
+        call: iis-administration-applications.listapplications
+        with:
+          website.id: rest.website.id
+          application_pool.id: rest.application_pool.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplication
+        description: Create an Application
+        call: iis-administration-applications.createapplication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/webserver/webapps/{id}
+      name: api-webserver-webapps-id
+      description: REST surface for api-webserver-webapps-id.
+      operations:
+      - method: GET
+        name: getapplication
+        description: Get an Application
+        call: iis-administration-applications.getapplication
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateapplication
+        description: Update an Application
+        call: iis-administration-applications.updateapplication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplication
+        description: Delete an Application
+        call: iis-administration-applications.deleteapplication
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: iis-administration-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for IIS Administration API — Applications. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-applications
+      description: List All Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-applications.listapplications
+      with:
+        website.id: tools.website.id
+        application_pool.id: tools.application_pool.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-application
+      description: Create an Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: iis-administration-applications.createapplication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application
+      description: Get an Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-applications.getapplication
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application
+      description: Update an Application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: iis-administration-applications.updateapplication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-application
+      description: Delete an Application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: iis-administration-applications.deleteapplication
+      outputParameters:
+      - type: object
+        mapping: $.

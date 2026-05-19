@@ -1,0 +1,197 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: IIS Administration API — Application Pools
+  description: 'IIS Administration API — Application Pools. 5 operations. Lead operation: List All Application Pools. Self-contained
+    Naftiko capability covering one Microsoft Windows Server business surface.'
+  tags:
+  - Microsoft Windows Server
+  - Application Pools
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_WINDOWS_SERVER_API_KEY: MICROSOFT_WINDOWS_SERVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: iis-administration-application-pools
+    baseUri: https://localhost:55539
+    description: IIS Administration API — Application Pools business capability. Self-contained, no shared references.
+    resources:
+    - name: api-webserver-application-pools
+      path: /api/webserver/application-pools
+      operations:
+      - name: listapplicationpools
+        method: GET
+        description: List All Application Pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createapplicationpool
+        method: POST
+        description: Create an Application Pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-webserver-application-pools-id
+      path: /api/webserver/application-pools/{id}
+      operations:
+      - name: getapplicationpool
+        method: GET
+        description: Get an Application Pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateapplicationpool
+        method: PATCH
+        description: Update an Application Pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapplicationpool
+        method: DELETE
+        description: Delete an Application Pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_WINDOWS_SERVER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: iis-administration-application-pools-rest
+    port: 8080
+    description: REST adapter for IIS Administration API — Application Pools. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/webserver/application-pools
+      name: api-webserver-application-pools
+      description: REST surface for api-webserver-application-pools.
+      operations:
+      - method: GET
+        name: listapplicationpools
+        description: List All Application Pools
+        call: iis-administration-application-pools.listapplicationpools
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapplicationpool
+        description: Create an Application Pool
+        call: iis-administration-application-pools.createapplicationpool
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/webserver/application-pools/{id}
+      name: api-webserver-application-pools-id
+      description: REST surface for api-webserver-application-pools-id.
+      operations:
+      - method: GET
+        name: getapplicationpool
+        description: Get an Application Pool
+        call: iis-administration-application-pools.getapplicationpool
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateapplicationpool
+        description: Update an Application Pool
+        call: iis-administration-application-pools.updateapplicationpool
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapplicationpool
+        description: Delete an Application Pool
+        call: iis-administration-application-pools.deleteapplicationpool
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: iis-administration-application-pools-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for IIS Administration API — Application Pools. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-all-application-pools
+      description: List All Application Pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-application-pools.listapplicationpools
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-application-pool
+      description: Create an Application Pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: iis-administration-application-pools.createapplicationpool
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application-pool
+      description: Get an Application Pool
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-application-pools.getapplicationpool
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-application-pool
+      description: Update an Application Pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: iis-administration-application-pools.updateapplicationpool
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-application-pool
+      description: Delete an Application Pool
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: iis-administration-application-pools.deleteapplicationpool
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: IIS Administration API — Web Sites
+  description: 'IIS Administration API — Web Sites. 5 operations. Lead operation: List All Web Sites. Self-contained Naftiko
+    capability covering one Microsoft Windows Server business surface.'
+  tags:
+  - Microsoft Windows Server
+  - Web Sites
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MICROSOFT_WINDOWS_SERVER_API_KEY: MICROSOFT_WINDOWS_SERVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: iis-administration-web-sites
+    baseUri: https://localhost:55539
+    description: IIS Administration API — Web Sites business capability. Self-contained, no shared references.
+    resources:
+    - name: api-webserver-websites
+      path: /api/webserver/websites
+      operations:
+      - name: listwebsites
+        method: GET
+        description: List All Web Sites
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application_pool.id
+          in: query
+          type: string
+          description: Filter web sites by application pool identifier.
+      - name: createwebsite
+        method: POST
+        description: Create a Web Site
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-webserver-websites-id
+      path: /api/webserver/websites/{id}
+      operations:
+      - name: getwebsite
+        method: GET
+        description: Get a Web Site
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatewebsite
+        method: PATCH
+        description: Update a Web Site
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletewebsite
+        method: DELETE
+        description: Delete a Web Site
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.MICROSOFT_WINDOWS_SERVER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: iis-administration-web-sites-rest
+    port: 8080
+    description: REST adapter for IIS Administration API — Web Sites. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/webserver/websites
+      name: api-webserver-websites
+      description: REST surface for api-webserver-websites.
+      operations:
+      - method: GET
+        name: listwebsites
+        description: List All Web Sites
+        call: iis-administration-web-sites.listwebsites
+        with:
+          application_pool.id: rest.application_pool.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebsite
+        description: Create a Web Site
+        call: iis-administration-web-sites.createwebsite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/webserver/websites/{id}
+      name: api-webserver-websites-id
+      description: REST surface for api-webserver-websites-id.
+      operations:
+      - method: GET
+        name: getwebsite
+        description: Get a Web Site
+        call: iis-administration-web-sites.getwebsite
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatewebsite
+        description: Update a Web Site
+        call: iis-administration-web-sites.updatewebsite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletewebsite
+        description: Delete a Web Site
+        call: iis-administration-web-sites.deletewebsite
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: iis-administration-web-sites-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for IIS Administration API — Web Sites. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-web-sites
+      description: List All Web Sites
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-web-sites.listwebsites
+      with:
+        application_pool.id: tools.application_pool.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-web-site
+      description: Create a Web Site
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: iis-administration-web-sites.createwebsite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-web-site
+      description: Get a Web Site
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: iis-administration-web-sites.getwebsite
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-web-site
+      description: Update a Web Site
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: iis-administration-web-sites.updatewebsite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-web-site
+      description: Delete a Web Site
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: iis-administration-web-sites.deletewebsite
+      outputParameters:
+      - type: object
+        mapping: $.
