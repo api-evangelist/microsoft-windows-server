@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Error",
+  "title": "Error",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "A short description of the error.",
+      "example": "Example Title"
+    },
+    "detail": {
+      "type": "string",
+      "description": "A detailed description of the error.",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "integer",
+      "description": "The HTTP status code.",
+      "example": 10
+    }
+  }
+}

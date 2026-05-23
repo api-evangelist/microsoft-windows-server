@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/HalLink",
+  "title": "HalLink",
+  "type": "object",
+  "properties": {
+    "href": {
+      "type": "string",
+      "format": "uri-reference",
+      "description": "The URI of the linked resource.",
+      "example": "example_value"
+    }
+  }
+}

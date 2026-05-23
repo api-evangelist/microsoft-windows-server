@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebSiteLimits",
+  "title": "WebSiteLimits",
+  "type": "object",
+  "description": "Resource limits for the web site.",
+  "properties": {
+    "connection_timeout": {
+      "type": "integer",
+      "description": "The connection timeout in seconds.",
+      "default": 120,
+      "example": 10
+    },
+    "max_bandwidth": {
+      "type": "integer",
+      "description": "The maximum bandwidth in bytes per second.",
+      "format": "int64",
+      "default": 4294967295,
+      "example": 10
+    },
+    "max_connections": {
+      "type": "integer",
+      "description": "The maximum number of concurrent connections.",
+      "format": "int64",
+      "default": 4294967295,
+      "example": 10
+    },
+    "max_url_segments": {
+      "type": "integer",
+      "description": "The maximum number of URL segments allowed.",
+      "default": 32,
+      "example": "https://www.example.com"
+    }
+  }
+}

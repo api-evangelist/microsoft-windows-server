@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebSite",
+  "title": "WebSite",
+  "type": "object",
+  "description": "A complete IIS web site resource including configuration, bindings, application pool assignment, and HAL links to related resources.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site.",
+      "examples": [
+        "Default Web Site"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the web site.",
+      "example": "abc123"
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the web site root.",
+      "examples": [
+        "%SystemDrive%\\inetpub\\wwwroot"
+      ]
+    },
+    "key": {
+      "type": "string",
+      "description": "The IIS site key identifier.",
+      "example": "example_value"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the web site.",
+      "enum": [
+        "started",
+        "stopped",
+        "starting",
+        "stopping"
+      ],
+      "example": "started"
+    },
+    "server_auto_start": {
+      "type": "boolean",
+      "description": "Whether the web site starts automatically when IIS starts.",
+      "default": true,
+      "example": true
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "description": "The protocols enabled for this web site, as a comma-separated list.",
+      "examples": [
+        "http",
+        "http,https"
+      ]
+    },
+    "limits": {
+      "$ref": "#/components/schemas/WebSiteLimits"
+    },
+    "bindings": {
+      "type": "array",
+      "description": "The list of bindings configured for this web site.",
+      "items": {
+        "$ref": "#/components/schemas/Binding"
+      },
+      "example": []
+    },
+    "application_pool": {
+      "$ref": "#/components/schemas/ApplicationPoolReference"
+    },
+    "_links": {
+      "$ref": "#/components/schemas/WebSiteLinks"
+    }
+  }
+}

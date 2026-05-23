@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProcessModel",
+  "title": "ProcessModel",
+  "type": "object",
+  "description": "Process model settings for the application pool worker processes.",
+  "properties": {
+    "idle_timeout": {
+      "type": "integer",
+      "description": "The idle timeout in minutes before a worker process is shut down.",
+      "default": 20,
+      "example": 10
+    },
+    "max_processes": {
+      "type": "integer",
+      "description": "The maximum number of worker processes for the application pool (web garden).",
+      "default": 1,
+      "example": 10
+    },
+    "pinging_enabled": {
+      "type": "boolean",
+      "description": "Whether health monitoring pings are enabled.",
+      "default": true,
+      "example": true
+    },
+    "ping_interval": {
+      "type": "integer",
+      "description": "The interval in seconds between health monitoring pings.",
+      "default": 30,
+      "example": 10
+    },
+    "ping_response_time": {
+      "type": "integer",
+      "description": "The maximum time in seconds allowed for a worker process to respond to a health ping.",
+      "default": 90,
+      "example": 10
+    },
+    "shutdown_time_limit": {
+      "type": "integer",
+      "description": "The time in seconds allowed for a worker process to gracefully shut down.",
+      "default": 90,
+      "example": 10
+    },
+    "startup_time_limit": {
+      "type": "integer",
+      "description": "The time in seconds allowed for a worker process to start up.",
+      "default": 90,
+      "example": 10
+    },
+    "idle_timeout_action": {
+      "type": "string",
+      "description": "The action to take when the idle timeout is reached.",
+      "enum": [
+        "Terminate",
+        "Suspend"
+      ],
+      "default": "Terminate",
+      "example": "Terminate"
+    }
+  }
+}

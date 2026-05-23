@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebSiteSummary",
+  "title": "WebSiteSummary",
+  "type": "object",
+  "description": "A summary representation of a web site in list responses.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site.",
+      "example": "Example Title"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the web site.",
+      "example": "abc123"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the web site.",
+      "enum": [
+        "started",
+        "stopped",
+        "starting",
+        "stopping"
+      ],
+      "example": "started"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "#/components/schemas/HalLink"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

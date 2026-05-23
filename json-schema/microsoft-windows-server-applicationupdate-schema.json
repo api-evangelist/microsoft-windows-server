@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationUpdate",
+  "title": "ApplicationUpdate",
+  "type": "object",
+  "description": "Request body for updating a web application. Only include properties that should be changed.",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "The virtual path for the application.",
+      "example": "example_value"
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the application.",
+      "example": "example_value"
+    },
+    "application_pool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "example": "example_value"
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "example": "example_value"
+    }
+  }
+}

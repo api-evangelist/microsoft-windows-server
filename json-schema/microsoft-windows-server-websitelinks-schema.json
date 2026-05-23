@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebSiteLinks",
+  "title": "WebSiteLinks",
+  "type": "object",
+  "description": "HAL-style links to related resources for a web site.",
+  "properties": {
+    "authentication": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "authorization": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "default_document": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "delegation": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "directory_browsing": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "files": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "handlers": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "ip_restrictions": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "logging": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "modules": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "request_filtering": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "request_monitor": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "request_tracing": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "response_compression": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "response_headers": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "ssl": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "static_content": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "vdirs": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "webapps": {
+      "$ref": "#/components/schemas/HalLink"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationPoolLinks",
+  "title": "ApplicationPoolLinks",
+  "type": "object",
+  "description": "HAL-style links to related resources for an application pool.",
+  "properties": {
+    "webapps": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "websites": {
+      "$ref": "#/components/schemas/HalLink"
+    },
+    "worker_processes": {
+      "$ref": "#/components/schemas/HalLink"
+    }
+  }
+}

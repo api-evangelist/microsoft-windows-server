@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationSummary",
+  "title": "ApplicationSummary",
+  "type": "object",
+  "description": "A summary representation of an application in list responses.",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "The full location path.",
+      "example": "example_value"
+    },
+    "path": {
+      "type": "string",
+      "description": "The virtual path of the application.",
+      "example": "example_value"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application.",
+      "example": "abc123"
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "#/components/schemas/HalLink"
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

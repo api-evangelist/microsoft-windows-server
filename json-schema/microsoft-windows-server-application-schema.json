@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Application",
+  "title": "Application",
+  "type": "object",
+  "description": "A complete IIS web application resource. Applications belong to a single web site and handle requests at a specific virtual path.",
+  "properties": {
+    "location": {
+      "type": "string",
+      "description": "The full location path combining the web site name and application path.",
+      "examples": [
+        "Default Web Site/demo-app"
+      ]
+    },
+    "path": {
+      "type": "string",
+      "description": "The virtual path of the application relative to the web site root.",
+      "examples": [
+        "/demo-app"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application.",
+      "example": "abc123"
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the application.",
+      "examples": [
+        "c:\\inetpub\\wwwroot\\demo-app"
+      ]
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "description": "The protocols enabled for this application, as a comma-separated list.",
+      "examples": [
+        "http"
+      ]
+    },
+    "website": {
+      "$ref": "#/components/schemas/WebSiteReference"
+    },
+    "application_pool": {
+      "$ref": "#/components/schemas/ApplicationPoolReference"
+    },
+    "_links": {
+      "$ref": "#/components/schemas/ApplicationLinks"
+    }
+  }
+}

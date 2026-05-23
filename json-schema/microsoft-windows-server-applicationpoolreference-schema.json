@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationPoolReference",
+  "title": "ApplicationPoolReference",
+  "type": "object",
+  "description": "A reference to an application pool resource.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application pool.",
+      "example": "Example Title"
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the application pool.",
+      "example": "abc123"
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the application pool.",
+      "enum": [
+        "started",
+        "stopped",
+        "starting",
+        "stopping"
+      ],
+      "example": "started"
+    }
+  }
+}

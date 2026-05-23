@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/WebSiteUpdate",
+  "title": "WebSiteUpdate",
+  "type": "object",
+  "description": "Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the web site.",
+      "example": "Example Title"
+    },
+    "physical_path": {
+      "type": "string",
+      "description": "The physical file system path for the web site root.",
+      "example": "example_value"
+    },
+    "bindings": {
+      "type": "array",
+      "description": "The full list of desired bindings. Existing bindings not included in this list will be removed.",
+      "items": {
+        "$ref": "#/components/schemas/Binding"
+      },
+      "example": []
+    },
+    "application_pool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "example": "example_value"
+    },
+    "server_auto_start": {
+      "type": "boolean",
+      "example": true
+    },
+    "enabled_protocols": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "limits": {
+      "$ref": "#/components/schemas/WebSiteLimits"
+    }
+  }
+}

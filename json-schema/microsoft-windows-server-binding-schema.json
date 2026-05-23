@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Binding",
+  "title": "Binding",
+  "type": "object",
+  "description": "Defines the protocol, IP address, port, and optional hostname that a web site listens on. The binding_information property format is '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.",
+  "required": [
+    "protocol"
+  ],
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "description": "The protocol for this binding (e.g., http, https, net.tcp).",
+      "examples": [
+        "http",
+        "https",
+        "net.tcp"
+      ]
+    },
+    "binding_information": {
+      "type": "string",
+      "description": "Combined binding string in the format '{ip_address}:{port}:{hostname}'.",
+      "examples": [
+        "*:80:",
+        "*:443:"
+      ]
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "The IP address to bind to. Use '*' for all addresses.",
+      "examples": [
+        "*",
+        "192.168.1.1"
+      ]
+    },
+    "port": {
+      "type": "integer",
+      "description": "The port number to listen on.",
+      "minimum": 1,
+      "maximum": 65535,
+      "examples": [
+        80,
+        443,
+        8080
+      ]
+    },
+    "hostname": {
+      "type": "string",
+      "description": "The hostname for host header-based routing.",
+      "example": "example_value"
+    },
+    "certificate": {
+      "$ref": "#/components/schemas/Certificate"
+    },
+    "require_sni": {
+      "type": "boolean",
+      "description": "Whether Server Name Indication (SNI) is required for this binding.",
+      "default": false,
+      "example": true
+    }
+  }
+}

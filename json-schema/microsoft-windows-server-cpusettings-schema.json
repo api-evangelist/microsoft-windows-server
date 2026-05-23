@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CpuSettings",
+  "title": "CpuSettings",
+  "type": "object",
+  "description": "CPU usage settings for the application pool.",
+  "properties": {
+    "limit": {
+      "type": "integer",
+      "description": "The maximum CPU usage percentage (in 1/1000ths of a percent) allowed for the application pool.",
+      "default": 0,
+      "example": 10
+    },
+    "limit_interval": {
+      "type": "integer",
+      "description": "The interval in minutes for CPU limit monitoring.",
+      "default": 5,
+      "example": 10
+    },
+    "action": {
+      "type": "string",
+      "description": "The action to take when the CPU limit is exceeded.",
+      "enum": [
+        "NoAction",
+        "KillW3wp",
+        "Throttle",
+        "ThrottleUnderLoad"
+      ],
+      "default": "NoAction",
+      "example": "NoAction"
+    },
+    "processor_affinity_enabled": {
+      "type": "boolean",
+      "description": "Whether processor affinity is enabled.",
+      "default": false,
+      "example": true
+    },
+    "processor_affinity_mask32": {
+      "type": "string",
+      "description": "The 32-bit processor affinity mask.",
+      "default": "0xFFFFFFFF",
+      "example": "example_value"
+    },
+    "processor_affinity_mask64": {
+      "type": "string",
+      "description": "The 64-bit processor affinity mask.",
+      "default": "0xFFFFFFFF",
+      "example": "example_value"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ApplicationPoolUpdate",
+  "title": "ApplicationPoolUpdate",
+  "type": "object",
+  "description": "Request body for updating an application pool. Only include properties that should be changed.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "example": "Example Title"
+    },
+    "auto_start": {
+      "type": "boolean",
+      "example": true
+    },
+    "pipeline_mode": {
+      "type": "string",
+      "enum": [
+        "integrated",
+        "classic"
+      ],
+      "example": "integrated"
+    },
+    "managed_runtime_version": {
+      "type": "string",
+      "example": "example_value"
+    },
+    "enable_32bit_win64": {
+      "type": "boolean",
+      "example": true
+    },
+    "queue_length": {
+      "type": "integer",
+      "example": 10
+    },
+    "cpu": {
+      "$ref": "#/components/schemas/CpuSettings"
+    },
+    "process_model": {
+      "$ref": "#/components/schemas/ProcessModel"
+    },
+    "identity": {
+      "$ref": "#/components/schemas/Identity"
+    },
+    "recycling": {
+      "$ref": "#/components/schemas/Recycling"
+    },
+    "rapid_fail_protection": {
+      "$ref": "#/components/schemas/RapidFailProtection"
+    },
+    "process_orphaning": {
+      "$ref": "#/components/schemas/ProcessOrphaning"
+    }
+  }
+}

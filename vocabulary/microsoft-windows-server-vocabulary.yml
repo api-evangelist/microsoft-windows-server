@@ -1,0 +1,14 @@
+name: Microsoft Windows Server Domain Vocabulary
+provider: Microsoft Windows Server
+providerId: microsoft-windows-server
+description: Tag-derived vocabulary for the Microsoft Windows Server API surface; sourced from openapi/ tags.
+terms:
+- term: Web Sites
+  description: Web sites are a core entity of IIS that determine where and how requests will be handled. The web site API
+    allows consumers to create, read, delete, or update their web sites.
+- term: Applications
+  description: Applications provide a method to differentiate sections of a web site. An application belongs to a single web
+    site and will handle requests for the web site at the application path.
+- term: Application Pools
+  description: Application pools provide an isolation mechanism for processes on the web server. There are many different
+    settings available to fine-tune the behavior of the worker processes used to serve requests through IIS.

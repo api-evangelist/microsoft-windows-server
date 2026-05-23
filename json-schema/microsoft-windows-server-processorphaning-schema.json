@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProcessOrphaning",
+  "title": "ProcessOrphaning",
+  "type": "object",
+  "description": "Process orphaning settings that control behavior when a worker process cannot be shut down gracefully.",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether process orphaning is enabled.",
+      "default": false,
+      "example": true
+    },
+    "orphan_action_exe": {
+      "type": "string",
+      "description": "The path to an executable to run when a worker process is orphaned.",
+      "example": "example_value"
+    },
+    "orphan_action_params": {
+      "type": "string",
+      "description": "Parameters for the orphan action executable.",
+      "example": "example_value"
+    }
+  }
+}

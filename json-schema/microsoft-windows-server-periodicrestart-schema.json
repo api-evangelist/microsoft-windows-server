@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PeriodicRestart",
+  "title": "PeriodicRestart",
+  "type": "object",
+  "description": "Periodic restart configuration for the application pool.",
+  "properties": {
+    "time_interval": {
+      "type": "integer",
+      "description": "The time interval in minutes after which the application pool recycles.",
+      "default": 1740,
+      "example": 10
+    },
+    "private_memory": {
+      "type": "integer",
+      "description": "The private memory threshold in kilobytes that triggers recycling. 0 means disabled.",
+      "default": 0,
+      "example": 10
+    },
+    "request_limit": {
+      "type": "integer",
+      "description": "The number of requests after which the application pool recycles. 0 means disabled.",
+      "default": 0,
+      "example": 10
+    },
+    "virtual_memory": {
+      "type": "integer",
+      "description": "The virtual memory threshold in kilobytes that triggers recycling. 0 means disabled.",
+      "default": 0,
+      "example": 10
+    },
+    "schedule": {
+      "type": "array",
+      "description": "Scheduled times for recycling the application pool.",
+      "items": {
+        "type": "string",
+        "format": "time"
+      },
+      "example": []
+    }
+  }
+}

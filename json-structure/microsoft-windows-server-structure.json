@@ -1,0 +1,339 @@
+{
+  "provider": "Microsoft Windows Server",
+  "providerId": "microsoft-windows-server",
+  "kind": "json-structure",
+  "description": "Structural overview of the Microsoft Windows Server API surface; extracted from openapi/.",
+  "schemaCount": 30,
+  "operationCount": 15,
+  "schemas": [
+    {
+      "name": "Error",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "HalLink",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Certificate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Binding",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "protocol"
+      ]
+    },
+    {
+      "name": "WebSiteLimits",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ApplicationPoolReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "WebSiteReference",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "WebSiteLinks",
+      "type": "object",
+      "propertyCount": 19,
+      "required": []
+    },
+    {
+      "name": "WebSite",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "WebSiteSummary",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "WebSiteCreate",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "name",
+        "physical_path",
+        "bindings"
+      ]
+    },
+    {
+      "name": "WebSiteUpdate",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ApplicationLinks",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "Application",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "ApplicationSummary",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ApplicationCreate",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "path",
+        "physical_path",
+        "website"
+      ]
+    },
+    {
+      "name": "ApplicationUpdate",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "CpuSettings",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ProcessModel",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "Identity",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "RecyclingLogEvents",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "PeriodicRestart",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Recycling",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "RapidFailProtection",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ProcessOrphaning",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ApplicationPoolLinks",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ApplicationPool",
+      "type": "object",
+      "propertyCount": 15,
+      "required": []
+    },
+    {
+      "name": "ApplicationPoolSummary",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ApplicationPoolCreate",
+      "type": "object",
+      "propertyCount": 12,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "ApplicationPoolUpdate",
+      "type": "object",
+      "propertyCount": 12,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/webserver/websites",
+      "operationId": "listWebSites",
+      "summary": "List All Web Sites",
+      "tags": [
+        "Web Sites"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/webserver/websites",
+      "operationId": "createWebSite",
+      "summary": "Create a Web Site",
+      "tags": [
+        "Web Sites"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/webserver/websites/{id}",
+      "operationId": "getWebSite",
+      "summary": "Get a Web Site",
+      "tags": [
+        "Web Sites"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/webserver/websites/{id}",
+      "operationId": "deleteWebSite",
+      "summary": "Delete a Web Site",
+      "tags": [
+        "Web Sites"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/webserver/websites/{id}",
+      "operationId": "updateWebSite",
+      "summary": "Update a Web Site",
+      "tags": [
+        "Web Sites"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/webserver/webapps",
+      "operationId": "listApplications",
+      "summary": "List All Applications",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/webserver/webapps",
+      "operationId": "createApplication",
+      "summary": "Create an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/webserver/webapps/{id}",
+      "operationId": "getApplication",
+      "summary": "Get an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/webserver/webapps/{id}",
+      "operationId": "deleteApplication",
+      "summary": "Delete an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/webserver/webapps/{id}",
+      "operationId": "updateApplication",
+      "summary": "Update an Application",
+      "tags": [
+        "Applications"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/webserver/application-pools",
+      "operationId": "listApplicationPools",
+      "summary": "List All Application Pools",
+      "tags": [
+        "Application Pools"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/webserver/application-pools",
+      "operationId": "createApplicationPool",
+      "summary": "Create an Application Pool",
+      "tags": [
+        "Application Pools"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/webserver/application-pools/{id}",
+      "operationId": "getApplicationPool",
+      "summary": "Get an Application Pool",
+      "tags": [
+        "Application Pools"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/webserver/application-pools/{id}",
+      "operationId": "deleteApplicationPool",
+      "summary": "Delete an Application Pool",
+      "tags": [
+        "Application Pools"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/webserver/application-pools/{id}",
+      "operationId": "updateApplicationPool",
+      "summary": "Update an Application Pool",
+      "tags": [
+        "Application Pools"
+      ]
+    }
+  ]
+}
