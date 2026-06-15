@@ -1,0 +1,4179 @@
+{
+  "item": [
+    {
+      "id": "090f734a-db83-46a2-884a-3d66b5b349b6",
+      "name": "Web Sites",
+      "description": {
+        "content": "Web sites are a core entity of IIS that determine where and how requests will be handled. The web site API allows consumers to create, read, delete, or update their web sites.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37ce90ab-e573-44be-96eb-ed9892257c0c",
+          "name": "List All Web Sites",
+          "request": {
+            "name": "List All Web Sites",
+            "description": {
+              "content": "Retrieves a list of all web sites configured on the IIS server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "websites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "application_pool.id",
+                  "value": "<string>",
+                  "description": "Filter web sites by application pool identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c70aa2e-239d-4094-9531-b30bfd938a6d",
+              "name": "A list of web sites.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"websites\": [\n    {\n      \"name\": \"Example Title\",\n      \"id\": \"abc123\",\n      \"status\": \"started\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    },\n    {\n      \"name\": \"Example Title\",\n      \"id\": \"abc123\",\n      \"status\": \"started\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87430a05-3929-4c93-85d2-6b4af94f9f25",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f5f34bd7-19c1-4e85-a412-f3614bd64078",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6fb29901-af41-485e-8f39-e8fead36b577",
+          "name": "Create a Web Site",
+          "request": {
+            "name": "Create a Web Site",
+            "description": {
+              "content": "Creates a new web site on the IIS server. Requires a physical path, the name of the web site, and a set of bindings that the web site should listen on.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "websites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bab86b9-a7ba-4119-9650-d28fd02a3025",
+              "name": "The web site was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration Site\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\DemonstrationSite\",\n  \"bindings\": [],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Default Web Site\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"%SystemDrive%\\\\inetpub\\\\wwwroot\",\n  \"key\": \"example_value\",\n  \"status\": \"started\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"delegation\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"files\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"logging\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_monitor\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    },\n    \"webapps\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c692ea4b-97ee-44ed-9ec3-ed95562cfe71",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration Site\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\DemonstrationSite\",\n  \"bindings\": [],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b463259-f0ec-4184-9bda-345b82c1a2e4",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration Site\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\DemonstrationSite\",\n  \"bindings\": [],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22910542-9789-4be9-b4a3-d09776e15a2e",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration Site\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\DemonstrationSite\",\n  \"bindings\": [],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe1e4b1e-cfc3-4d48-acf0-108be3654980",
+              "name": "A web site with the specified name or bindings already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration Site\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\DemonstrationSite\",\n  \"bindings\": [],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "974c24f7-2abf-44e6-8bfa-5542779114a4",
+          "name": "Get a Web Site",
+          "request": {
+            "name": "Get a Web Site",
+            "description": {
+              "content": "Retrieves the details of a specific web site by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "websites",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web site."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6403eb87-85aa-4ac1-ac02-d893825d3c08",
+              "name": "The web site details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Default Web Site\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"%SystemDrive%\\\\inetpub\\\\wwwroot\",\n  \"key\": \"example_value\",\n  \"status\": \"started\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"delegation\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"files\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"logging\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_monitor\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    },\n    \"webapps\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2d70bd4-db8a-4bf0-97af-96b771cfff9b",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11cba6a4-b950-42c7-b3f8-2ac678948667",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "586d957f-9d85-46a4-b90f-5c2085d18939",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7948433-4b76-4188-afee-1c7a671167c5",
+          "name": "Update a Web Site",
+          "request": {
+            "name": "Update a Web Site",
+            "description": {
+              "content": "Updates the configuration of an existing web site. Sending a patch request with the web site in the desired state will update the web site on the server to match. List properties such as bindings must include all desired entries since the entire list is replaced.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "websites",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web site."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e645bc7-9c42-44b6-ab66-fb62f4335136",
+              "name": "The web site was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Default Web Site\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"%SystemDrive%\\\\inetpub\\\\wwwroot\",\n  \"key\": \"example_value\",\n  \"status\": \"started\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"delegation\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"files\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"logging\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_monitor\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    },\n    \"webapps\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7404c74e-58d2-4d5c-997b-424b08ffd0be",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbb8a954-20d6-4fed-9b73-58466596b9a2",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6bcd177-c96d-4f26-9e85-946f5b9c3202",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77a77fcd-ccef-4342-adbe-862cb624757e",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81d09b28-b20c-4d07-bb41-1985118af593",
+              "name": "A conflict occurred with the specified bindings.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"example_value\",\n  \"limits\": {\n    \"connection_timeout\": 10,\n    \"max_bandwidth\": 10,\n    \"max_connections\": 10,\n    \"max_url_segments\": 32\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59029019-667e-4a24-84d9-5e3a90f07699",
+          "name": "Delete a Web Site",
+          "request": {
+            "name": "Delete a Web Site",
+            "description": {
+              "content": "Deletes a web site from the IIS server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "websites",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web site."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "75889502-cf11-4a11-80e5-a2208d2e2428",
+              "name": "The web site was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb83fa27-bc27-4d52-8eb3-9e5eb1d76d34",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d56fbae-b35b-47a2-80d5-fc10bc6c2214",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bda2f606-83a7-4056-b148-e29060f05517",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "websites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web site."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c90f7035-9625-44fb-8ac4-4b1ad7afb1a2",
+      "name": "Applications",
+      "description": {
+        "content": "Applications provide a method to differentiate sections of a web site. An application belongs to a single web site and will handle requests for the web site at the application path.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83b1101f-6bb2-4e9f-ba9a-e4384dc8744f",
+          "name": "List All Applications",
+          "request": {
+            "name": "List All Applications",
+            "description": {
+              "content": "Retrieves a list of all web applications. Optionally filter by web site or application pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "webapps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "website.id",
+                  "value": "<string>",
+                  "description": "Filter applications by web site identifier."
+                },
+                {
+                  "disabled": false,
+                  "key": "application_pool.id",
+                  "value": "<string>",
+                  "description": "Filter applications by application pool identifier."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b31a7239-f8d6-446d-af80-c7754d624e13",
+              "name": "A list of web applications.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "website.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webapps\": [\n    {\n      \"location\": \"example_value\",\n      \"path\": \"example_value\",\n      \"id\": \"abc123\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    },\n    {\n      \"location\": \"example_value\",\n      \"path\": \"example_value\",\n      \"id\": \"abc123\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b7fa1ad-adf3-4359-b9df-77e3a343079f",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "website.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3d2f3d7-b5d7-42d3-962e-f4e9d486d6b2",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "website.id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "application_pool.id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc12a39c-6421-43de-ab82-dbd076f9cbb3",
+          "name": "Create an Application",
+          "request": {
+            "name": "Create an Application",
+            "description": {
+              "content": "Creates a new web application. Requires the web site that the application should belong to, the virtual path, and the physical path in the file system. The directory must exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "webapps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "860e65de-c0bd-4156-b68f-bfd5951d8d3b",
+              "name": "The application was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"demo-app\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"Default Web Site/demo-app\",\n  \"path\": \"/demo-app\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"c:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"enabled_protocols\": \"http\",\n  \"website\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd2fbecd-283b-49e9-9b68-8ab6ce693376",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"demo-app\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d76164ef-2d19-4c39-bf2a-6d5045393aba",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"demo-app\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4e617a7-74bb-4537-a4d2-66b870c1561d",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"demo-app\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16c818a9-7df5-4b6e-8a4b-942603d802c8",
+              "name": "The specified web site or application pool was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"demo-app\",\n  \"physical_path\": \"C:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fec0e50-fd9e-4ed4-a6d5-2b1b2d946119",
+          "name": "Get an Application",
+          "request": {
+            "name": "Get an Application",
+            "description": {
+              "content": "Retrieves the details of a specific web application by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "webapps",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1b2b0f7-ffa1-470a-8fd0-93f295f44ebc",
+              "name": "The application details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"Default Web Site/demo-app\",\n  \"path\": \"/demo-app\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"c:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"enabled_protocols\": \"http\",\n  \"website\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f84548a-ba63-4fb5-8427-e59e43ce5515",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c5c3a8c-4805-4bf8-bca3-1a9920d9a98a",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e786d27-131e-45db-b112-9bdcdfe99d7a",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7efc663-fe44-4bfa-8390-362ea1229d05",
+          "name": "Update an Application",
+          "request": {
+            "name": "Update an Application",
+            "description": {
+              "content": "Updates the configuration of an existing web application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "webapps",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7ccff92-8313-46fd-ac16-0d1ea926dde9",
+              "name": "The application was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": \"Default Web Site/demo-app\",\n  \"path\": \"/demo-app\",\n  \"id\": \"abc123\",\n  \"physical_path\": \"c:\\\\inetpub\\\\wwwroot\\\\demo-app\",\n  \"enabled_protocols\": \"http\",\n  \"website\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"application_pool\": {\n    \"name\": \"Example Title\",\n    \"id\": \"abc123\",\n    \"status\": \"started\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"example_value\"\n    },\n    \"authorization\": {\n      \"href\": \"example_value\"\n    },\n    \"default_document\": {\n      \"href\": \"example_value\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"example_value\"\n    },\n    \"handlers\": {\n      \"href\": \"example_value\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"example_value\"\n    },\n    \"modules\": {\n      \"href\": \"example_value\"\n    },\n    \"request_filtering\": {\n      \"href\": \"example_value\"\n    },\n    \"request_tracing\": {\n      \"href\": \"example_value\"\n    },\n    \"response_compression\": {\n      \"href\": \"example_value\"\n    },\n    \"response_headers\": {\n      \"href\": \"example_value\"\n    },\n    \"ssl\": {\n      \"href\": \"example_value\"\n    },\n    \"static_content\": {\n      \"href\": \"example_value\"\n    },\n    \"vdirs\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33d97b32-7533-436d-bf4c-b6bddb37098c",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9a08eab-0f8a-4e26-9785-8804f52f9b93",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "105870e3-707e-447d-a7e0-6bf00ffe3cf0",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4fe2d386-81eb-430e-89a5-77ea25f558fd",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"example_value\",\n  \"physical_path\": \"example_value\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51adcf3c-8e3b-43d4-a0b0-0c9aa8119549",
+          "name": "Delete an Application",
+          "request": {
+            "name": "Delete an Application",
+            "description": {
+              "content": "Deletes a web application from the IIS server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "webapps",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the web application."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b89adfc-48cc-40db-a83a-6c77a92d12d0",
+              "name": "The application was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f88fa7c-ac64-4ec2-b82a-b3f95e9ae9ee",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9dc4bcf2-06f4-4ef6-80f3-776f1c17d4f0",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7a90b1e1-ff88-48ee-b9c3-be96eb3a140b",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "webapps",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the web application."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "639ccd00-bd67-4405-8c4c-aa2d763e2e4c",
+      "name": "Application Pools",
+      "description": {
+        "content": "Application pools provide an isolation mechanism for processes on the web server. There are many different settings available to fine-tune the behavior of the worker processes used to serve requests through IIS.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "324e4142-a067-4c99-a739-b1aa821c3e8c",
+          "name": "List All Application Pools",
+          "request": {
+            "name": "List All Application Pools",
+            "description": {
+              "content": "Retrieves a list of all application pools configured on the IIS server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "application-pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b768f63-0ab9-4672-b5fc-c79d9ffa26dd",
+              "name": "A list of application pools.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"application_pools\": [\n    {\n      \"name\": \"Example Title\",\n      \"id\": \"abc123\",\n      \"status\": \"started\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    },\n    {\n      \"name\": \"Example Title\",\n      \"id\": \"abc123\",\n      \"status\": \"started\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"example_value\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c50075a-f241-44dc-b233-dd4bd163c43c",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0eebc3d5-0fc2-4872-8a19-efc731767562",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "364db6c9-a623-4eb0-aa24-90c6cb39b3b5",
+          "name": "Create an Application Pool",
+          "request": {
+            "name": "Create an Application Pool",
+            "description": {
+              "content": "Creates a new application pool. The only required information is the name of the application pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "application-pools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"v4.0\",\n  \"enable_32bit_win64\": false,\n  \"queue_length\": 1000,\n  \"cpu\": {\n    \"limit\": 0,\n    \"limit_interval\": 5,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": false,\n    \"processor_affinity_mask32\": \"0xFFFFFFFF\",\n    \"processor_affinity_mask64\": \"0xFFFFFFFF\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 20,\n    \"max_processes\": 1,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 30,\n    \"ping_response_time\": 90,\n    \"shutdown_time_limit\": 90,\n    \"startup_time_limit\": 90,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"<string>\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": false,\n    \"disable_recycle_on_config_change\": false,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 1740,\n      \"private_memory\": 0,\n      \"request_limit\": 0,\n      \"virtual_memory\": 0,\n      \"schedule\": [\n        \"<time>\",\n        \"<time>\"\n      ]\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 5,\n    \"max_crashes\": 5,\n    \"auto_shutdown_exe\": \"<string>\",\n    \"auto_shutdown_params\": \"<string>\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": false,\n    \"orphan_action_exe\": \"<string>\",\n    \"orphan_action_params\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "807121e6-d22c-4101-a68b-8aa09e17f3df",
+              "name": "The application pool was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration App Pool\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"DefaultAppPool\",\n  \"id\": \"abc123\",\n  \"status\": \"started\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"v4.0\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  },\n  \"_links\": {\n    \"webapps\": {\n      \"href\": \"example_value\"\n    },\n    \"websites\": {\n      \"href\": \"example_value\"\n    },\n    \"worker_processes\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a37559b3-2f45-402b-bd53-ca507b570428",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration App Pool\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c81aca6-8d88-48bc-972f-cd6e0df8dbdb",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration App Pool\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25856dc5-fcd7-4bf8-aea3-52c5daac6e57",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration App Pool\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "63983cce-e13a-492f-ad12-5e63cbeef7b5",
+              "name": "An application pool with the specified name already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Demonstration App Pool\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efebd2f8-9dc3-489a-997e-4a9fe76eaaaa",
+          "name": "Get an Application Pool",
+          "request": {
+            "name": "Get an Application Pool",
+            "description": {
+              "content": "Retrieves the details of a specific application pool by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "application-pools",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the application pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5faa034-bcdb-4b1c-8dff-e4af7a383b82",
+              "name": "The application pool details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"DefaultAppPool\",\n  \"id\": \"abc123\",\n  \"status\": \"started\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"v4.0\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  },\n  \"_links\": {\n    \"webapps\": {\n      \"href\": \"example_value\"\n    },\n    \"websites\": {\n      \"href\": \"example_value\"\n    },\n    \"worker_processes\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ddfcdb0-8947-4e1e-878d-2d404be23026",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0fadfd4-91b4-40e6-8c6e-cd9e18dad6f1",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8069b233-46de-4a0b-983f-171d33c6fd6a",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ab95fd7-730b-44c2-8cfa-cf27eea88597",
+          "name": "Update an Application Pool",
+          "request": {
+            "name": "Update an Application Pool",
+            "description": {
+              "content": "Updates the configuration of an existing application pool.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "application-pools",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the application pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"auto_start\": \"<boolean>\",\n  \"pipeline_mode\": \"<string>\",\n  \"managed_runtime_version\": \"<string>\",\n  \"enable_32bit_win64\": \"<boolean>\",\n  \"queue_length\": \"<integer>\",\n  \"cpu\": {\n    \"limit\": 0,\n    \"limit_interval\": 5,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": false,\n    \"processor_affinity_mask32\": \"0xFFFFFFFF\",\n    \"processor_affinity_mask64\": \"0xFFFFFFFF\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 20,\n    \"max_processes\": 1,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 30,\n    \"ping_response_time\": 90,\n    \"shutdown_time_limit\": 90,\n    \"startup_time_limit\": 90,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"<string>\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": false,\n    \"disable_recycle_on_config_change\": false,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 1740,\n      \"private_memory\": 0,\n      \"request_limit\": 0,\n      \"virtual_memory\": 0,\n      \"schedule\": [\n        \"<time>\",\n        \"<time>\"\n      ]\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 5,\n    \"max_crashes\": 5,\n    \"auto_shutdown_exe\": \"<string>\",\n    \"auto_shutdown_params\": \"<string>\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": false,\n    \"orphan_action_exe\": \"<string>\",\n    \"orphan_action_params\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62bd7b17-7e71-44a2-960c-d30f3aeffd64",
+              "name": "The application pool was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"DefaultAppPool\",\n  \"id\": \"abc123\",\n  \"status\": \"started\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"v4.0\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  },\n  \"_links\": {\n    \"webapps\": {\n      \"href\": \"example_value\"\n    },\n    \"websites\": {\n      \"href\": \"example_value\"\n    },\n    \"worker_processes\": {\n      \"href\": \"example_value\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc799f53-fffa-4bf1-ae18-84d47f4c3a09",
+              "name": "The request body is malformed or contains invalid values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "462bb0a9-52e8-45d5-9ae5-ae53e5c1a1b4",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba303bb5-71df-4cd3-be98-4c52f317386f",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aaf514c9-4dad-4396-923c-1876ab052f2f",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"auto_start\": true,\n  \"pipeline_mode\": \"integrated\",\n  \"managed_runtime_version\": \"example_value\",\n  \"enable_32bit_win64\": true,\n  \"queue_length\": 10,\n  \"cpu\": {\n    \"limit\": 10,\n    \"limit_interval\": 10,\n    \"action\": \"NoAction\",\n    \"processor_affinity_enabled\": true,\n    \"processor_affinity_mask32\": \"example_value\",\n    \"processor_affinity_mask64\": \"example_value\"\n  },\n  \"process_model\": {\n    \"idle_timeout\": 10,\n    \"max_processes\": 10,\n    \"pinging_enabled\": true,\n    \"ping_interval\": 10,\n    \"ping_response_time\": 10,\n    \"shutdown_time_limit\": 10,\n    \"startup_time_limit\": 10,\n    \"idle_timeout_action\": \"Terminate\"\n  },\n  \"identity\": {\n    \"identity_type\": \"ApplicationPoolIdentity\",\n    \"username\": \"example_value\",\n    \"load_user_profile\": true\n  },\n  \"recycling\": {\n    \"disable_overlapped_recycle\": true,\n    \"disable_recycle_on_config_change\": true,\n    \"log_events\": {\n      \"time\": true,\n      \"requests\": true,\n      \"schedule\": true,\n      \"memory\": true,\n      \"isapi_unhealthy\": true,\n      \"on_demand\": true,\n      \"config_change\": true,\n      \"private_memory\": true\n    },\n    \"periodic_restart\": {\n      \"time_interval\": 10,\n      \"private_memory\": 10,\n      \"request_limit\": 10,\n      \"virtual_memory\": 10\n    }\n  },\n  \"rapid_fail_protection\": {\n    \"enabled\": true,\n    \"load_balancer_capabilities\": \"HttpLevel\",\n    \"interval\": 10,\n    \"max_crashes\": 10,\n    \"auto_shutdown_exe\": \"example_value\",\n    \"auto_shutdown_params\": \"example_value\"\n  },\n  \"process_orphaning\": {\n    \"enabled\": true,\n    \"orphan_action_exe\": \"example_value\",\n    \"orphan_action_params\": \"example_value\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cbf08b4-02ef-4fa9-a4a0-dc5b9f60f611",
+          "name": "Delete an Application Pool",
+          "request": {
+            "name": "Delete an Application Pool",
+            "description": {
+              "content": "Deletes an application pool from the IIS server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "webserver",
+                "application-pools",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the application pool."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f29a6a2c-cf68-44fa-8811-aabdf2d92363",
+              "name": "The application pool was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3a6afe6-20c8-4df7-9374-dd0b2ae3629b",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dac0da9b-5e23-4709-aafa-25977d5551eb",
+              "name": "The authenticated user does not have permission for this operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc4655f2-9533-4005-a10c-3ad66460c15d",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "webserver",
+                    "application-pools",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the application pool."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Example Title\",\n  \"detail\": \"example_value\",\n  \"status\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:55539",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "67171f7f-6ad9-4bae-b0ec-fa64ad0bb5e1",
+    "name": "IIS Administration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.\n\nContact Support:\n Name: Microsoft Support\n Email: support@microsoft.com",
+      "type": "text/plain"
+    }
+  }
+}
