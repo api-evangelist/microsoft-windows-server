@@ -4,7 +4,7 @@ description: >-
   APIs and integration points for Microsoft Windows Server operating system including management, networking, storage,
   virtualization, security, and remote administration capabilities for enterprise server infrastructure.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://www.microsoft.com/windows-server
 tags:
   - Datacenter
