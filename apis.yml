@@ -64,7 +64,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.microsoft.com/windows/win32/ad/active-directory-domain-services
-      - type: SDK
+      - type: SDKs
         url: https://docs.microsoft.com/dotnet/api/system.directoryservices
   - name: Hyper-V Management API
     description: >-
@@ -92,7 +92,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.microsoft.com/previous-versions/windows/desktop/aa354519(v=vs.85)
-      - type: SDK
+      - type: SDKs
         url: https://docs.microsoft.com/dotnet/api/microsoft.updateservices.administration
   - name: Windows Admin Center API
     description: >-
