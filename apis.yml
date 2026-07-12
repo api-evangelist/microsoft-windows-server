@@ -273,6 +273,10 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
 common:
+  - type: DomainSecurity
+    url: security/microsoft-windows-server-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-windows-server-authentication.yml
   - type: Portal
     url: https://portal.azure.com
   - type: Documentation
