@@ -5,14 +5,17 @@
       "source": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=WindowsServer",
       "feed_url": "https://techcommunity.microsoft.com/t5/s/gxcuf89792/rss/board?board.id=WindowsServer",
       "title": "",
-      "saved": 3,
+      "saved": 0,
       "method": "feed"
     },
     {
       "source": "https://support.microsoft.com/windows-server",
-      "error": "HTTPError"
+      "feed_url": "https://support.microsoft.com/windows-server",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 3,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 20,
+  "fetched": "2026-07-11T11:50:51Z"
 }
