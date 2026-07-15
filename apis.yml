@@ -273,6 +273,8 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
 common:
+  - type: AgenticAccess
+    url: agentic-access/microsoft-windows-server-agentic-access.yml
   - type: DomainSecurity
     url: security/microsoft-windows-server-domain-security.yml
   - type: Authentication
