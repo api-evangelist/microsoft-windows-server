@@ -1,0 +1,644 @@
+openapi: 3.1.0
+info:
+  title: IIS Administration Application Pools API
+  description: REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.
+  version: 2.3.0
+  contact:
+    name: Microsoft Support
+    url: https://support.microsoft.com
+    email: support@microsoft.com
+  license:
+    name: MIT
+    url: https://github.com/microsoft/IIS.Administration/blob/main/LICENSE
+  x-logo:
+    url: https://www.microsoft.com/favicon.ico
+servers:
+- url: https://localhost:55539
+  description: Default IIS Administration API server
+security:
+- accessToken: []
+tags:
+- name: Application Pools
+  description: Application pools provide an isolation mechanism for processes on the web server. There are many different settings available to fine-tune the behavior of the worker processes used to serve requests through IIS.
+paths:
+  /api/webserver/application-pools:
+    get:
+      operationId: listApplicationPools
+      summary: List All Application Pools
+      description: Retrieves a list of all application pools configured on the IIS server.
+      tags:
+      - Application Pools
+      responses:
+        '200':
+          description: A list of application pools.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  application_pools:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApplicationPoolSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createApplicationPool
+      summary: Create an Application Pool
+      description: Creates a new application pool. The only required information is the name of the application pool.
+      tags:
+      - Application Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPoolCreate'
+      responses:
+        '201':
+          description: The application pool was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: An application pool with the specified name already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/webserver/application-pools/{id}:
+    get:
+      operationId: getApplicationPool
+      summary: Get an Application Pool
+      description: Retrieves the details of a specific application pool by its identifier.
+      tags:
+      - Application Pools
+      parameters:
+      - $ref: '#/components/parameters/ApplicationPoolId'
+      responses:
+        '200':
+          description: The application pool details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateApplicationPool
+      summary: Update an Application Pool
+      description: Updates the configuration of an existing application pool.
+      tags:
+      - Application Pools
+      parameters:
+      - $ref: '#/components/parameters/ApplicationPoolId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationPoolUpdate'
+      responses:
+        '200':
+          description: The application pool was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationPool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteApplicationPool
+      summary: Delete an Application Pool
+      description: Deletes an application pool from the IIS server.
+      tags:
+      - Application Pools
+      parameters:
+      - $ref: '#/components/parameters/ApplicationPoolId'
+      responses:
+        '204':
+          description: The application pool was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProcessModel:
+      type: object
+      description: Process model settings for the application pool worker processes.
+      properties:
+        idle_timeout:
+          type: integer
+          description: The idle timeout in minutes before a worker process is shut down.
+          default: 20
+          example: 10
+        max_processes:
+          type: integer
+          description: The maximum number of worker processes for the application pool (web garden).
+          default: 1
+          example: 10
+        pinging_enabled:
+          type: boolean
+          description: Whether health monitoring pings are enabled.
+          default: true
+          example: true
+        ping_interval:
+          type: integer
+          description: The interval in seconds between health monitoring pings.
+          default: 30
+          example: 10
+        ping_response_time:
+          type: integer
+          description: The maximum time in seconds allowed for a worker process to respond to a health ping.
+          default: 90
+          example: 10
+        shutdown_time_limit:
+          type: integer
+          description: The time in seconds allowed for a worker process to gracefully shut down.
+          default: 90
+          example: 10
+        startup_time_limit:
+          type: integer
+          description: The time in seconds allowed for a worker process to start up.
+          default: 90
+          example: 10
+        idle_timeout_action:
+          type: string
+          description: The action to take when the idle timeout is reached.
+          enum:
+          - Terminate
+          - Suspend
+          default: Terminate
+          example: Terminate
+    ApplicationPoolCreate:
+      type: object
+      description: Request body for creating a new application pool.
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: The name of the application pool to create.
+          examples:
+          - Demonstration App Pool
+        auto_start:
+          type: boolean
+          default: true
+          example: true
+        pipeline_mode:
+          type: string
+          enum:
+          - integrated
+          - classic
+          default: integrated
+          example: integrated
+        managed_runtime_version:
+          type: string
+          default: v4.0
+          example: example_value
+        enable_32bit_win64:
+          type: boolean
+          default: false
+          example: true
+        queue_length:
+          type: integer
+          default: 1000
+          example: 10
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+    CpuSettings:
+      type: object
+      description: CPU usage settings for the application pool.
+      properties:
+        limit:
+          type: integer
+          description: The maximum CPU usage percentage (in 1/1000ths of a percent) allowed for the application pool.
+          default: 0
+          example: 10
+        limit_interval:
+          type: integer
+          description: The interval in minutes for CPU limit monitoring.
+          default: 5
+          example: 10
+        action:
+          type: string
+          description: The action to take when the CPU limit is exceeded.
+          enum:
+          - NoAction
+          - KillW3wp
+          - Throttle
+          - ThrottleUnderLoad
+          default: NoAction
+          example: NoAction
+        processor_affinity_enabled:
+          type: boolean
+          description: Whether processor affinity is enabled.
+          default: false
+          example: true
+        processor_affinity_mask32:
+          type: string
+          description: The 32-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+          example: example_value
+        processor_affinity_mask64:
+          type: string
+          description: The 64-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+          example: example_value
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
+          example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
+    RecyclingLogEvents:
+      type: object
+      description: Configuration for which recycling events are logged.
+      properties:
+        time:
+          type: boolean
+          default: true
+          example: true
+        requests:
+          type: boolean
+          default: true
+          example: true
+        schedule:
+          type: boolean
+          default: true
+          example: true
+        memory:
+          type: boolean
+          default: true
+          example: true
+        isapi_unhealthy:
+          type: boolean
+          default: true
+          example: true
+        on_demand:
+          type: boolean
+          default: true
+          example: true
+        config_change:
+          type: boolean
+          default: true
+          example: true
+        private_memory:
+          type: boolean
+          default: true
+          example: true
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
+    ProcessOrphaning:
+      type: object
+      description: Process orphaning settings that control behavior when a worker process cannot be shut down gracefully.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether process orphaning is enabled.
+          default: false
+          example: true
+        orphan_action_exe:
+          type: string
+          description: The path to an executable to run when a worker process is orphaned.
+          example: example_value
+        orphan_action_params:
+          type: string
+          description: Parameters for the orphan action executable.
+          example: example_value
+    Identity:
+      type: object
+      description: The identity configuration for the application pool worker process.
+      properties:
+        identity_type:
+          type: string
+          description: The type of identity used by the application pool.
+          enum:
+          - ApplicationPoolIdentity
+          - LocalSystem
+          - LocalService
+          - NetworkService
+          - SpecificUser
+          default: ApplicationPoolIdentity
+          example: ApplicationPoolIdentity
+        username:
+          type: string
+          description: The username for the identity when using SpecificUser identity type.
+          example: example_value
+        load_user_profile:
+          type: boolean
+          description: Whether to load the user profile for the worker process.
+          default: true
+          example: true
+    ApplicationPoolUpdate:
+      type: object
+      description: Request body for updating an application pool. Only include properties that should be changed.
+      properties:
+        name:
+          type: string
+          example: Example Title
+        auto_start:
+          type: boolean
+          example: true
+        pipeline_mode:
+          type: string
+          enum:
+          - integrated
+          - classic
+          example: integrated
+        managed_runtime_version:
+          type: string
+          example: example_value
+        enable_32bit_win64:
+          type: boolean
+          example: true
+        queue_length:
+          type: integer
+          example: 10
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+    Recycling:
+      type: object
+      description: Recycling settings for the application pool.
+      properties:
+        disable_overlapped_recycle:
+          type: boolean
+          description: Whether to disable overlapped recycling.
+          default: false
+          example: true
+        disable_recycle_on_config_change:
+          type: boolean
+          description: Whether to disable recycling on configuration changes.
+          default: false
+          example: true
+        log_events:
+          $ref: '#/components/schemas/RecyclingLogEvents'
+        periodic_restart:
+          $ref: '#/components/schemas/PeriodicRestart'
+    ApplicationPoolLinks:
+      type: object
+      description: HAL-style links to related resources for an application pool.
+      properties:
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+        websites:
+          $ref: '#/components/schemas/HalLink'
+        worker_processes:
+          $ref: '#/components/schemas/HalLink'
+    PeriodicRestart:
+      type: object
+      description: Periodic restart configuration for the application pool.
+      properties:
+        time_interval:
+          type: integer
+          description: The time interval in minutes after which the application pool recycles.
+          default: 1740
+          example: 10
+        private_memory:
+          type: integer
+          description: The private memory threshold in kilobytes that triggers recycling. 0 means disabled.
+          default: 0
+          example: 10
+        request_limit:
+          type: integer
+          description: The number of requests after which the application pool recycles. 0 means disabled.
+          default: 0
+          example: 10
+        virtual_memory:
+          type: integer
+          description: The virtual memory threshold in kilobytes that triggers recycling. 0 means disabled.
+          default: 0
+          example: 10
+        schedule:
+          type: array
+          description: Scheduled times for recycling the application pool.
+          items:
+            type: string
+            format: time
+          example: []
+    RapidFailProtection:
+      type: object
+      description: Rapid fail protection settings that determine how IIS responds to repeated worker process failures.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether rapid fail protection is enabled.
+          default: true
+          example: true
+        load_balancer_capabilities:
+          type: string
+          description: The load balancer capabilities response type.
+          enum:
+          - HttpLevel
+          - TcpLevel
+          default: HttpLevel
+          example: HttpLevel
+        interval:
+          type: integer
+          description: The time interval in minutes during which the max crash count is monitored.
+          default: 5
+          example: 10
+        max_crashes:
+          type: integer
+          description: The maximum number of worker process crashes allowed within the interval.
+          default: 5
+          example: 10
+        auto_shutdown_exe:
+          type: string
+          description: The path to an executable to run when the application pool is shut down due to rapid fail protection.
+          example: example_value
+        auto_shutdown_params:
+          type: string
+          description: Parameters for the auto shutdown executable.
+          example: example_value
+    ApplicationPoolSummary:
+      type: object
+      description: A summary representation of an application pool in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+    ApplicationPool:
+      type: object
+      description: A complete IIS application pool resource with all configuration settings for worker process isolation and management.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          examples:
+          - DefaultAppPool
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        auto_start:
+          type: boolean
+          description: Whether the application pool starts automatically when IIS starts.
+          default: true
+          example: true
+        pipeline_mode:
+          type: string
+          description: The managed pipeline mode for the application pool.
+          enum:
+          - integrated
+          - classic
+          default: integrated
+          example: integrated
+        managed_runtime_version:
+          type: string
+          description: The version of the .NET CLR loaded by the application pool. Empty string for unmanaged code.
+          examples:
+          - v4.0
+          - v2.0
+          - ''
+        enable_32bit_win64:
+          type: boolean
+          description: Whether to enable 32-bit applications on 64-bit Windows.
+          default: false
+          example: true
+        queue_length:
+          type: integer
+          description: The maximum number of requests that can be queued for the application pool before requests are rejected.
+          default: 1000
+          example: 10
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+        _links:
+          $ref: '#/components/schemas/ApplicationPoolLinks'
+  responses:
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ApplicationPoolId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the application pool.
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+      description: Access token for authenticating with the IIS Administration API. Tokens are generated through the API management portal at https://localhost:55539.

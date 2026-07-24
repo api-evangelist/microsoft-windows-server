@@ -1,0 +1,416 @@
+openapi: 3.1.0
+info:
+  title: IIS Administration Application Pools Applications API
+  description: REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.
+  version: 2.3.0
+  contact:
+    name: Microsoft Support
+    url: https://support.microsoft.com
+    email: support@microsoft.com
+  license:
+    name: MIT
+    url: https://github.com/microsoft/IIS.Administration/blob/main/LICENSE
+  x-logo:
+    url: https://www.microsoft.com/favicon.ico
+servers:
+- url: https://localhost:55539
+  description: Default IIS Administration API server
+security:
+- accessToken: []
+tags:
+- name: Applications
+  description: Applications provide a method to differentiate sections of a web site. An application belongs to a single web site and will handle requests for the web site at the application path.
+paths:
+  /api/webserver/webapps:
+    get:
+      operationId: listApplications
+      summary: List All Applications
+      description: Retrieves a list of all web applications. Optionally filter by web site or application pool.
+      tags:
+      - Applications
+      parameters:
+      - name: website.id
+        in: query
+        description: Filter applications by web site identifier.
+        required: false
+        schema:
+          type: string
+      - name: application_pool.id
+        in: query
+        description: Filter applications by application pool identifier.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of web applications.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webapps:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ApplicationSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createApplication
+      summary: Create an Application
+      description: Creates a new web application. Requires the web site that the application should belong to, the virtual path, and the physical path in the file system. The directory must exist.
+      tags:
+      - Applications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: The application was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          description: The specified web site or application pool was not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/webserver/webapps/{id}:
+    get:
+      operationId: getApplication
+      summary: Get an Application
+      description: Retrieves the details of a specific web application by its identifier.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/ApplicationId'
+      responses:
+        '200':
+          description: The application details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateApplication
+      summary: Update an Application
+      description: Updates the configuration of an existing web application.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/ApplicationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdate'
+      responses:
+        '200':
+          description: The application was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteApplication
+      summary: Delete an Application
+      description: Deletes a web application from the IIS server.
+      tags:
+      - Applications
+      parameters:
+      - $ref: '#/components/parameters/ApplicationId'
+      responses:
+        '204':
+          description: The application was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ApplicationUpdate:
+      type: object
+      description: Request body for updating a web application. Only include properties that should be changed.
+      properties:
+        path:
+          type: string
+          description: The virtual path for the application.
+          example: example_value
+        physical_path:
+          type: string
+          description: The physical file system path for the application.
+          example: example_value
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+          example: example_value
+        enabled_protocols:
+          type: string
+          example: example_value
+    ApplicationPoolReference:
+      type: object
+      description: A reference to an application pool resource.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+    WebSiteReference:
+      type: object
+      description: A reference to a web site resource.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+    ApplicationSummary:
+      type: object
+      description: A summary representation of an application in list responses.
+      properties:
+        location:
+          type: string
+          description: The full location path.
+          example: example_value
+        path:
+          type: string
+          description: The virtual path of the application.
+          example: example_value
+        id:
+          type: string
+          description: The unique identifier of the application.
+          example: abc123
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+    ApplicationLinks:
+      type: object
+      description: HAL-style links to related resources for an application.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/HalLink'
+        authorization:
+          $ref: '#/components/schemas/HalLink'
+        default_document:
+          $ref: '#/components/schemas/HalLink'
+        directory_browsing:
+          $ref: '#/components/schemas/HalLink'
+        handlers:
+          $ref: '#/components/schemas/HalLink'
+        ip_restrictions:
+          $ref: '#/components/schemas/HalLink'
+        modules:
+          $ref: '#/components/schemas/HalLink'
+        request_filtering:
+          $ref: '#/components/schemas/HalLink'
+        request_tracing:
+          $ref: '#/components/schemas/HalLink'
+        response_compression:
+          $ref: '#/components/schemas/HalLink'
+        response_headers:
+          $ref: '#/components/schemas/HalLink'
+        ssl:
+          $ref: '#/components/schemas/HalLink'
+        static_content:
+          $ref: '#/components/schemas/HalLink'
+        vdirs:
+          $ref: '#/components/schemas/HalLink'
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
+          example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
+    Application:
+      type: object
+      description: A complete IIS web application resource. Applications belong to a single web site and handle requests at a specific virtual path.
+      properties:
+        location:
+          type: string
+          description: The full location path combining the web site name and application path.
+          examples:
+          - Default Web Site/demo-app
+        path:
+          type: string
+          description: The virtual path of the application relative to the web site root.
+          examples:
+          - /demo-app
+        id:
+          type: string
+          description: The unique identifier of the application.
+          example: abc123
+        physical_path:
+          type: string
+          description: The physical file system path for the application.
+          examples:
+          - c:\inetpub\wwwroot\demo-app
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this application, as a comma-separated list.
+          examples:
+          - http
+        website:
+          $ref: '#/components/schemas/WebSiteReference'
+        application_pool:
+          $ref: '#/components/schemas/ApplicationPoolReference'
+        _links:
+          $ref: '#/components/schemas/ApplicationLinks'
+    ApplicationCreate:
+      type: object
+      description: Request body for creating a new web application.
+      required:
+      - path
+      - physical_path
+      - website
+      properties:
+        path:
+          type: string
+          description: The virtual path for the application relative to the web site root.
+          examples:
+          - demo-app
+        physical_path:
+          type: string
+          description: The physical file system path for the application. The directory must exist.
+          examples:
+          - C:\inetpub\wwwroot\demo-app
+        website:
+          type: object
+          description: The web site that the application should belong to.
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              description: The identifier of the web site.
+          example: example_value
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+          example: example_value
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this application.
+          default: http
+          example: example_value
+  parameters:
+    ApplicationId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the web application.
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+      description: Access token for authenticating with the IIS Administration API. Tokens are generated through the API management portal at https://localhost:55539.

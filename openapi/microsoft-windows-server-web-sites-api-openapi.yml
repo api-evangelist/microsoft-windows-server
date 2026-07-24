@@ -1,0 +1,539 @@
+openapi: 3.1.0
+info:
+  title: IIS Administration Application Pools Web Sites API
+  description: REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.
+  version: 2.3.0
+  contact:
+    name: Microsoft Support
+    url: https://support.microsoft.com
+    email: support@microsoft.com
+  license:
+    name: MIT
+    url: https://github.com/microsoft/IIS.Administration/blob/main/LICENSE
+  x-logo:
+    url: https://www.microsoft.com/favicon.ico
+servers:
+- url: https://localhost:55539
+  description: Default IIS Administration API server
+security:
+- accessToken: []
+tags:
+- name: Web Sites
+  description: Web sites are a core entity of IIS that determine where and how requests will be handled. The web site API allows consumers to create, read, delete, or update their web sites.
+paths:
+  /api/webserver/websites:
+    get:
+      operationId: listWebSites
+      summary: List All Web Sites
+      description: Retrieves a list of all web sites configured on the IIS server.
+      tags:
+      - Web Sites
+      parameters:
+      - name: application_pool.id
+        in: query
+        description: Filter web sites by application pool identifier.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of web sites.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  websites:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebSiteSummary'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createWebSite
+      summary: Create a Web Site
+      description: Creates a new web site on the IIS server. Requires a physical path, the name of the web site, and a set of bindings that the web site should listen on.
+      tags:
+      - Web Sites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebSiteCreate'
+      responses:
+        '201':
+          description: The web site was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: A web site with the specified name or bindings already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/webserver/websites/{id}:
+    get:
+      operationId: getWebSite
+      summary: Get a Web Site
+      description: Retrieves the details of a specific web site by its identifier.
+      tags:
+      - Web Sites
+      parameters:
+      - $ref: '#/components/parameters/WebSiteId'
+      responses:
+        '200':
+          description: The web site details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateWebSite
+      summary: Update a Web Site
+      description: Updates the configuration of an existing web site. Sending a patch request with the web site in the desired state will update the web site on the server to match. List properties such as bindings must include all desired entries since the entire list is replaced.
+      tags:
+      - Web Sites
+      parameters:
+      - $ref: '#/components/parameters/WebSiteId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebSiteUpdate'
+      responses:
+        '200':
+          description: The web site was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSite'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: A conflict occurred with the specified bindings.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteWebSite
+      summary: Delete a Web Site
+      description: Deletes a web site from the IIS server.
+      tags:
+      - Web Sites
+      parameters:
+      - $ref: '#/components/parameters/WebSiteId'
+      responses:
+        '204':
+          description: The web site was successfully deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Binding:
+      type: object
+      description: Defines the protocol, IP address, port, and optional hostname that a web site listens on. The binding_information property format is '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.
+      required:
+      - protocol
+      properties:
+        protocol:
+          type: string
+          description: The protocol for this binding (e.g., http, https, net.tcp).
+          examples:
+          - http
+          - https
+          - net.tcp
+        binding_information:
+          type: string
+          description: Combined binding string in the format '{ip_address}:{port}:{hostname}'.
+          examples:
+          - '*:80:'
+          - '*:443:'
+        ip_address:
+          type: string
+          description: The IP address to bind to. Use '*' for all addresses.
+          examples:
+          - '*'
+          - 192.168.1.1
+        port:
+          type: integer
+          description: The port number to listen on.
+          minimum: 1
+          maximum: 65535
+          examples:
+          - 80
+          - 443
+          - 8080
+        hostname:
+          type: string
+          description: The hostname for host header-based routing.
+          example: example_value
+        certificate:
+          $ref: '#/components/schemas/Certificate'
+        require_sni:
+          type: boolean
+          description: Whether Server Name Indication (SNI) is required for this binding.
+          default: false
+          example: true
+    ApplicationPoolReference:
+      type: object
+      description: A reference to an application pool resource.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+    WebSiteLinks:
+      type: object
+      description: HAL-style links to related resources for a web site.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/HalLink'
+        authorization:
+          $ref: '#/components/schemas/HalLink'
+        default_document:
+          $ref: '#/components/schemas/HalLink'
+        delegation:
+          $ref: '#/components/schemas/HalLink'
+        directory_browsing:
+          $ref: '#/components/schemas/HalLink'
+        files:
+          $ref: '#/components/schemas/HalLink'
+        handlers:
+          $ref: '#/components/schemas/HalLink'
+        ip_restrictions:
+          $ref: '#/components/schemas/HalLink'
+        logging:
+          $ref: '#/components/schemas/HalLink'
+        modules:
+          $ref: '#/components/schemas/HalLink'
+        request_filtering:
+          $ref: '#/components/schemas/HalLink'
+        request_monitor:
+          $ref: '#/components/schemas/HalLink'
+        request_tracing:
+          $ref: '#/components/schemas/HalLink'
+        response_compression:
+          $ref: '#/components/schemas/HalLink'
+        response_headers:
+          $ref: '#/components/schemas/HalLink'
+        ssl:
+          $ref: '#/components/schemas/HalLink'
+        static_content:
+          $ref: '#/components/schemas/HalLink'
+        vdirs:
+          $ref: '#/components/schemas/HalLink'
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
+          example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
+    WebSiteUpdate:
+      type: object
+      description: Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root.
+          example: example_value
+        bindings:
+          type: array
+          description: The full list of desired bindings. Existing bindings not included in this list will be removed.
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+          example: example_value
+        server_auto_start:
+          type: boolean
+          example: true
+        enabled_protocols:
+          type: string
+          example: example_value
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
+    WebSite:
+      type: object
+      description: A complete IIS web site resource including configuration, bindings, application pool assignment, and HAL links to related resources.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          examples:
+          - Default Web Site
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root.
+          examples:
+          - '%SystemDrive%\inetpub\wwwroot'
+        key:
+          type: string
+          description: The IIS site key identifier.
+          example: example_value
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+          example: true
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this web site, as a comma-separated list.
+          examples:
+          - http
+          - http,https
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
+        bindings:
+          type: array
+          description: The list of bindings configured for this web site.
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          $ref: '#/components/schemas/ApplicationPoolReference'
+        _links:
+          $ref: '#/components/schemas/WebSiteLinks'
+    Certificate:
+      type: object
+      description: An SSL/TLS certificate associated with an HTTPS binding.
+      properties:
+        name:
+          type: string
+          description: The friendly name of the certificate.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the certificate resource.
+          example: abc123
+        issued_by:
+          type: string
+          description: The certificate issuer distinguished name.
+          example: example_value
+        subject:
+          type: string
+          description: The certificate subject distinguished name.
+          example: example_value
+        thumbprint:
+          type: string
+          description: The SHA-1 thumbprint of the certificate.
+          example: example_value
+        valid_to:
+          type: string
+          format: date-time
+          description: The expiration date of the certificate.
+          example: '2026-01-15T10:30:00Z'
+    WebSiteLimits:
+      type: object
+      description: Resource limits for the web site.
+      properties:
+        connection_timeout:
+          type: integer
+          description: The connection timeout in seconds.
+          default: 120
+          example: 10
+        max_bandwidth:
+          type: integer
+          description: The maximum bandwidth in bytes per second.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_connections:
+          type: integer
+          description: The maximum number of concurrent connections.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_url_segments:
+          type: integer
+          description: The maximum number of URL segments allowed.
+          default: 32
+          example: https://www.example.com
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
+    WebSiteCreate:
+      type: object
+      description: Request body for creating a new web site.
+      required:
+      - name
+      - physical_path
+      - bindings
+      properties:
+        name:
+          type: string
+          description: The name of the web site to create.
+          examples:
+          - Demonstration Site
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root directory. The directory must exist.
+          examples:
+          - C:\inetpub\wwwroot\DemonstrationSite
+        bindings:
+          type: array
+          description: The bindings for the web site.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+          example: example_value
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+          example: true
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this web site.
+          default: http
+          example: example_value
+    WebSiteSummary:
+      type: object
+      description: A summary representation of a web site in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+  parameters:
+    WebSiteId:
+      name: id
+      in: path
+      required: true
+      description: The unique identifier of the web site.
+      schema:
+        type: string
+  securitySchemes:
+    accessToken:
+      type: http
+      scheme: bearer
+      description: Access token for authenticating with the IIS Administration API. Tokens are generated through the API management portal at https://localhost:55539.
