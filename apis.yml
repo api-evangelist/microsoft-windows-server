@@ -4,7 +4,20 @@ description: >-
   APIs and integration points for Microsoft Windows Server operating system including management, networking, storage,
   virtualization, security, and remote administration capabilities for enterprise server infrastructure.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-windows-server.png
 url: https://www.microsoft.com/windows-server
 tags:
   - Datacenter
@@ -19,260 +32,306 @@ created: '2024'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - name: Windows Server Management API
-    description: PowerShell and WMI-based management APIs for Windows Server administration.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows-server/administration/
-    baseURL: https://localhost
-    tags:
-      - Administration
-      - Management
-      - PowerShell
-      - WMI
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/powershell/windows/get-started
-    contact:
-      - FN: Microsoft Support
-        email: support@microsoft.com
-        url: https://support.microsoft.com
-  - name: Windows Remote Management (WinRM)
-    description: >-
-      WS-Management protocol implementation for remote management of Windows servers using SOAP-based web services for
-      configuration and operations.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows/win32/winrm/portal
-    baseURL: http://localhost:5985
-    tags:
-      - PowerShell Remoting
-      - Remote Management
-      - SOAP
-      - WS-Management
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/windows/win32/winrm/windows-remote-management-portal
-  - name: Active Directory Domain Services API
-    description: LDAP and REST APIs for Active Directory management and authentication.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows-server/identity/ad-ds/
-    baseURL: ldap://localhost:389
-    tags:
-      - Active Directory
-      - Authentication
-      - Directory Services
-      - LDAP
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/windows/win32/ad/active-directory-domain-services
-      - type: SDKs
-        url: https://docs.microsoft.com/dotnet/api/system.directoryservices
-  - name: Hyper-V Management API
-    description: >-
-      APIs for managing Hyper-V virtualization platform including virtual machines, virtual switches, and virtual
-      storage.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/virtualization/hyper-v-on-windows/
-    baseURL: https://localhost
-    tags:
-      - Hyper-V
-      - Virtual Machines
-      - Virtualization
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/virtualization/api/
-  - name: Windows Server Update Services (WSUS) API
-    description: APIs for managing Windows updates across enterprise environments.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows-server/administration/windows-server-update-services/
-    baseURL: https://localhost:8530
-    tags:
-      - Patch Management
-      - Updates
-      - WSUS
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/previous-versions/windows/desktop/aa354519(v=vs.85)
-      - type: SDKs
-        url: https://docs.microsoft.com/dotnet/api/microsoft.updateservices.administration
-  - name: Windows Admin Center API
-    description: >-
-      Modern web-based management interface REST API for Windows Server that provides a gateway service for relaying
-      commands and scripts to managed nodes.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows-server/manage/windows-admin-center/
-    baseURL: https://localhost:6516
-    tags:
-      - Admin Center
-      - Gateway
-      - REST API
-      - Web Management
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/windows-server/manage/windows-admin-center/extend/extensibility-overview
-      - type: GitHubRepository
-        url: https://github.com/Microsoft/windows-admin-center-sdk
-  - name: DNS Server Management API
-    description: APIs for managing Windows DNS Server services.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://docs.microsoft.com/windows-server/networking/dns/
-    baseURL: https://localhost
-    tags:
-      - DNS
-      - Name Resolution
-      - Networking
-    properties:
-      - type: Documentation
-        url: https://docs.microsoft.com/powershell/module/dnsserver/
-  - name: Windows Management Instrumentation (WMI) API
-    description: >-
-      Infrastructure for management data and operations on Windows-based operating systems providing COM, scripting, and
-      .NET APIs for system administration and monitoring.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page
-    baseURL: https://localhost
-    tags:
-      - COM
-      - Management
-      - Monitoring
-      - Scripting
-      - WMI
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi
-  - name: IIS Administration API
-    description: >-
-      REST API for managing Internet Information Services (IIS) web servers that enables configuration and monitoring
-      from any HTTP client.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/iis-administration/
-    baseURL: https://localhost:55539
-    tags:
-      - IIS
-      - REST API
-      - Web Management
-      - Web Server
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/iis-administration/
-      - type: GettingStarted
-        url: https://learn.microsoft.com/en-us/iis-administration/getting-started
-      - type: GitHubRepository
-        url: https://github.com/microsoft/IIS.Administration
-      - type: OpenAPI
-        url: openapi/iis-administration-api.yml
-  - name: Remote Desktop Services API
-    description: >-
-      Win32 API for managing Remote Desktop Services including session management, virtual channels, user configuration,
-      and the Remote Desktop Protocol.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal
-    baseURL: https://localhost
-    tags:
-      - RDS
-      - Remote Access
-      - Remote Desktop
-      - Terminal Services
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-api-reference
-  - name: Failover Clustering API
-    description: >-
-      APIs for defining and managing software and hardware components on failover clusters to increase application
-      scalability and availability.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview
-    baseURL: https://localhost
-    tags:
-      - Cluster Management
-      - Failover Clustering
-      - High Availability
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/mscs/failover-cluster-apis-portal
-  - name: DHCP Server Management API
-    description: >-
-      APIs and PowerShell cmdlets for managing Dynamic Host Configuration Protocol server services including leases,
-      reservations, and scopes.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows-server/networking/technologies/dhcp/dhcp-deploy-wps
-    baseURL: https://localhost
-    tags:
-      - DHCP
-      - IP Address Management
-      - Networking
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/dhcp/dhcp-server-management-api
-  - name: SMB File Server API
-    description: >-
-      Server Message Block protocol APIs and WMI management classes for managing file shares, share access, and network
-      file sharing across Windows Server environments.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
-    baseURL: https://localhost
-    tags:
-      - File Sharing
-      - Network Storage
-      - SMB
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
-  - name: Windows Event Log API
-    description: >-
-      API for instrumenting, querying, and consuming event logs on Windows Server for diagnostics, monitoring, and
-      auditing.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log
-    baseURL: https://localhost
-    tags:
-      - Diagnostics
-      - Event Log
-      - Logging
-      - Monitoring
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log
-      - type: APIReference
-        url: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-reference
-  - name: Storage Spaces Direct API
-    description: >-
-      APIs and PowerShell management for software-defined storage enabling clustering of servers with internal storage
-      for hyper-converged infrastructure.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview
-    baseURL: https://localhost
-    tags:
-      - Hyper-Converged
-      - Software-Defined Storage
-      - Storage
-      - Storage Spaces Direct
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview
-  - name: Network Policy Server (NPS) RADIUS API
-    description: >-
-      Network Policy Server providing centralized RADIUS authentication, authorization, and accounting for wireless,
-      VPN, and dial-up connections.
-    image: https://www.microsoft.com/favicon.ico
-    humanURL: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
-    baseURL: https://localhost
-    tags:
-      - Authentication
-      - Network Access
-      - NPS
-      - RADIUS
-      - VPN
-    properties:
-      - type: Documentation
-        url: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
+- name: Windows Server Management API
+  description: PowerShell and WMI-based management APIs for Windows Server administration.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/administration/
+  baseURL: https://localhost
+  tags:
+  - Administration
+  - Management
+  - PowerShell
+  - WMI
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/powershell/windows/get-started
+  contact:
+  - FN: Microsoft Support
+    email: support@microsoft.com
+    url: https://support.microsoft.com
+- name: Windows Remote Management (WinRM)
+  description: >-
+    WS-Management protocol implementation for remote management of Windows servers using SOAP-based web
+    services for configuration and operations.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows/win32/winrm/portal
+  baseURL: http://localhost:5985
+  tags:
+  - PowerShell Remoting
+  - Remote Management
+  - SOAP
+  - WS-Management
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/windows/win32/winrm/windows-remote-management-portal
+- name: Active Directory Domain Services API
+  description: LDAP and REST APIs for Active Directory management and authentication.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/identity/ad-ds/
+  baseURL: ldap://localhost:389
+  tags:
+  - Active Directory
+  - Authentication
+  - Directory Services
+  - LDAP
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/windows/win32/ad/active-directory-domain-services
+  - type: SDKs
+    url: https://docs.microsoft.com/dotnet/api/system.directoryservices
+- name: Hyper-V Management API
+  description: >-
+    APIs for managing Hyper-V virtualization platform including virtual machines, virtual switches, and
+    virtual storage.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/virtualization/hyper-v-on-windows/
+  baseURL: https://localhost
+  tags:
+  - Hyper-V
+  - Virtual Machines
+  - Virtualization
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/virtualization/api/
+- name: Windows Server Update Services (WSUS) API
+  description: APIs for managing Windows updates across enterprise environments.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/administration/windows-server-update-services/
+  baseURL: https://localhost:8530
+  tags:
+  - Patch Management
+  - Updates
+  - WSUS
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/previous-versions/windows/desktop/aa354519(v=vs.85)
+  - type: SDKs
+    url: https://docs.microsoft.com/dotnet/api/microsoft.updateservices.administration
+- name: Windows Admin Center API
+  description: >-
+    Modern web-based management interface REST API for Windows Server that provides a gateway service
+    for relaying commands and scripts to managed nodes.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/manage/windows-admin-center/
+  baseURL: https://localhost:6516
+  tags:
+  - Admin Center
+  - Gateway
+  - REST API
+  - Web Management
+  properties:
+  - type: Documentation
+    url: >-
+      https://docs.microsoft.com/windows-server/manage/windows-admin-center/extend/extensibility-overview
+  - type: GitHubRepository
+    url: https://github.com/Microsoft/windows-admin-center-sdk
+- name: DNS Server Management API
+  description: APIs for managing Windows DNS Server services.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://docs.microsoft.com/windows-server/networking/dns/
+  baseURL: https://localhost
+  tags:
+  - DNS
+  - Name Resolution
+  - Networking
+  properties:
+  - type: Documentation
+    url: https://docs.microsoft.com/powershell/module/dnsserver/
+- name: Windows Management Instrumentation (WMI) API
+  description: >-
+    Infrastructure for management data and operations on Windows-based operating systems providing COM,
+    scripting, and .NET APIs for system administration and monitoring.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page
+  baseURL: https://localhost
+  tags:
+  - COM
+  - Management
+  - Monitoring
+  - Scripting
+  - WMI
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi
+- name: Remote Desktop Services API
+  description: >-
+    Win32 API for managing Remote Desktop Services including session management, virtual channels, user
+    configuration, and the Remote Desktop Protocol.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal
+  baseURL: https://localhost
+  tags:
+  - RDS
+  - Remote Access
+  - Remote Desktop
+  - Terminal Services
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-api-reference
+- name: Failover Clustering API
+  description: >-
+    APIs for defining and managing software and hardware components on failover clusters to increase application
+    scalability and availability.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: >-
+    https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview
+  baseURL: https://localhost
+  tags:
+  - Cluster Management
+  - Failover Clustering
+  - High Availability
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview
+  - type: APIReference
+    url: >-
+      https://learn.microsoft.com/en-us/previous-versions/windows/desktop/mscs/failover-cluster-apis-portal
+- name: DHCP Server Management API
+  description: >-
+    APIs and PowerShell cmdlets for managing Dynamic Host Configuration Protocol server services including
+    leases, reservations, and scopes.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: >-
+    https://learn.microsoft.com/en-us/windows-server/networking/technologies/dhcp/dhcp-deploy-wps
+  baseURL: https://localhost
+  tags:
+  - DHCP
+  - IP Address Management
+  - Networking
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/previous-versions/windows/desktop/dhcp/dhcp-server-management-api
+- name: SMB File Server API
+  description: >-
+    Server Message Block protocol APIs and WMI management classes for managing file shares, share access,
+    and network file sharing across Windows Server environments.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: >-
+    https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
+  baseURL: https://localhost
+  tags:
+  - File Sharing
+  - Network Storage
+  - SMB
+  - Storage
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview
+- name: Windows Event Log API
+  description: >-
+    API for instrumenting, querying, and consuming event logs on Windows Server for diagnostics, monitoring,
+    and auditing.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log
+  baseURL: https://localhost
+  tags:
+  - Diagnostics
+  - Event Log
+  - Logging
+  - Monitoring
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log
+  - type: APIReference
+    url: https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-reference
+- name: Storage Spaces Direct API
+  description: >-
+    APIs and PowerShell management for software-defined storage enabling clustering of servers with internal
+    storage for hyper-converged infrastructure.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: >-
+    https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview
+  baseURL: https://localhost
+  tags:
+  - Hyper-Converged
+  - Software-Defined Storage
+  - Storage
+  - Storage Spaces Direct
+  properties:
+  - type: Documentation
+    url: >-
+      https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview
+- name: Network Policy Server (NPS) RADIUS API
+  description: >-
+    Network Policy Server providing centralized RADIUS authentication, authorization, and accounting for
+    wireless, VPN, and dial-up connections.
+  image: https://www.microsoft.com/favicon.ico
+  humanURL: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
+  baseURL: https://localhost
+  tags:
+  - Authentication
+  - Network Access
+  - NPS
+  - RADIUS
+  - VPN
+  properties:
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top
+- aid: microsoft-windows-server:microsoft-windows-server-application-pools-api
+  name: Microsoft Windows Server Application Pools API
+  description: >-
+    Application pools provide an isolation mechanism for processes on the web server. There are many different
+    settings available to fine-tune the behavior of the worker processes used to serve requests through
+    IIS.
+  humanURL: https://docs.microsoft.com/windows-server/administration/
+  baseURL: https://localhost
+  tags:
+  - Application Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-windows-server-application-pools-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/iis-administration/
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/iis-administration/getting-started
+  - type: GitHubRepository
+    url: https://github.com/microsoft/IIS.Administration
+- aid: microsoft-windows-server:microsoft-windows-server-applications-api
+  name: Microsoft Windows Server Applications API
+  description: >-
+    Applications provide a method to differentiate sections of a web site. An application belongs to a
+    single web site and will handle requests for the web site at the application path.
+  humanURL: https://docs.microsoft.com/windows-server/administration/
+  baseURL: https://localhost
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-windows-server-applications-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/iis-administration/
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/iis-administration/getting-started
+  - type: GitHubRepository
+    url: https://github.com/microsoft/IIS.Administration
+- aid: microsoft-windows-server:microsoft-windows-server-web-sites-api
+  name: Microsoft Windows Server Web Sites API
+  description: >-
+    Web sites are a core entity of IIS that determine where and how requests will be handled. The web
+    site API allows consumers to create, read, delete, or update their web sites.
+  humanURL: https://docs.microsoft.com/windows-server/administration/
+  baseURL: https://localhost
+  tags:
+  - Web Sites
+  properties:
+  - type: OpenAPI
+    url: openapi/microsoft-windows-server-web-sites-api-openapi.yml
+  - type: Documentation
+    url: https://learn.microsoft.com/en-us/iis-administration/
+  - type: GettingStarted
+    url: https://learn.microsoft.com/en-us/iis-administration/getting-started
+  - type: GitHubRepository
+    url: https://github.com/microsoft/IIS.Administration
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/microsoft-windows-server/overview
   - type: AgenticAccess
     url: agentic-access/microsoft-windows-server-agentic-access.yml
   - type: DomainSecurity
