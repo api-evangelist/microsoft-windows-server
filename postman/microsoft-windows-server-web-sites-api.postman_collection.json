@@ -1,0 +1,1403 @@
+{
+  "info": {
+    "_postman_id": "50a6ec78-d4a7-4562-8f5f-2a749de9179b",
+    "name": "IIS Administration Application Pools Web Sites API",
+    "description": "REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.\n\nContact Support:\n Name: Microsoft Support\n Email: support@microsoft.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:13:00.000Z",
+    "updatedAt": "2026-07-28T02:13:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-50a6ec78-d4a7-4562-8f5f-2a749de9179b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "webserver",
+          "item": [
+            {
+              "name": "websites",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get a Web Site",
+                      "id": "e2a5fe73-f647-48e5-8d91-b31d293381fb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a38f520e-e65e-4aa9-810e-c2bc780e97d5",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web site."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the details of a specific web site by its identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "d58eca0c-b4b7-405b-8a00-cf9d2d1216cb",
+                          "name": "The web site details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"key\": \"<string>\",\n  \"status\": \"stopped\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  },\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"starting\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"delegation\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"files\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"logging\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_monitor\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"webapps\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-d58eca0c-b4b7-405b-8a00-cf9d2d1216cb"
+                        },
+                        {
+                          "id": "9d70ab2d-a785-42c0-a309-1e0663fa65d5",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-9d70ab2d-a785-42c0-a309-1e0663fa65d5"
+                        },
+                        {
+                          "id": "f3b1e403-ca4f-4c89-bd92-e6032b65b23e",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-f3b1e403-ca4f-4c89-bd92-e6032b65b23e"
+                        },
+                        {
+                          "id": "acb95583-06af-498b-a1cc-662b3dcad39c",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-acb95583-06af-498b-a1cc-662b3dcad39c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-e2a5fe73-f647-48e5-8d91-b31d293381fb"
+                    },
+                    {
+                      "name": "Update a Web Site",
+                      "id": "68e2df63-240e-40f3-a574-dd13b62d01e6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9bebba2a-216a-4276-88b1-84af5b0a4c85",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web site."
+                            }
+                          ]
+                        },
+                        "description": "Updates the configuration of an existing web site. Sending a patch request with the web site in the desired state will update the web site on the server to match. List properties such as bindings must include all desired entries since the entire list is replaced."
+                      },
+                      "response": [
+                        {
+                          "id": "72de709e-ba39-4b24-9d09-4188c5ddbf7a",
+                          "name": "The web site was successfully updated.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"key\": \"<string>\",\n  \"status\": \"stopped\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  },\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"starting\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"delegation\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"files\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"logging\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_monitor\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"webapps\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-72de709e-ba39-4b24-9d09-4188c5ddbf7a"
+                        },
+                        {
+                          "id": "5aa2b601-9718-4f4e-9271-089a4ec57d52",
+                          "name": "The request body is malformed or contains invalid values.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-5aa2b601-9718-4f4e-9271-089a4ec57d52"
+                        },
+                        {
+                          "id": "49615498-58ec-4626-95ba-9d2b0ae5613f",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-49615498-58ec-4626-95ba-9d2b0ae5613f"
+                        },
+                        {
+                          "id": "8e939a5c-5a33-49c2-a35d-552fee0ee3a6",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-8e939a5c-5a33-49c2-a35d-552fee0ee3a6"
+                        },
+                        {
+                          "id": "025c9372-364e-47ca-b3da-352db7ffee69",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-025c9372-364e-47ca-b3da-352db7ffee69"
+                        },
+                        {
+                          "id": "d15f066c-2507-4252-8717-090ec690a2cf",
+                          "name": "A conflict occurred with the specified bindings.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": \"<boolean>\",\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-d15f066c-2507-4252-8717-090ec690a2cf"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-68e2df63-240e-40f3-a574-dd13b62d01e6"
+                    },
+                    {
+                      "name": "Delete a Web Site",
+                      "id": "a2582d9a-b7d8-414d-9541-172b09e2ebcb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "66a2667c-04ad-4bcf-81b0-c26d18d864c7",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web site."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a web site from the IIS server."
+                      },
+                      "response": [
+                        {
+                          "id": "8d3d3093-2f01-4153-bdee-5a9080317ee3",
+                          "name": "The web site was successfully deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-8d3d3093-2f01-4153-bdee-5a9080317ee3"
+                        },
+                        {
+                          "id": "32a9ea44-67c5-4de7-a593-9baef3d7be38",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-32a9ea44-67c5-4de7-a593-9baef3d7be38"
+                        },
+                        {
+                          "id": "64a33e48-fd13-4585-a2af-9a2671e931e2",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-64a33e48-fd13-4585-a2af-9a2671e931e2"
+                        },
+                        {
+                          "id": "36451b05-a9ba-4eae-92cf-77efb919335d",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/websites/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "websites",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:01.000Z",
+                          "updatedAt": "2026-07-28T02:13:01.000Z",
+                          "uid": "35240-36451b05-a9ba-4eae-92cf-77efb919335d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-a2582d9a-b7d8-414d-9541-172b09e2ebcb"
+                    }
+                  ],
+                  "id": "5b4c49d5-236c-41ea-a988-cf8b94288dc0",
+                  "createdAt": "2026-07-28T02:13:01.000Z",
+                  "updatedAt": "2026-07-28T02:13:01.000Z",
+                  "uid": "35240-5b4c49d5-236c-41ea-a988-cf8b94288dc0"
+                },
+                {
+                  "name": "List All Web Sites",
+                  "id": "1533d1d5-8fd0-478f-83b1-400fdef32b10",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/webserver/websites?application_pool.id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "webserver",
+                        "websites"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter web sites by application pool identifier.",
+                          "key": "application_pool.id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of all web sites configured on the IIS server."
+                  },
+                  "response": [
+                    {
+                      "id": "5d5bb06d-2f09-4239-af37-4716c21d90ba",
+                      "name": "A list of web sites.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites?application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter web sites by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"websites\": [\n    {\n      \"name\": \"<string>\",\n      \"id\": \"<string>\",\n      \"status\": \"stopped\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri-reference>\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"id\": \"<string>\",\n      \"status\": \"starting\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri-reference>\"\n        }\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-5d5bb06d-2f09-4239-af37-4716c21d90ba"
+                    },
+                    {
+                      "id": "6c08d6fd-e3e7-4a60-aea6-689284862dce",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites?application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter web sites by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-6c08d6fd-e3e7-4a60-aea6-689284862dce"
+                    },
+                    {
+                      "id": "01a08883-efae-4cd3-b5a1-4e56d11edb9b",
+                      "name": "The authenticated user does not have permission for this operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites?application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter web sites by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-01a08883-efae-4cd3-b5a1-4e56d11edb9b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:13:01.000Z",
+                  "updatedAt": "2026-07-28T02:13:01.000Z",
+                  "uid": "35240-1533d1d5-8fd0-478f-83b1-400fdef32b10"
+                },
+                {
+                  "name": "Create a Web Site",
+                  "id": "a4806076-50a7-4bf6-981d-c613df0bf1d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/webserver/websites",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "webserver",
+                        "websites"
+                      ]
+                    },
+                    "description": "Creates a new web site on the IIS server. Requires a physical path, the name of the web site, and a set of bindings that the web site should listen on."
+                  },
+                  "response": [
+                    {
+                      "id": "20769f99-c70c-45bc-a697-9c1efe8f5426",
+                      "name": "The web site was successfully created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"key\": \"<string>\",\n  \"status\": \"stopped\",\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"<string>\",\n  \"limits\": {\n    \"connection_timeout\": 120,\n    \"max_bandwidth\": 4294967295,\n    \"max_connections\": 4294967295,\n    \"max_url_segments\": 32\n  },\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    },\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"starting\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"delegation\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"files\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"logging\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_monitor\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"webapps\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-20769f99-c70c-45bc-a697-9c1efe8f5426"
+                    },
+                    {
+                      "id": "895f1f9a-a663-4aac-9dbd-b1d56375c2ec",
+                      "name": "The request body is malformed or contains invalid values.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-895f1f9a-a663-4aac-9dbd-b1d56375c2ec"
+                    },
+                    {
+                      "id": "5b7a852b-9a09-4541-a53b-1fc696e116ab",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-5b7a852b-9a09-4541-a53b-1fc696e116ab"
+                    },
+                    {
+                      "id": "2aa11147-b4f8-474d-999a-621b3e76106f",
+                      "name": "The authenticated user does not have permission for this operation.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-2aa11147-b4f8-474d-999a-621b3e76106f"
+                    },
+                    {
+                      "id": "6387d105-7277-47b4-8f45-22856ac6dff1",
+                      "name": "A web site with the specified name or bindings already exists.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"bindings\": [\n    {\n      \"protocol\": \"<string>\",\n      \"binding_information\": \"<string>\",\n      \"ip_address\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"hostname\": \"<string>\",\n      \"certificate\": {\n        \"name\": \"<string>\",\n        \"id\": \"<string>\",\n        \"issued_by\": \"<string>\",\n        \"subject\": \"<string>\",\n        \"thumbprint\": \"<string>\",\n        \"valid_to\": \"<dateTime>\"\n      },\n      \"require_sni\": false\n    }\n  ],\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"server_auto_start\": true,\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/websites",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "websites"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:01.000Z",
+                      "updatedAt": "2026-07-28T02:13:01.000Z",
+                      "uid": "35240-6387d105-7277-47b4-8f45-22856ac6dff1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:13:01.000Z",
+                  "updatedAt": "2026-07-28T02:13:01.000Z",
+                  "uid": "35240-a4806076-50a7-4bf6-981d-c613df0bf1d2"
+                }
+              ],
+              "id": "3b2b56e4-d843-446a-a93d-37cf645a09e6",
+              "createdAt": "2026-07-28T02:13:01.000Z",
+              "updatedAt": "2026-07-28T02:13:01.000Z",
+              "uid": "35240-3b2b56e4-d843-446a-a93d-37cf645a09e6"
+            }
+          ],
+          "id": "24a8a622-3388-4fef-b314-bcb6842cc751",
+          "createdAt": "2026-07-28T02:13:01.000Z",
+          "updatedAt": "2026-07-28T02:13:01.000Z",
+          "uid": "35240-24a8a622-3388-4fef-b314-bcb6842cc751"
+        }
+      ],
+      "id": "593f5f2a-c149-4a6f-b057-fcde907335ef",
+      "createdAt": "2026-07-28T02:13:01.000Z",
+      "updatedAt": "2026-07-28T02:13:01.000Z",
+      "uid": "35240-593f5f2a-c149-4a6f-b057-fcde907335ef"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:55539"
+    }
+  ]
+}

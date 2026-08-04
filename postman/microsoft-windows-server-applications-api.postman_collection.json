@@ -1,0 +1,1368 @@
+{
+  "info": {
+    "_postman_id": "a3e09740-fcf9-4bb1-8e4c-c000b8d97eda",
+    "name": "IIS Administration Application Pools Applications API",
+    "description": "REST API for managing Internet Information Services (IIS) web servers. The IIS Administration API enables configuration and monitoring of IIS web sites, applications, and application pools from any HTTP client. Based on the Microsoft IIS Administration documentation at https://learn.microsoft.com/en-us/iis-administration/.\n\nContact Support:\n Name: Microsoft Support\n Email: support@microsoft.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:13:00.000Z",
+    "updatedAt": "2026-07-28T02:13:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a3e09740-fcf9-4bb1-8e4c-c000b8d97eda"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "webserver",
+          "item": [
+            {
+              "name": "webapps",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get an Application",
+                      "id": "67370501-a2c6-4c87-a13c-598b29c84f4f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "19dc6806-fbf6-4d34-803f-c09605f0165e",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web application."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the details of a specific web application by its identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "ceb50765-2495-4cd8-8377-0ac8f5c1f193",
+                          "name": "The application details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"location\": \"<string>\",\n  \"path\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"enabled_protocols\": \"<string>\",\n  \"website\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopping\"\n  },\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopped\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-ceb50765-2495-4cd8-8377-0ac8f5c1f193"
+                        },
+                        {
+                          "id": "f8aee1be-4fbd-4990-9161-2e8e5db72af6",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-f8aee1be-4fbd-4990-9161-2e8e5db72af6"
+                        },
+                        {
+                          "id": "e6187750-246b-463c-a3bc-66e59174729c",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-e6187750-246b-463c-a3bc-66e59174729c"
+                        },
+                        {
+                          "id": "2bc97ed1-126f-4545-8347-7c93591afbb1",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-2bc97ed1-126f-4545-8347-7c93591afbb1"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-67370501-a2c6-4c87-a13c-598b29c84f4f"
+                    },
+                    {
+                      "name": "Update an Application",
+                      "id": "edfec798-cee4-4e70-ac6c-0fb9c4648289",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ffb7e538-e712-4935-ac2f-13d1e31bd8ad",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web application."
+                            }
+                          ]
+                        },
+                        "description": "Updates the configuration of an existing web application."
+                      },
+                      "response": [
+                        {
+                          "id": "59198a47-7f79-4e6e-a32f-b3b3d544ed1e",
+                          "name": "The application was successfully updated.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"location\": \"<string>\",\n  \"path\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"enabled_protocols\": \"<string>\",\n  \"website\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopping\"\n  },\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopped\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-59198a47-7f79-4e6e-a32f-b3b3d544ed1e"
+                        },
+                        {
+                          "id": "5da6f89c-6d86-485b-821a-45aaec71cb8c",
+                          "name": "The request body is malformed or contains invalid values.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-5da6f89c-6d86-485b-821a-45aaec71cb8c"
+                        },
+                        {
+                          "id": "7e1dc728-b3f7-4f4b-8d5f-817f8b9402da",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-7e1dc728-b3f7-4f4b-8d5f-817f8b9402da"
+                        },
+                        {
+                          "id": "875832f3-d17a-4648-a297-d3e670163a35",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-875832f3-d17a-4648-a297-d3e670163a35"
+                        },
+                        {
+                          "id": "c36a14dd-497c-41e4-afe3-822cbc2466e4",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-c36a14dd-497c-41e4-afe3-822cbc2466e4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-edfec798-cee4-4e70-ac6c-0fb9c4648289"
+                    },
+                    {
+                      "name": "Delete an Application",
+                      "id": "9a1131b3-8fce-4b88-a442-1b02ba52e19c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "cde0832c-ac26-4a05-aff4-3e532c16b5cf",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the web application."
+                            }
+                          ]
+                        },
+                        "description": "Deletes a web application from the IIS server."
+                      },
+                      "response": [
+                        {
+                          "id": "1f26b01b-1bdc-4b15-9922-a684cac120b0",
+                          "name": "The application was successfully deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-1f26b01b-1bdc-4b15-9922-a684cac120b0"
+                        },
+                        {
+                          "id": "eee1d9d2-ca52-4198-828e-b721913fa3f7",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-eee1d9d2-ca52-4198-828e-b721913fa3f7"
+                        },
+                        {
+                          "id": "943e69d7-e01d-4b1b-919d-79de5db0ea34",
+                          "name": "The authenticated user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-943e69d7-e01d-4b1b-919d-79de5db0ea34"
+                        },
+                        {
+                          "id": "3cc446eb-7bf9-43cd-a59e-4d5ecdd34982",
+                          "name": "The specified resource was not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/webserver/webapps/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "webserver",
+                                "webapps",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T02:13:00.000Z",
+                          "updatedAt": "2026-07-28T02:13:00.000Z",
+                          "uid": "35240-3cc446eb-7bf9-43cd-a59e-4d5ecdd34982"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-9a1131b3-8fce-4b88-a442-1b02ba52e19c"
+                    }
+                  ],
+                  "id": "733066dd-029f-44cb-87e3-c0acfd23c9bb",
+                  "createdAt": "2026-07-28T02:13:00.000Z",
+                  "updatedAt": "2026-07-28T02:13:00.000Z",
+                  "uid": "35240-733066dd-029f-44cb-87e3-c0acfd23c9bb"
+                },
+                {
+                  "name": "List All Applications",
+                  "id": "04c63d9e-a8ed-4b0e-b81a-d021a8bc2777",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/webserver/webapps?website.id=<string>&application_pool.id=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "webserver",
+                        "webapps"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter applications by web site identifier.",
+                          "key": "website.id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter applications by application pool identifier.",
+                          "key": "application_pool.id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of all web applications. Optionally filter by web site or application pool."
+                  },
+                  "response": [
+                    {
+                      "id": "b063f04e-a06d-463e-8ce0-b802a80a0b81",
+                      "name": "A list of web applications.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps?website.id=<string>&application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter applications by web site identifier.",
+                              "key": "website.id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter applications by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"webapps\": [\n    {\n      \"location\": \"<string>\",\n      \"path\": \"<string>\",\n      \"id\": \"<string>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri-reference>\"\n        }\n      }\n    },\n    {\n      \"location\": \"<string>\",\n      \"path\": \"<string>\",\n      \"id\": \"<string>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<uri-reference>\"\n        }\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-b063f04e-a06d-463e-8ce0-b802a80a0b81"
+                    },
+                    {
+                      "id": "cc1fae09-f1a1-41be-9c2d-c678e395fe0a",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps?website.id=<string>&application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter applications by web site identifier.",
+                              "key": "website.id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter applications by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-cc1fae09-f1a1-41be-9c2d-c678e395fe0a"
+                    },
+                    {
+                      "id": "51e20acb-f3e0-4531-96dc-0b8c8acd3380",
+                      "name": "The authenticated user does not have permission for this operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps?website.id=<string>&application_pool.id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter applications by web site identifier.",
+                              "key": "website.id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter applications by application pool identifier.",
+                              "key": "application_pool.id",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-51e20acb-f3e0-4531-96dc-0b8c8acd3380"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:13:00.000Z",
+                  "updatedAt": "2026-07-28T02:13:00.000Z",
+                  "uid": "35240-04c63d9e-a8ed-4b0e-b81a-d021a8bc2777"
+                },
+                {
+                  "name": "Create an Application",
+                  "id": "9a842d40-94b1-4dd4-8e8d-9d66a373390e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/webserver/webapps",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "webserver",
+                        "webapps"
+                      ]
+                    },
+                    "description": "Creates a new web application. Requires the web site that the application should belong to, the virtual path, and the physical path in the file system. The directory must exist."
+                  },
+                  "response": [
+                    {
+                      "id": "284b1a1b-3d71-4262-a620-87b12fef60a9",
+                      "name": "The application was successfully created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"location\": \"<string>\",\n  \"path\": \"<string>\",\n  \"id\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"enabled_protocols\": \"<string>\",\n  \"website\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopping\"\n  },\n  \"application_pool\": {\n    \"name\": \"<string>\",\n    \"id\": \"<string>\",\n    \"status\": \"stopped\"\n  },\n  \"_links\": {\n    \"authentication\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"authorization\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"default_document\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"directory_browsing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"handlers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ip_restrictions\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"modules\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_filtering\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"request_tracing\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_compression\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"response_headers\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"ssl\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"static_content\": {\n      \"href\": \"<uri-reference>\"\n    },\n    \"vdirs\": {\n      \"href\": \"<uri-reference>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-284b1a1b-3d71-4262-a620-87b12fef60a9"
+                    },
+                    {
+                      "id": "eef95ed9-c7eb-4b0c-a114-98a2f7713a28",
+                      "name": "The request body is malformed or contains invalid values.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"title\": \"<string>\",\n  \"detail\": \"<string>\",\n  \"status\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-eef95ed9-c7eb-4b0c-a114-98a2f7713a28"
+                    },
+                    {
+                      "id": "f354c132-fff4-4764-a956-74f1f5774825",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-f354c132-fff4-4764-a956-74f1f5774825"
+                    },
+                    {
+                      "id": "fbe0d370-9d55-4bc3-a9a0-5ebefb581269",
+                      "name": "The authenticated user does not have permission for this operation.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-fbe0d370-9d55-4bc3-a9a0-5ebefb581269"
+                    },
+                    {
+                      "id": "73d3a2c1-2e20-44ba-8415-66eddbe4120f",
+                      "name": "The specified web site or application pool was not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"physical_path\": \"<string>\",\n  \"website\": {\n    \"id\": \"<string>\"\n  },\n  \"application_pool\": {\n    \"id\": \"<string>\"\n  },\n  \"enabled_protocols\": \"http\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/webserver/webapps",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "webserver",
+                            "webapps"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:13:00.000Z",
+                      "updatedAt": "2026-07-28T02:13:00.000Z",
+                      "uid": "35240-73d3a2c1-2e20-44ba-8415-66eddbe4120f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:13:00.000Z",
+                  "updatedAt": "2026-07-28T02:13:00.000Z",
+                  "uid": "35240-9a842d40-94b1-4dd4-8e8d-9d66a373390e"
+                }
+              ],
+              "id": "06b56be8-b6ba-4cc9-a919-ae20f22d9141",
+              "createdAt": "2026-07-28T02:13:00.000Z",
+              "updatedAt": "2026-07-28T02:13:00.000Z",
+              "uid": "35240-06b56be8-b6ba-4cc9-a919-ae20f22d9141"
+            }
+          ],
+          "id": "8987aeba-a1d5-4eb9-a32a-f4c8b7ad7bcb",
+          "createdAt": "2026-07-28T02:13:00.000Z",
+          "updatedAt": "2026-07-28T02:13:00.000Z",
+          "uid": "35240-8987aeba-a1d5-4eb9-a32a-f4c8b7ad7bcb"
+        }
+      ],
+      "id": "365cf307-d6c9-4c87-b102-83dbc9fa0ca7",
+      "createdAt": "2026-07-28T02:13:00.000Z",
+      "updatedAt": "2026-07-28T02:13:00.000Z",
+      "uid": "35240-365cf307-d6c9-4c87-b102-83dbc9fa0ca7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://localhost:55539"
+    }
+  ]
+}
