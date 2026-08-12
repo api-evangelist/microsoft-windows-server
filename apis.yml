@@ -330,6 +330,12 @@ apis:
   - type: GitHubRepository
     url: https://github.com/microsoft/IIS.Administration
 common:
+  - type: IssueTracker
+    url: https://github.com/Microsoft/windows-admin-center-sdk/issues
+  - type: SecurityPolicy
+    url: https://github.com/microsoft/windows-admin-center-sdk/blob/master/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/microsoft/.github/blob/main/CODE_OF_CONDUCT.md
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/microsoft-windows-server/overview
   - type: AgenticAccess
