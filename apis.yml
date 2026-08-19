@@ -30,7 +30,7 @@ tags:
   - Windows Server 2025
 created: '2024'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - name: Windows Server Management API
   description: PowerShell and WMI-based management APIs for Windows Server administration.
