@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IIS Administration Application Pools API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Application Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Application Pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:55539/api/webserver/application-pools"
+          },
+          "docs": "Retrieves a list of all application pools configured on the IIS server."
+        },
+        {
+          "info": {
+            "name": "Create an Application Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:55539/api/webserver/application-pools",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new application pool. The only required information is the name of the application pool."
+        },
+        {
+          "info": {
+            "name": "Get an Application Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:55539/api/webserver/application-pools/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the application pool."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific application pool by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update an Application Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://localhost:55539/api/webserver/application-pools/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the application pool."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing application pool."
+        },
+        {
+          "info": {
+            "name": "Delete an Application Pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:55539/api/webserver/application-pools/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the application pool."
+              }
+            ]
+          },
+          "docs": "Deletes an application pool from the IIS server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

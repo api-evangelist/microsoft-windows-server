@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IIS Administration Application Pools Applications API",
+    "version": "2.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:55539/api/webserver/webapps",
+            "params": [
+              {
+                "name": "website.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by web site identifier."
+              },
+              {
+                "name": "application_pool.id",
+                "value": "",
+                "type": "query",
+                "description": "Filter applications by application pool identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all web applications. Optionally filter by web site or application pool."
+        },
+        {
+          "info": {
+            "name": "Create an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:55539/api/webserver/webapps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new web application. Requires the web site that the application should belong to, the virtual path, and the physical path in the file system. The directory must exist."
+        },
+        {
+          "info": {
+            "name": "Get an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:55539/api/webserver/webapps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the web application."
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific web application by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://localhost:55539/api/webserver/webapps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the web application."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of an existing web application."
+        },
+        {
+          "info": {
+            "name": "Delete an Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://localhost:55539/api/webserver/webapps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the web application."
+              }
+            ]
+          },
+          "docs": "Deletes a web application from the IIS server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
