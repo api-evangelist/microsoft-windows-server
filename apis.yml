@@ -20,6 +20,15 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-windows-server.png
 url: https://www.microsoft.com/windows-server
 tags:
+  - Data-Center
+  - Enterprise
+  - Infrastructure
+  - Microsoft
+  - Operating System
+  - Server Management
+  - Windows Server
+  - Windows Server 2025
+tags_raw:
   - Datacenter
   - Enterprise
   - Infrastructure
@@ -301,6 +310,8 @@ apis:
   humanURL: https://docs.microsoft.com/windows-server/administration/
   baseURL: https://localhost
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -319,6 +330,8 @@ apis:
   humanURL: https://docs.microsoft.com/windows-server/administration/
   baseURL: https://localhost
   tags:
+  - Websites
+  tags_raw:
   - Web Sites
   properties:
   - type: OpenAPI
