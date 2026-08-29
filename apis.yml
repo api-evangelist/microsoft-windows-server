@@ -4,6 +4,19 @@ description: >-
   APIs and integration points for Microsoft Windows Server operating system including management, networking, storage,
   virtualization, security, and remote administration capabilities for enterprise server infrastructure.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
