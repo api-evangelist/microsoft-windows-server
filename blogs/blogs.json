@@ -10,9 +10,12 @@
     },
     {
       "source": "https://support.microsoft.com/windows-server",
-      "error": "HTTPError"
+      "feed_url": "https://support.microsoft.com/windows-server",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 27,
-  "fetched": "2026-08-22T20:20:02Z"
+  "post_count": 31,
+  "fetched": "2026-08-30T22:33:40Z"
 }

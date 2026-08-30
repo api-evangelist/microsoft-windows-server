@@ -33,7 +33,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-windows-server.png
 url: https://www.microsoft.com/windows-server
 tags:
-  - Data-Center
+  - Datacenter
   - Enterprise
   - Infrastructure
   - Microsoft
@@ -343,7 +343,7 @@ apis:
   humanURL: https://docs.microsoft.com/windows-server/administration/
   baseURL: https://localhost
   tags:
-  - Websites
+  - Web Sites
   tags_raw:
   - Web Sites
   properties:
