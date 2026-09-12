@@ -363,6 +363,8 @@ apis:
   - type: GitHubRepository
     url: https://github.com/microsoft/IIS.Administration
 common:
+  - type: Website
+    url: https://www.microsoft.com/
   - type: IssueTracker
     url: https://github.com/Microsoft/windows-admin-center-sdk/issues
   - type: SecurityPolicy
@@ -475,3 +477,5 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://apievangelist.com
+x-parent: microsoft
+x-relationship: product
