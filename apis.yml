@@ -342,8 +342,8 @@ apis:
     url: https://learn.microsoft.com/en-us/iis-administration/getting-started
   - type: GitHubRepository
     url: https://github.com/microsoft/IIS.Administration
-- aid: microsoft-windows-server:microsoft-windows-server-web-sites-api
-  name: Microsoft Windows Server Web Sites API
+- aid: microsoft-windows-server:microsoft-windows-server-websites-api
+  name: Microsoft Windows Server Websites API
   description: >-
     Web sites are a core entity of IIS that determine where and how requests will be handled. The web
     site API allows consumers to create, read, delete, or update their web sites.
@@ -351,11 +351,9 @@ apis:
   baseURL: https://localhost
   tags:
   - Websites
-  tags_raw:
-  - Web Sites
   properties:
   - type: OpenAPI
-    url: openapi/microsoft-windows-server-web-sites-api-openapi.yml
+    url: openapi/microsoft-windows-server-websites-api-openapi.yml
   - type: Documentation
     url: https://learn.microsoft.com/en-us/iis-administration/
   - type: GettingStarted
