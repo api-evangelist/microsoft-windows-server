@@ -140,6 +140,11 @@ apis:
   baseURL: https://localhost:6516
   tags:
   - Admin Center
+  - Gateways
+  - REST API
+  - Web Management
+  tags_raw:
+  - Admin Center
   - Gateway
   - REST API
   - Web Management
