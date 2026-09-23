@@ -155,24 +155,115 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
-    Forbidden:
-      description: The authenticated user does not have permission for this operation.
-    BadRequest:
-      description: The request body is malformed or contains invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    ApplicationPoolUpdate:
+      type: object
+      description: Request body for updating an application pool. Only include properties that should be changed.
+      properties:
+        name:
+          type: string
+          example: Example Title
+        auto_start:
+          type: boolean
+          example: true
+        pipeline_mode:
+          type: string
+          enum:
+          - integrated
+          - classic
+          example: integrated
+        managed_runtime_version:
+          type: string
+          example: example_value
+        enable_32bit_win64:
+          type: boolean
+          example: true
+        queue_length:
+          type: integer
+          example: 10
+        cpu:
+          $ref: '#/components/schemas/CpuSettings'
+        process_model:
+          $ref: '#/components/schemas/ProcessModel'
+        identity:
+          $ref: '#/components/schemas/Identity'
+        recycling:
+          $ref: '#/components/schemas/Recycling'
+        rapid_fail_protection:
+          $ref: '#/components/schemas/RapidFailProtection'
+        process_orphaning:
+          $ref: '#/components/schemas/ProcessOrphaning'
+    RapidFailProtection:
+      type: object
+      description: Rapid fail protection settings that determine how IIS responds to repeated worker process failures.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether rapid fail protection is enabled.
+          default: true
+          example: true
+        load_balancer_capabilities:
+          type: string
+          description: The load balancer capabilities response type.
+          enum:
+          - HttpLevel
+          - TcpLevel
+          default: HttpLevel
+          example: HttpLevel
+        interval:
+          type: integer
+          description: The time interval in minutes during which the max crash count is monitored.
+          default: 5
+          example: 10
+        max_crashes:
+          type: integer
+          description: The maximum number of worker process crashes allowed within the interval.
+          default: 5
+          example: 10
+        auto_shutdown_exe:
+          type: string
+          description: The path to an executable to run when the application pool is shut down due to rapid fail protection.
+          example: example_value
+        auto_shutdown_params:
+          type: string
+          description: Parameters for the auto shutdown executable.
+          example: example_value
+    RecyclingLogEvents:
+      type: object
+      description: Configuration for which recycling events are logged.
+      properties:
+        time:
+          type: boolean
+          default: true
+          example: true
+        requests:
+          type: boolean
+          default: true
+          example: true
+        schedule:
+          type: boolean
+          default: true
+          example: true
+        memory:
+          type: boolean
+          default: true
+          example: true
+        isapi_unhealthy:
+          type: boolean
+          default: true
+          example: true
+        on_demand:
+          type: boolean
+          default: true
+          example: true
+        config_change:
+          type: boolean
+          default: true
+          example: true
+        private_memory:
+          type: boolean
+          default: true
+          example: true
     ApplicationPoolCreate:
       type: object
       description: Request body for creating a new application pool.
@@ -219,202 +310,6 @@ components:
           $ref: '#/components/schemas/RapidFailProtection'
         process_orphaning:
           $ref: '#/components/schemas/ProcessOrphaning'
-    CpuSettings:
-      type: object
-      description: CPU usage settings for the application pool.
-      properties:
-        limit:
-          type: integer
-          description: The maximum CPU usage percentage (in 1/1000ths of a percent) allowed for the application pool.
-          default: 0
-          example: 10
-        limit_interval:
-          type: integer
-          description: The interval in minutes for CPU limit monitoring.
-          default: 5
-          example: 10
-        action:
-          type: string
-          description: The action to take when the CPU limit is exceeded.
-          enum:
-          - NoAction
-          - KillW3wp
-          - Throttle
-          - ThrottleUnderLoad
-          default: NoAction
-          example: NoAction
-        processor_affinity_enabled:
-          type: boolean
-          description: Whether processor affinity is enabled.
-          default: false
-          example: true
-        processor_affinity_mask32:
-          type: string
-          description: The 32-bit processor affinity mask.
-          default: '0xFFFFFFFF'
-          example: example_value
-        processor_affinity_mask64:
-          type: string
-          description: The 64-bit processor affinity mask.
-          default: '0xFFFFFFFF'
-          example: example_value
-    RapidFailProtection:
-      type: object
-      description: Rapid fail protection settings that determine how IIS responds to repeated worker process failures.
-      properties:
-        enabled:
-          type: boolean
-          description: Whether rapid fail protection is enabled.
-          default: true
-          example: true
-        load_balancer_capabilities:
-          type: string
-          description: The load balancer capabilities response type.
-          enum:
-          - HttpLevel
-          - TcpLevel
-          default: HttpLevel
-          example: HttpLevel
-        interval:
-          type: integer
-          description: The time interval in minutes during which the max crash count is monitored.
-          default: 5
-          example: 10
-        max_crashes:
-          type: integer
-          description: The maximum number of worker process crashes allowed within the interval.
-          default: 5
-          example: 10
-        auto_shutdown_exe:
-          type: string
-          description: The path to an executable to run when the application pool is shut down due to rapid fail protection.
-          example: example_value
-        auto_shutdown_params:
-          type: string
-          description: Parameters for the auto shutdown executable.
-          example: example_value
-    HalLink:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri-reference
-          description: The URI of the linked resource.
-          example: example_value
-    Identity:
-      type: object
-      description: The identity configuration for the application pool worker process.
-      properties:
-        identity_type:
-          type: string
-          description: The type of identity used by the application pool.
-          enum:
-          - ApplicationPoolIdentity
-          - LocalSystem
-          - LocalService
-          - NetworkService
-          - SpecificUser
-          default: ApplicationPoolIdentity
-          example: ApplicationPoolIdentity
-        username:
-          type: string
-          description: The username for the identity when using SpecificUser identity type.
-          example: example_value
-        load_user_profile:
-          type: boolean
-          description: Whether to load the user profile for the worker process.
-          default: true
-          example: true
-    ApplicationPoolLinks:
-      type: object
-      description: HAL-style links to related resources for an application pool.
-      properties:
-        webapps:
-          $ref: '#/components/schemas/HalLink'
-        websites:
-          $ref: '#/components/schemas/HalLink'
-        worker_processes:
-          $ref: '#/components/schemas/HalLink'
-    Error:
-      type: object
-      properties:
-        title:
-          type: string
-          description: A short description of the error.
-          example: Example Title
-        detail:
-          type: string
-          description: A detailed description of the error.
-          example: example_value
-        status:
-          type: integer
-          description: The HTTP status code.
-          example: 10
-    ProcessModel:
-      type: object
-      description: Process model settings for the application pool worker processes.
-      properties:
-        idle_timeout:
-          type: integer
-          description: The idle timeout in minutes before a worker process is shut down.
-          default: 20
-          example: 10
-        max_processes:
-          type: integer
-          description: The maximum number of worker processes for the application pool (web garden).
-          default: 1
-          example: 10
-        pinging_enabled:
-          type: boolean
-          description: Whether health monitoring pings are enabled.
-          default: true
-          example: true
-        ping_interval:
-          type: integer
-          description: The interval in seconds between health monitoring pings.
-          default: 30
-          example: 10
-        ping_response_time:
-          type: integer
-          description: The maximum time in seconds allowed for a worker process to respond to a health ping.
-          default: 90
-          example: 10
-        shutdown_time_limit:
-          type: integer
-          description: The time in seconds allowed for a worker process to gracefully shut down.
-          default: 90
-          example: 10
-        startup_time_limit:
-          type: integer
-          description: The time in seconds allowed for a worker process to start up.
-          default: 90
-          example: 10
-        idle_timeout_action:
-          type: string
-          description: The action to take when the idle timeout is reached.
-          enum:
-          - Terminate
-          - Suspend
-          default: Terminate
-          example: Terminate
-    Recycling:
-      type: object
-      description: Recycling settings for the application pool.
-      properties:
-        disable_overlapped_recycle:
-          type: boolean
-          description: Whether to disable overlapped recycling.
-          default: false
-          example: true
-        disable_recycle_on_config_change:
-          type: boolean
-          description: Whether to disable recycling on configuration changes.
-          default: false
-          example: true
-        log_events:
-          $ref: '#/components/schemas/RecyclingLogEvents'
-        periodic_restart:
-          $ref: '#/components/schemas/PeriodicRestart'
     ProcessOrphaning:
       type: object
       description: Process orphaning settings that control behavior when a worker process cannot be shut down gracefully.
@@ -432,70 +327,16 @@ components:
           type: string
           description: Parameters for the orphan action executable.
           example: example_value
-    ApplicationPoolUpdate:
+    ApplicationPoolLinks:
       type: object
-      description: Request body for updating an application pool. Only include properties that should be changed.
+      description: HAL-style links to related resources for an application pool.
       properties:
-        name:
-          type: string
-          example: Example Title
-        auto_start:
-          type: boolean
-          example: true
-        pipeline_mode:
-          type: string
-          enum:
-          - integrated
-          - classic
-          example: integrated
-        managed_runtime_version:
-          type: string
-          example: example_value
-        enable_32bit_win64:
-          type: boolean
-          example: true
-        queue_length:
-          type: integer
-          example: 10
-        cpu:
-          $ref: '#/components/schemas/CpuSettings'
-        process_model:
-          $ref: '#/components/schemas/ProcessModel'
-        identity:
-          $ref: '#/components/schemas/Identity'
-        recycling:
-          $ref: '#/components/schemas/Recycling'
-        rapid_fail_protection:
-          $ref: '#/components/schemas/RapidFailProtection'
-        process_orphaning:
-          $ref: '#/components/schemas/ProcessOrphaning'
-    ApplicationPoolSummary:
-      type: object
-      description: A summary representation of an application pool in list responses.
-      properties:
-        name:
-          type: string
-          description: The name of the application pool.
-          example: Example Title
-        id:
-          type: string
-          description: The unique identifier of the application pool.
-          example: abc123
-        status:
-          type: string
-          description: The current status of the application pool.
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
-        _links:
-          type: object
-          properties:
-            self:
-              $ref: '#/components/schemas/HalLink'
-          example: example_value
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+        websites:
+          $ref: '#/components/schemas/HalLink'
+        worker_processes:
+          $ref: '#/components/schemas/HalLink'
     ApplicationPool:
       type: object
       description: A complete IIS application pool resource with all configuration settings for worker process isolation and management.
@@ -562,6 +403,137 @@ components:
           $ref: '#/components/schemas/ProcessOrphaning'
         _links:
           $ref: '#/components/schemas/ApplicationPoolLinks'
+    ProcessModel:
+      type: object
+      description: Process model settings for the application pool worker processes.
+      properties:
+        idle_timeout:
+          type: integer
+          description: The idle timeout in minutes before a worker process is shut down.
+          default: 20
+          example: 10
+        max_processes:
+          type: integer
+          description: The maximum number of worker processes for the application pool (web garden).
+          default: 1
+          example: 10
+        pinging_enabled:
+          type: boolean
+          description: Whether health monitoring pings are enabled.
+          default: true
+          example: true
+        ping_interval:
+          type: integer
+          description: The interval in seconds between health monitoring pings.
+          default: 30
+          example: 10
+        ping_response_time:
+          type: integer
+          description: The maximum time in seconds allowed for a worker process to respond to a health ping.
+          default: 90
+          example: 10
+        shutdown_time_limit:
+          type: integer
+          description: The time in seconds allowed for a worker process to gracefully shut down.
+          default: 90
+          example: 10
+        startup_time_limit:
+          type: integer
+          description: The time in seconds allowed for a worker process to start up.
+          default: 90
+          example: 10
+        idle_timeout_action:
+          type: string
+          description: The action to take when the idle timeout is reached.
+          enum:
+          - Terminate
+          - Suspend
+          default: Terminate
+          example: Terminate
+    Identity:
+      type: object
+      description: The identity configuration for the application pool worker process.
+      properties:
+        identity_type:
+          type: string
+          description: The type of identity used by the application pool.
+          enum:
+          - ApplicationPoolIdentity
+          - LocalSystem
+          - LocalService
+          - NetworkService
+          - SpecificUser
+          default: ApplicationPoolIdentity
+          example: ApplicationPoolIdentity
+        username:
+          type: string
+          description: The username for the identity when using SpecificUser identity type.
+          example: example_value
+        load_user_profile:
+          type: boolean
+          description: Whether to load the user profile for the worker process.
+          default: true
+          example: true
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
+          example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
+    Recycling:
+      type: object
+      description: Recycling settings for the application pool.
+      properties:
+        disable_overlapped_recycle:
+          type: boolean
+          description: Whether to disable overlapped recycling.
+          default: false
+          example: true
+        disable_recycle_on_config_change:
+          type: boolean
+          description: Whether to disable recycling on configuration changes.
+          default: false
+          example: true
+        log_events:
+          $ref: '#/components/schemas/RecyclingLogEvents'
+        periodic_restart:
+          $ref: '#/components/schemas/PeriodicRestart'
+    ApplicationPoolSummary:
+      type: object
+      description: A summary representation of an application pool in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the application pool.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the application pool.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
     PeriodicRestart:
       type: object
       description: Periodic restart configuration for the application pool.
@@ -593,42 +565,70 @@ components:
             type: string
             format: time
           example: []
-    RecyclingLogEvents:
+    CpuSettings:
       type: object
-      description: Configuration for which recycling events are logged.
+      description: CPU usage settings for the application pool.
       properties:
-        time:
+        limit:
+          type: integer
+          description: The maximum CPU usage percentage (in 1/1000ths of a percent) allowed for the application pool.
+          default: 0
+          example: 10
+        limit_interval:
+          type: integer
+          description: The interval in minutes for CPU limit monitoring.
+          default: 5
+          example: 10
+        action:
+          type: string
+          description: The action to take when the CPU limit is exceeded.
+          enum:
+          - NoAction
+          - KillW3wp
+          - Throttle
+          - ThrottleUnderLoad
+          default: NoAction
+          example: NoAction
+        processor_affinity_enabled:
           type: boolean
-          default: true
+          description: Whether processor affinity is enabled.
+          default: false
           example: true
-        requests:
-          type: boolean
-          default: true
-          example: true
-        schedule:
-          type: boolean
-          default: true
-          example: true
-        memory:
-          type: boolean
-          default: true
-          example: true
-        isapi_unhealthy:
-          type: boolean
-          default: true
-          example: true
-        on_demand:
-          type: boolean
-          default: true
-          example: true
-        config_change:
-          type: boolean
-          default: true
-          example: true
-        private_memory:
-          type: boolean
-          default: true
-          example: true
+        processor_affinity_mask32:
+          type: string
+          description: The 32-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+          example: example_value
+        processor_affinity_mask64:
+          type: string
+          description: The 64-bit processor affinity mask.
+          default: '0xFFFFFFFF'
+          example: example_value
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
+  responses:
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     ApplicationPoolId:
       name: id
