@@ -5,17 +5,22 @@ description: >-
   virtualization, security, and remote administration capabilities for enterprise server infrastructure.
 type: Index
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - microsoft/iis.administration
+    - microsoft/windows-admin-center-sdk
+    - microsoftdocs/windowsserverdocs
   open_source: unknown
   commercial: true
   callable_host: false
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: paid
@@ -35,7 +40,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/microsoft-windows-server.png
 url: https://www.microsoft.com/windows-server
 tags:
-  - Data-Center
+  - Data Center
   - Enterprise
   - Infrastructure
   - Microsoft
@@ -52,6 +57,7 @@ tags_raw:
   - Server Management
   - Windows Server
   - Windows Server 2025
+  - Data-Center
 created: '2024'
 modified: '2026-05-19'
 specificationVersion: '0.23'
@@ -247,7 +253,7 @@ apis:
   tags:
   - File Sharing
   - Network Storage
-  - SMB
+  - Server Message Block
   - Storage
   properties:
   - type: Documentation
