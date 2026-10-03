@@ -165,21 +165,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        title:
-          type: string
-          description: A short description of the error.
-          example: Example Title
-        detail:
-          type: string
-          description: A detailed description of the error.
-          example: example_value
-        status:
-          type: integer
-          description: The HTTP status code.
-          example: 10
     WebSiteLimits:
       type: object
       description: Resource limits for the web site.
@@ -206,36 +191,18 @@ components:
           description: The maximum number of URL segments allowed.
           default: 32
           example: https://www.example.com
-    HalLink:
+    WebSiteSummary:
       type: object
-      properties:
-        href:
-          type: string
-          format: uri-reference
-          description: The URI of the linked resource.
-          example: example_value
-    WebSite:
-      type: object
-      description: A complete IIS web site resource including configuration, bindings, application pool assignment, and HAL links to related resources.
+      description: A summary representation of a web site in list responses.
       properties:
         name:
           type: string
           description: The name of the web site.
-          examples:
-          - Default Web Site
+          example: Example Title
         id:
           type: string
           description: The unique identifier of the web site.
           example: abc123
-        physical_path:
-          type: string
-          description: The physical file system path for the web site root.
-          examples:
-          - '%SystemDrive%\inetpub\wwwroot'
-        key:
-          type: string
-          description: The IIS site key identifier.
-          example: example_value
         status:
           type: string
           description: The current status of the web site.
@@ -245,50 +212,20 @@ components:
           - starting
           - stopping
           example: started
-        server_auto_start:
-          type: boolean
-          description: Whether the web site starts automatically when IIS starts.
-          default: true
-          example: true
-        enabled_protocols:
-          type: string
-          description: The protocols enabled for this web site, as a comma-separated list.
-          examples:
-          - http
-          - http,https
-        limits:
-          $ref: '#/components/schemas/WebSiteLimits'
-        bindings:
-          type: array
-          description: The list of bindings configured for this web site.
-          items:
-            $ref: '#/components/schemas/Binding'
-          example: []
-        application_pool:
-          $ref: '#/components/schemas/ApplicationPoolReference'
         _links:
-          $ref: '#/components/schemas/WebSiteLinks'
-    ApplicationPoolReference:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+    HalLink:
       type: object
-      description: A reference to an application pool resource.
       properties:
-        name:
+        href:
           type: string
-          description: The name of the application pool.
-          example: Example Title
-        id:
-          type: string
-          description: The unique identifier of the application pool.
-          example: abc123
-        status:
-          type: string
-          description: The current status of the application pool.
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
     WebSiteUpdate:
       type: object
       description: Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.
@@ -406,33 +343,71 @@ components:
           description: The protocols enabled for this web site.
           default: http
           example: example_value
-    WebSiteSummary:
+    Certificate:
       type: object
-      description: A summary representation of a web site in list responses.
+      description: An SSL/TLS certificate associated with an HTTPS binding.
       properties:
         name:
           type: string
-          description: The name of the web site.
+          description: The friendly name of the certificate.
           example: Example Title
         id:
           type: string
-          description: The unique identifier of the web site.
+          description: The unique identifier of the certificate resource.
+          example: abc123
+        issued_by:
+          type: string
+          description: The certificate issuer distinguished name.
+          example: example_value
+        subject:
+          type: string
+          description: The certificate subject distinguished name.
+          example: example_value
+        thumbprint:
+          type: string
+          description: The SHA-1 thumbprint of the certificate.
+          example: example_value
+        valid_to:
+          type: string
+          format: date-time
+          description: The expiration date of the certificate.
+          example: '2026-01-15T10:30:00Z'
+    ApplicationPoolReference:
+      type: object
+      description: A reference to an application pool resource.
+      properties:
+        name:
+          type: string
+          description: The name of the application pool.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the application pool.
           example: abc123
         status:
           type: string
-          description: The current status of the web site.
+          description: The current status of the application pool.
           enum:
           - started
           - stopped
           - starting
           - stopping
           example: started
-        _links:
-          type: object
-          properties:
-            self:
-              $ref: '#/components/schemas/HalLink'
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
           example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
     Binding:
       type: object
       description: Defines the protocol, IP address, port, and optional hostname that a web site listens on. The binding_information property format is '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.
@@ -478,35 +453,60 @@ components:
           description: Whether Server Name Indication (SNI) is required for this binding.
           default: false
           example: true
-    Certificate:
+    WebSite:
       type: object
-      description: An SSL/TLS certificate associated with an HTTPS binding.
+      description: A complete IIS web site resource including configuration, bindings, application pool assignment, and HAL links to related resources.
       properties:
         name:
           type: string
-          description: The friendly name of the certificate.
-          example: Example Title
+          description: The name of the web site.
+          examples:
+          - Default Web Site
         id:
           type: string
-          description: The unique identifier of the certificate resource.
+          description: The unique identifier of the web site.
           example: abc123
-        issued_by:
+        physical_path:
           type: string
-          description: The certificate issuer distinguished name.
+          description: The physical file system path for the web site root.
+          examples:
+          - '%SystemDrive%\inetpub\wwwroot'
+        key:
+          type: string
+          description: The IIS site key identifier.
           example: example_value
-        subject:
+        status:
           type: string
-          description: The certificate subject distinguished name.
-          example: example_value
-        thumbprint:
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+          example: true
+        enabled_protocols:
           type: string
-          description: The SHA-1 thumbprint of the certificate.
-          example: example_value
-        valid_to:
-          type: string
-          format: date-time
-          description: The expiration date of the certificate.
-          example: '2026-01-15T10:30:00Z'
+          description: The protocols enabled for this web site, as a comma-separated list.
+          examples:
+          - http
+          - http,https
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
+        bindings:
+          type: array
+          description: The list of bindings configured for this web site.
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          $ref: '#/components/schemas/ApplicationPoolReference'
+        _links:
+          $ref: '#/components/schemas/WebSiteLinks'
   responses:
     BadRequest:
       description: The request body is malformed or contains invalid values.
@@ -516,14 +516,14 @@ components:
             $ref: '#/components/schemas/Error'
     Forbidden:
       description: The authenticated user does not have permission for this operation.
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
     NotFound:
       description: The specified resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
   parameters:
     WebSiteId:
       name: id
