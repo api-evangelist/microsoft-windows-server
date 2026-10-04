@@ -165,99 +165,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WebSiteLimits:
-      type: object
-      description: Resource limits for the web site.
-      properties:
-        connection_timeout:
-          type: integer
-          description: The connection timeout in seconds.
-          default: 120
-          example: 10
-        max_bandwidth:
-          type: integer
-          description: The maximum bandwidth in bytes per second.
-          format: int64
-          default: 4294967295
-          example: 10
-        max_connections:
-          type: integer
-          description: The maximum number of concurrent connections.
-          format: int64
-          default: 4294967295
-          example: 10
-        max_url_segments:
-          type: integer
-          description: The maximum number of URL segments allowed.
-          default: 32
-          example: https://www.example.com
-    WebSiteSummary:
-      type: object
-      description: A summary representation of a web site in list responses.
-      properties:
-        name:
-          type: string
-          description: The name of the web site.
-          example: Example Title
-        id:
-          type: string
-          description: The unique identifier of the web site.
-          example: abc123
-        status:
-          type: string
-          description: The current status of the web site.
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
-        _links:
-          type: object
-          properties:
-            self:
-              $ref: '#/components/schemas/HalLink'
-          example: example_value
-    HalLink:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri-reference
-          description: The URI of the linked resource.
-          example: example_value
-    WebSiteUpdate:
-      type: object
-      description: Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.
-      properties:
-        name:
-          type: string
-          description: The name of the web site.
-          example: Example Title
-        physical_path:
-          type: string
-          description: The physical file system path for the web site root.
-          example: example_value
-        bindings:
-          type: array
-          description: The full list of desired bindings. Existing bindings not included in this list will be removed.
-          items:
-            $ref: '#/components/schemas/Binding'
-          example: []
-        application_pool:
-          type: object
-          properties:
-            id:
-              type: string
-          example: example_value
-        server_auto_start:
-          type: boolean
-          example: true
-        enabled_protocols:
-          type: string
-          example: example_value
-        limits:
-          $ref: '#/components/schemas/WebSiteLimits'
     WebSiteLinks:
       type: object
       description: HAL-style links to related resources for a web site.
@@ -300,49 +207,6 @@ components:
           $ref: '#/components/schemas/HalLink'
         webapps:
           $ref: '#/components/schemas/HalLink'
-    WebSiteCreate:
-      type: object
-      description: Request body for creating a new web site.
-      required:
-      - name
-      - physical_path
-      - bindings
-      properties:
-        name:
-          type: string
-          description: The name of the web site to create.
-          examples:
-          - Demonstration Site
-        physical_path:
-          type: string
-          description: The physical file system path for the web site root directory. The directory must exist.
-          examples:
-          - C:\inetpub\wwwroot\DemonstrationSite
-        bindings:
-          type: array
-          description: The bindings for the web site.
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Binding'
-          example: []
-        application_pool:
-          type: object
-          description: Optional application pool assignment.
-          properties:
-            id:
-              type: string
-              description: The identifier of the application pool.
-          example: example_value
-        server_auto_start:
-          type: boolean
-          description: Whether the web site starts automatically when IIS starts.
-          default: true
-          example: true
-        enabled_protocols:
-          type: string
-          description: The protocols enabled for this web site.
-          default: http
-          example: example_value
     Certificate:
       type: object
       description: An SSL/TLS certificate associated with an HTTPS binding.
@@ -372,6 +236,32 @@ components:
           format: date-time
           description: The expiration date of the certificate.
           example: '2026-01-15T10:30:00Z'
+    WebSiteLimits:
+      type: object
+      description: Resource limits for the web site.
+      properties:
+        connection_timeout:
+          type: integer
+          description: The connection timeout in seconds.
+          default: 120
+          example: 10
+        max_bandwidth:
+          type: integer
+          description: The maximum bandwidth in bytes per second.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_connections:
+          type: integer
+          description: The maximum number of concurrent connections.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_url_segments:
+          type: integer
+          description: The maximum number of URL segments allowed.
+          default: 32
+          example: https://www.example.com
     ApplicationPoolReference:
       type: object
       description: A reference to an application pool resource.
@@ -393,6 +283,38 @@ components:
           - starting
           - stopping
           example: started
+    WebSiteUpdate:
+      type: object
+      description: Request body for updating a web site. Only include properties that should be changed. Note that list properties like bindings replace the entire list.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root.
+          example: example_value
+        bindings:
+          type: array
+          description: The full list of desired bindings. Existing bindings not included in this list will be removed.
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+          example: example_value
+        server_auto_start:
+          type: boolean
+          example: true
+        enabled_protocols:
+          type: string
+          example: example_value
+        limits:
+          $ref: '#/components/schemas/WebSiteLimits'
     Error:
       type: object
       properties:
@@ -453,6 +375,84 @@ components:
           description: Whether Server Name Indication (SNI) is required for this binding.
           default: false
           example: true
+    WebSiteCreate:
+      type: object
+      description: Request body for creating a new web site.
+      required:
+      - name
+      - physical_path
+      - bindings
+      properties:
+        name:
+          type: string
+          description: The name of the web site to create.
+          examples:
+          - Demonstration Site
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root directory. The directory must exist.
+          examples:
+          - C:\inetpub\wwwroot\DemonstrationSite
+        bindings:
+          type: array
+          description: The bindings for the web site.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+          example: example_value
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+          example: true
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this web site.
+          default: http
+          example: example_value
+    WebSiteSummary:
+      type: object
+      description: A summary representation of a web site in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
     WebSite:
       type: object
       description: A complete IIS web site resource including configuration, bindings, application pool assignment, and HAL links to related resources.
@@ -508,22 +508,22 @@ components:
         _links:
           $ref: '#/components/schemas/WebSiteLinks'
   responses:
-    BadRequest:
-      description: The request body is malformed or contains invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The authenticated user does not have permission for this operation.
     NotFound:
       description: The specified resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
     Unauthorized:
       description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     WebSiteId:
       name: id

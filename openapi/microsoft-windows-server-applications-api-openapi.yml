@@ -168,97 +168,45 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    BadRequest:
+      description: The request body is malformed or contains invalid values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    WebSiteReference:
+    ApplicationSummary:
       type: object
-      description: A reference to a web site resource.
+      description: A summary representation of an application in list responses.
       properties:
-        name:
+        location:
           type: string
-          description: The name of the web site.
-          example: Example Title
+          description: The full location path.
+          example: example_value
+        path:
+          type: string
+          description: The virtual path of the application.
+          example: example_value
         id:
           type: string
-          description: The unique identifier of the web site.
+          description: The unique identifier of the application.
           example: abc123
-        status:
-          type: string
-          description: The current status of the web site.
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
-    HalLink:
-      type: object
-      properties:
-        href:
-          type: string
-          format: uri-reference
-          description: The URI of the linked resource.
-          example: example_value
-    ApplicationCreate:
-      type: object
-      description: Request body for creating a new web application.
-      required:
-      - path
-      - physical_path
-      - website
-      properties:
-        path:
-          type: string
-          description: The virtual path for the application relative to the web site root.
-          examples:
-          - demo-app
-        physical_path:
-          type: string
-          description: The physical file system path for the application. The directory must exist.
-          examples:
-          - C:\inetpub\wwwroot\demo-app
-        website:
-          type: object
-          description: The web site that the application should belong to.
-          required:
-          - id
-          properties:
-            id:
-              type: string
-              description: The identifier of the web site.
-          example: example_value
-        application_pool:
-          type: object
-          description: Optional application pool assignment.
-          properties:
-            id:
-              type: string
-              description: The identifier of the application pool.
-          example: example_value
-        enabled_protocols:
-          type: string
-          description: The protocols enabled for this application.
-          default: http
-          example: example_value
-    ApplicationUpdate:
-      type: object
-      description: Request body for updating a web application. Only include properties that should be changed.
-      properties:
-        path:
-          type: string
-          description: The virtual path for the application.
-          example: example_value
-        physical_path:
-          type: string
-          description: The physical file system path for the application.
-          example: example_value
-        application_pool:
+        _links:
           type: object
           properties:
-            id:
-              type: string
-          example: example_value
-        enabled_protocols:
-          type: string
+            self:
+              $ref: '#/components/schemas/HalLink'
           example: example_value
     ApplicationPoolReference:
       type: object
@@ -347,28 +295,6 @@ components:
           $ref: '#/components/schemas/ApplicationPoolReference'
         _links:
           $ref: '#/components/schemas/ApplicationLinks'
-    ApplicationSummary:
-      type: object
-      description: A summary representation of an application in list responses.
-      properties:
-        location:
-          type: string
-          description: The full location path.
-          example: example_value
-        path:
-          type: string
-          description: The virtual path of the application.
-          example: example_value
-        id:
-          type: string
-          description: The unique identifier of the application.
-          example: abc123
-        _links:
-          type: object
-          properties:
-            self:
-              $ref: '#/components/schemas/HalLink'
-          example: example_value
     Error:
       type: object
       properties:
@@ -384,23 +310,97 @@ components:
           type: integer
           description: The HTTP status code.
           example: 10
-  responses:
-    BadRequest:
-      description: The request body is malformed or contains invalid values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The authenticated user does not have permission for this operation.
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
+    ApplicationCreate:
+      type: object
+      description: Request body for creating a new web application.
+      required:
+      - path
+      - physical_path
+      - website
+      properties:
+        path:
+          type: string
+          description: The virtual path for the application relative to the web site root.
+          examples:
+          - demo-app
+        physical_path:
+          type: string
+          description: The physical file system path for the application. The directory must exist.
+          examples:
+          - C:\inetpub\wwwroot\demo-app
+        website:
+          type: object
+          description: The web site that the application should belong to.
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              description: The identifier of the web site.
+          example: example_value
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+          example: example_value
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this application.
+          default: http
+          example: example_value
+    HalLink:
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri-reference
+          description: The URI of the linked resource.
+          example: example_value
+    ApplicationUpdate:
+      type: object
+      description: Request body for updating a web application. Only include properties that should be changed.
+      properties:
+        path:
+          type: string
+          description: The virtual path for the application.
+          example: example_value
+        physical_path:
+          type: string
+          description: The physical file system path for the application.
+          example: example_value
+        application_pool:
+          type: object
+          properties:
+            id:
+              type: string
+          example: example_value
+        enabled_protocols:
+          type: string
+          example: example_value
+    WebSiteReference:
+      type: object
+      description: A reference to a web site resource.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
   parameters:
     ApplicationId:
       name: id
