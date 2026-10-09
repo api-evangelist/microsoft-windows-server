@@ -136,3 +136,55 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - metered
+  - subscription
+  units:
+  - compute
+  - seat
+  plans:
+  - name: Windows Server 2025 Standard
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - year
+  - name: Windows Server 2025 Datacenter
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - year
+  - name: Windows Server CAL
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - year
+  - name: Windows Server Pay-As-You-Go (Azure Arc)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    - other
+    periods:
+    - month
+    - per-use
+  - name: Windows Server Essentials (legacy)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - year
