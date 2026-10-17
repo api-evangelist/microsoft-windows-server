@@ -165,103 +165,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    WebSiteLinks:
-      type: object
-      description: HAL-style links to related resources for a web site.
-      properties:
-        authentication:
-          $ref: '#/components/schemas/HalLink'
-        authorization:
-          $ref: '#/components/schemas/HalLink'
-        default_document:
-          $ref: '#/components/schemas/HalLink'
-        delegation:
-          $ref: '#/components/schemas/HalLink'
-        directory_browsing:
-          $ref: '#/components/schemas/HalLink'
-        files:
-          $ref: '#/components/schemas/HalLink'
-        handlers:
-          $ref: '#/components/schemas/HalLink'
-        ip_restrictions:
-          $ref: '#/components/schemas/HalLink'
-        logging:
-          $ref: '#/components/schemas/HalLink'
-        modules:
-          $ref: '#/components/schemas/HalLink'
-        request_filtering:
-          $ref: '#/components/schemas/HalLink'
-        request_monitor:
-          $ref: '#/components/schemas/HalLink'
-        request_tracing:
-          $ref: '#/components/schemas/HalLink'
-        response_compression:
-          $ref: '#/components/schemas/HalLink'
-        response_headers:
-          $ref: '#/components/schemas/HalLink'
-        ssl:
-          $ref: '#/components/schemas/HalLink'
-        static_content:
-          $ref: '#/components/schemas/HalLink'
-        vdirs:
-          $ref: '#/components/schemas/HalLink'
-        webapps:
-          $ref: '#/components/schemas/HalLink'
-    Certificate:
-      type: object
-      description: An SSL/TLS certificate associated with an HTTPS binding.
-      properties:
-        name:
-          type: string
-          description: The friendly name of the certificate.
-          example: Example Title
-        id:
-          type: string
-          description: The unique identifier of the certificate resource.
-          example: abc123
-        issued_by:
-          type: string
-          description: The certificate issuer distinguished name.
-          example: example_value
-        subject:
-          type: string
-          description: The certificate subject distinguished name.
-          example: example_value
-        thumbprint:
-          type: string
-          description: The SHA-1 thumbprint of the certificate.
-          example: example_value
-        valid_to:
-          type: string
-          format: date-time
-          description: The expiration date of the certificate.
-          example: '2026-01-15T10:30:00Z'
-    WebSiteLimits:
-      type: object
-      description: Resource limits for the web site.
-      properties:
-        connection_timeout:
-          type: integer
-          description: The connection timeout in seconds.
-          default: 120
-          example: 10
-        max_bandwidth:
-          type: integer
-          description: The maximum bandwidth in bytes per second.
-          format: int64
-          default: 4294967295
-          example: 10
-        max_connections:
-          type: integer
-          description: The maximum number of concurrent connections.
-          format: int64
-          default: 4294967295
-          example: 10
-        max_url_segments:
-          type: integer
-          description: The maximum number of URL segments allowed.
-          default: 32
-          example: https://www.example.com
     ApplicationPoolReference:
       type: object
       description: A reference to an application pool resource.
@@ -315,21 +218,6 @@ components:
           example: example_value
         limits:
           $ref: '#/components/schemas/WebSiteLimits'
-    Error:
-      type: object
-      properties:
-        title:
-          type: string
-          description: A short description of the error.
-          example: Example Title
-        detail:
-          type: string
-          description: A detailed description of the error.
-          example: example_value
-        status:
-          type: integer
-          description: The HTTP status code.
-          example: 10
     Binding:
       type: object
       description: Defines the protocol, IP address, port, and optional hostname that a web site listens on. The binding_information property format is '{ip_address}:{port}:{hostname}' for HTTP and HTTPS protocols.
@@ -375,76 +263,6 @@ components:
           description: Whether Server Name Indication (SNI) is required for this binding.
           default: false
           example: true
-    WebSiteCreate:
-      type: object
-      description: Request body for creating a new web site.
-      required:
-      - name
-      - physical_path
-      - bindings
-      properties:
-        name:
-          type: string
-          description: The name of the web site to create.
-          examples:
-          - Demonstration Site
-        physical_path:
-          type: string
-          description: The physical file system path for the web site root directory. The directory must exist.
-          examples:
-          - C:\inetpub\wwwroot\DemonstrationSite
-        bindings:
-          type: array
-          description: The bindings for the web site.
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Binding'
-          example: []
-        application_pool:
-          type: object
-          description: Optional application pool assignment.
-          properties:
-            id:
-              type: string
-              description: The identifier of the application pool.
-          example: example_value
-        server_auto_start:
-          type: boolean
-          description: Whether the web site starts automatically when IIS starts.
-          default: true
-          example: true
-        enabled_protocols:
-          type: string
-          description: The protocols enabled for this web site.
-          default: http
-          example: example_value
-    WebSiteSummary:
-      type: object
-      description: A summary representation of a web site in list responses.
-      properties:
-        name:
-          type: string
-          description: The name of the web site.
-          example: Example Title
-        id:
-          type: string
-          description: The unique identifier of the web site.
-          example: abc123
-        status:
-          type: string
-          description: The current status of the web site.
-          enum:
-          - started
-          - stopped
-          - starting
-          - stopping
-          example: started
-        _links:
-          type: object
-          properties:
-            self:
-              $ref: '#/components/schemas/HalLink'
-          example: example_value
     HalLink:
       type: object
       properties:
@@ -507,17 +325,199 @@ components:
           $ref: '#/components/schemas/ApplicationPoolReference'
         _links:
           $ref: '#/components/schemas/WebSiteLinks'
+    WebSiteLinks:
+      type: object
+      description: HAL-style links to related resources for a web site.
+      properties:
+        authentication:
+          $ref: '#/components/schemas/HalLink'
+        authorization:
+          $ref: '#/components/schemas/HalLink'
+        default_document:
+          $ref: '#/components/schemas/HalLink'
+        delegation:
+          $ref: '#/components/schemas/HalLink'
+        directory_browsing:
+          $ref: '#/components/schemas/HalLink'
+        files:
+          $ref: '#/components/schemas/HalLink'
+        handlers:
+          $ref: '#/components/schemas/HalLink'
+        ip_restrictions:
+          $ref: '#/components/schemas/HalLink'
+        logging:
+          $ref: '#/components/schemas/HalLink'
+        modules:
+          $ref: '#/components/schemas/HalLink'
+        request_filtering:
+          $ref: '#/components/schemas/HalLink'
+        request_monitor:
+          $ref: '#/components/schemas/HalLink'
+        request_tracing:
+          $ref: '#/components/schemas/HalLink'
+        response_compression:
+          $ref: '#/components/schemas/HalLink'
+        response_headers:
+          $ref: '#/components/schemas/HalLink'
+        ssl:
+          $ref: '#/components/schemas/HalLink'
+        static_content:
+          $ref: '#/components/schemas/HalLink'
+        vdirs:
+          $ref: '#/components/schemas/HalLink'
+        webapps:
+          $ref: '#/components/schemas/HalLink'
+    WebSiteLimits:
+      type: object
+      description: Resource limits for the web site.
+      properties:
+        connection_timeout:
+          type: integer
+          description: The connection timeout in seconds.
+          default: 120
+          example: 10
+        max_bandwidth:
+          type: integer
+          description: The maximum bandwidth in bytes per second.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_connections:
+          type: integer
+          description: The maximum number of concurrent connections.
+          format: int64
+          default: 4294967295
+          example: 10
+        max_url_segments:
+          type: integer
+          description: The maximum number of URL segments allowed.
+          default: 32
+          example: https://www.example.com
+    WebSiteSummary:
+      type: object
+      description: A summary representation of a web site in list responses.
+      properties:
+        name:
+          type: string
+          description: The name of the web site.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the web site.
+          example: abc123
+        status:
+          type: string
+          description: The current status of the web site.
+          enum:
+          - started
+          - stopped
+          - starting
+          - stopping
+          example: started
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HalLink'
+          example: example_value
+    WebSiteCreate:
+      type: object
+      description: Request body for creating a new web site.
+      required:
+      - name
+      - physical_path
+      - bindings
+      properties:
+        name:
+          type: string
+          description: The name of the web site to create.
+          examples:
+          - Demonstration Site
+        physical_path:
+          type: string
+          description: The physical file system path for the web site root directory. The directory must exist.
+          examples:
+          - C:\inetpub\wwwroot\DemonstrationSite
+        bindings:
+          type: array
+          description: The bindings for the web site.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Binding'
+          example: []
+        application_pool:
+          type: object
+          description: Optional application pool assignment.
+          properties:
+            id:
+              type: string
+              description: The identifier of the application pool.
+          example: example_value
+        server_auto_start:
+          type: boolean
+          description: Whether the web site starts automatically when IIS starts.
+          default: true
+          example: true
+        enabled_protocols:
+          type: string
+          description: The protocols enabled for this web site.
+          default: http
+          example: example_value
+    Certificate:
+      type: object
+      description: An SSL/TLS certificate associated with an HTTPS binding.
+      properties:
+        name:
+          type: string
+          description: The friendly name of the certificate.
+          example: Example Title
+        id:
+          type: string
+          description: The unique identifier of the certificate resource.
+          example: abc123
+        issued_by:
+          type: string
+          description: The certificate issuer distinguished name.
+          example: example_value
+        subject:
+          type: string
+          description: The certificate subject distinguished name.
+          example: example_value
+        thumbprint:
+          type: string
+          description: The SHA-1 thumbprint of the certificate.
+          example: example_value
+        valid_to:
+          type: string
+          format: date-time
+          description: The expiration date of the certificate.
+          example: '2026-01-15T10:30:00Z'
+    Error:
+      type: object
+      properties:
+        title:
+          type: string
+          description: A short description of the error.
+          example: Example Title
+        detail:
+          type: string
+          description: A detailed description of the error.
+          example: example_value
+        status:
+          type: integer
+          description: The HTTP status code.
+          example: 10
   responses:
+    Unauthorized:
+      description: Authentication credentials are missing or invalid.
+    Forbidden:
+      description: The authenticated user does not have permission for this operation.
     NotFound:
       description: The specified resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: The authenticated user does not have permission for this operation.
-    Unauthorized:
-      description: Authentication credentials are missing or invalid.
     BadRequest:
       description: The request body is malformed or contains invalid values.
       content:
