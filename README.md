@@ -1,4 +1,4 @@
-# Microsoft Windows Server (microsoft-windows-server)
+# Microsoft Windows Server
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,375 +66,256 @@
 
 APIs and integration points for Microsoft Windows Server operating system including management, networking, storage, virtualization, security, and remote administration capabilities for enterprise server infrastructure.
 
-**APIs.json:** [https://www.microsoft.com/windows-server](https://www.microsoft.com/windows-server)
+**Areas:** Data Center · Enterprise · Infrastructure · Microsoft · Operating System · Server Management · Windows Server · Windows Server 2025
+
+## Microsoft Windows Server on APIs.io
+
+Everything profiled for Microsoft Windows Server is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-windows-server/](https://apis.io/providers/microsoft-windows-server/)** — or go straight to one of the APIs or properties below.
+
+### APIs (18)
+
+- [Windows Server Management API](https://apis.io/apis/microsoft-windows-server/windows-server-management-api/) — PowerShell and WMI-based management APIs for Windows Server administration.
+- [Windows Remote Management (WinRM)](https://apis.io/apis/microsoft-windows-server/windows-remote-management-winrm/) — WS-Management protocol implementation for remote management of Windows servers using SOAP-based web services for configuration and operations.
+- [Active Directory Domain Services API](https://apis.io/apis/microsoft-windows-server/active-directory-domain-services-api/) — LDAP and REST APIs for Active Directory management and authentication.
+- [Hyper-V Management API](https://apis.io/apis/microsoft-windows-server/hyper-v-management-api/) — APIs for managing Hyper-V virtualization platform including virtual machines, virtual switches, and virtual storage.
+- [Windows Server Update Services (WSUS) API](https://apis.io/apis/microsoft-windows-server/windows-server-update-services-wsus-api/) — APIs for managing Windows updates across enterprise environments.
+- [Windows Admin Center API](https://apis.io/apis/microsoft-windows-server/windows-admin-center-api/) — Modern web-based management interface REST API for Windows Server that provides a gateway service for relaying commands and scripts to managed nodes.
+- [DNS Server Management API](https://apis.io/apis/microsoft-windows-server/dns-server-management-api/) — APIs for managing Windows DNS Server services.
+- [Windows Management Instrumentation (WMI) API](https://apis.io/apis/microsoft-windows-server/windows-management-instrumentation-wmi-api/) — Infrastructure for management data and operations on Windows-based operating systems providing COM, scripting, and .NET APIs for system administration and…
+- [Remote Desktop Services API](https://apis.io/apis/microsoft-windows-server/remote-desktop-services-api/) — Win32 API for managing Remote Desktop Services including session management, virtual channels, user configuration, and the Remote Desktop Protocol.
+- [Failover Clustering API](https://apis.io/apis/microsoft-windows-server/failover-clustering-api/) — APIs for defining and managing software and hardware components on failover clusters to increase application scalability and availability.
+- [DHCP Server Management API](https://apis.io/apis/microsoft-windows-server/dhcp-server-management-api/) — APIs and PowerShell cmdlets for managing Dynamic Host Configuration Protocol server services including leases, reservations, and scopes.
+- [SMB File Server API](https://apis.io/apis/microsoft-windows-server/smb-file-server-api/) — Server Message Block protocol APIs and WMI management classes for managing file shares, share access, and network file sharing across Windows Server…
+- [Windows Event Log API](https://apis.io/apis/microsoft-windows-server/windows-event-log-api/) — API for instrumenting, querying, and consuming event logs on Windows Server for diagnostics, monitoring, and auditing.
+- [Storage Spaces Direct API](https://apis.io/apis/microsoft-windows-server/storage-spaces-direct-api/) — APIs and PowerShell management for software-defined storage enabling clustering of servers with internal storage for hyper-converged infrastructure.
+- [Network Policy Server (NPS) RADIUS API](https://apis.io/apis/microsoft-windows-server/network-policy-server-nps-radius-api/) — Network Policy Server providing centralized RADIUS authentication, authorization, and accounting for wireless, VPN, and dial-up connections.
+- [Microsoft Windows Server Application Pools API](https://apis.io/apis/microsoft-windows-server/microsoft-windows-server-application-pools-api/) — Application pools provide an isolation mechanism for processes on the web server. There are many different settings available to fine-tune the behavior of…
+- [Microsoft Windows Server Applications API](https://apis.io/apis/microsoft-windows-server/microsoft-windows-server-applications-api/) — Applications provide a method to differentiate sections of a web site. An application belongs to a single web site and will handle requests for the web site…
+- [Microsoft Windows Server Websites API](https://apis.io/apis/microsoft-windows-server/microsoft-windows-server-websites-api/) — Web sites are a core entity of IIS that determine where and how requests will be handled. The web site API allows consumers to create, read, delete, or…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Microsoft Windows Server Agentic Access](https://apis.io/agentic-access/microsoft-windows-server/microsoft-windows-server-agentic-access/)
+
+#### JSON Schema (61)
+
+The data models the API reads and writes.
+
+- [Application](https://apis.io/schemas/microsoft-windows-server/iis-administration-application/)
+- [ApplicationCreate](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-create/)
+- [ApplicationLinks](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-links/)
+- [ApplicationPool](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool/)
+- [ApplicationPoolCreate](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool-create/)
+- [ApplicationPoolLinks](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool-links/)
+- [ApplicationPoolReference](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool-reference/)
+- [ApplicationPoolSummary](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool-summary/)
+- [ApplicationPoolUpdate](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-pool-update/)
+- [ApplicationSummary](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-summary/)
+- [ApplicationUpdate](https://apis.io/schemas/microsoft-windows-server/iis-administration-application-update/)
+- [Binding](https://apis.io/schemas/microsoft-windows-server/iis-administration-binding/)
+- [Certificate](https://apis.io/schemas/microsoft-windows-server/iis-administration-certificate/)
+- [CpuSettings](https://apis.io/schemas/microsoft-windows-server/iis-administration-cpu-settings/)
+- [Error](https://apis.io/schemas/microsoft-windows-server/iis-administration-error/)
+- [HalLink](https://apis.io/schemas/microsoft-windows-server/iis-administration-hal-link/)
+- [Identity](https://apis.io/schemas/microsoft-windows-server/iis-administration-identity/)
+- [PeriodicRestart](https://apis.io/schemas/microsoft-windows-server/iis-administration-periodic-restart/)
+- [ProcessModel](https://apis.io/schemas/microsoft-windows-server/iis-administration-process-model/)
+- [ProcessOrphaning](https://apis.io/schemas/microsoft-windows-server/iis-administration-process-orphaning/)
+- [RapidFailProtection](https://apis.io/schemas/microsoft-windows-server/iis-administration-rapid-fail-protection/)
+- [Recycling](https://apis.io/schemas/microsoft-windows-server/iis-administration-recycling/)
+- [RecyclingLogEvents](https://apis.io/schemas/microsoft-windows-server/iis-administration-recycling-log-events/)
+- [WebSite](https://apis.io/schemas/microsoft-windows-server/iis-administration-web-site/)
+- [WebSiteCreate](https://apis.io/schemas/microsoft-windows-server/iis-administration-web-site-create/)
+- …and 36 more published on APIs.io
+
+#### JSON Structure (31)
+
+Data models expressed in JSON Structure.
+
+- [Iis Administration Application Create Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-create-structure/)
+- [Iis Administration Application Links Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-links-structure/)
+- [Iis Administration Application Pool Create Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-create-structure/)
+- [Iis Administration Application Pool Links Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-links-structure/)
+- [Iis Administration Application Pool Reference Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-reference-structure/)
+- [Iis Administration Application Pool Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-structure/)
+- [Iis Administration Application Pool Summary Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-summary-structure/)
+- [Iis Administration Application Pool Update Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-pool-update-structure/)
+- [Iis Administration Application Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-structure/)
+- [Iis Administration Application Summary Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-summary-structure/)
+- [Iis Administration Application Update Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-application-update-structure/)
+- [Iis Administration Binding Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-binding-structure/)
+- [Iis Administration Certificate Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-certificate-structure/)
+- [Iis Administration Cpu Settings Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-cpu-settings-structure/)
+- [Iis Administration Error Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-error-structure/)
+- [Iis Administration Hal Link Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-hal-link-structure/)
+- [Iis Administration Identity Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-identity-structure/)
+- [Iis Administration Periodic Restart Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-periodic-restart-structure/)
+- [Iis Administration Process Model Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-process-model-structure/)
+- [Iis Administration Process Orphaning Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-process-orphaning-structure/)
+- [Iis Administration Rapid Fail Protection Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-rapid-fail-protection-structure/)
+- [Iis Administration Recycling Log Events Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-recycling-log-events-structure/)
+- [Iis Administration Recycling Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-recycling-structure/)
+- [Iis Administration Web Site Create Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-web-site-create-structure/)
+- [Iis Administration Web Site Limits Structure](https://apis.io/json-structure/microsoft-windows-server/iis-administration-web-site-limits-structure/)
+- …and 6 more published on APIs.io
+
+#### JSON-LD (2)
+
+Linked-data contexts for the provider's vocabulary.
 
-## Scope
+- [Iis Administration Context](https://apis.io/jsonld/microsoft-windows-server/iis-administration-context/)
+- [Microsoft Windows Server Context](https://apis.io/jsonld/microsoft-windows-server/microsoft-windows-server-context/)
 
-- **Type:** Index
+#### Vocabulary (1)
 
-## Tags
+The provider's domain terms, defined.
 
-- Datacenter
-- Enterprise
-- Infrastructure
-- Microsoft
-- Operating System
-- Server Management
-- Windows Server
-- Windows Server 2025
+- [Microsoft Windows Server Domain Vocabulary](https://apis.io/vocabularies/microsoft-windows-server/microsoft-windows-server-vocabulary/)
 
-## Timestamps
+#### Examples (30)
 
-- **Created:** 2024
-- **Modified:** 2026-05-19
+Example requests and responses.
 
-## APIs
+- [Iis Administration Application Create Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-create-example/)
+- [Iis Administration Application Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-example/)
+- [Iis Administration Application Links Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-links-example/)
+- [Iis Administration Application Pool Create Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-create-example/)
+- [Iis Administration Application Pool Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-example/)
+- [Iis Administration Application Pool Links Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-links-example/)
+- [Iis Administration Application Pool Reference Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-reference-example/)
+- [Iis Administration Application Pool Summary Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-summary-example/)
+- [Iis Administration Application Pool Update Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-pool-update-example/)
+- [Iis Administration Application Summary Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-summary-example/)
+- [Iis Administration Application Update Example](https://apis.io/examples/microsoft-windows-server/iis-administration-application-update-example/)
+- [Iis Administration Binding Example](https://apis.io/examples/microsoft-windows-server/iis-administration-binding-example/)
+- [Iis Administration Certificate Example](https://apis.io/examples/microsoft-windows-server/iis-administration-certificate-example/)
+- [Iis Administration Cpu Settings Example](https://apis.io/examples/microsoft-windows-server/iis-administration-cpu-settings-example/)
+- [Iis Administration Error Example](https://apis.io/examples/microsoft-windows-server/iis-administration-error-example/)
+- [Iis Administration Hal Link Example](https://apis.io/examples/microsoft-windows-server/iis-administration-hal-link-example/)
+- [Iis Administration Identity Example](https://apis.io/examples/microsoft-windows-server/iis-administration-identity-example/)
+- [Iis Administration Periodic Restart Example](https://apis.io/examples/microsoft-windows-server/iis-administration-periodic-restart-example/)
+- [Iis Administration Process Model Example](https://apis.io/examples/microsoft-windows-server/iis-administration-process-model-example/)
+- [Iis Administration Process Orphaning Example](https://apis.io/examples/microsoft-windows-server/iis-administration-process-orphaning-example/)
+- [Iis Administration Rapid Fail Protection Example](https://apis.io/examples/microsoft-windows-server/iis-administration-rapid-fail-protection-example/)
+- [Iis Administration Recycling Example](https://apis.io/examples/microsoft-windows-server/iis-administration-recycling-example/)
+- [Iis Administration Recycling Log Events Example](https://apis.io/examples/microsoft-windows-server/iis-administration-recycling-log-events-example/)
+- [Iis Administration Web Site Create Example](https://apis.io/examples/microsoft-windows-server/iis-administration-web-site-create-example/)
+- [Iis Administration Web Site Example](https://apis.io/examples/microsoft-windows-server/iis-administration-web-site-example/)
+- …and 5 more published on APIs.io
 
-### Windows Server Management API
+#### Collections (7)
 
-PowerShell and WMI-based management APIs for Windows Server administration.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.microsoft.com/windows-server/administration/](https://docs.microsoft.com/windows-server/administration/)
-- **Base URL:** `https://localhost`
+- [IIS Administration API](https://apis.io/collections/microsoft-windows-server/open-iis-administration-api/)
+- [IIS Administration Application Pools API](https://apis.io/collections/microsoft-windows-server/open-microsoft-windows-server-application-pools-api/)
+- [IIS Administration Application Pools Applications API](https://apis.io/collections/microsoft-windows-server/open-microsoft-windows-server-applications-api/)
+- [IIS Administration Application Pools Web Sites API](https://apis.io/collections/microsoft-windows-server/open-microsoft-windows-server-web-sites-api/)
+- [IIS Administration Application Pools API](https://apis.io/collections/microsoft-windows-server/postman-microsoft-windows-server-application-pools-api/)
+- [IIS Administration Application Pools Applications API](https://apis.io/collections/microsoft-windows-server/postman-microsoft-windows-server-applications-api/)
+- [IIS Administration Application Pools Web Sites API](https://apis.io/collections/microsoft-windows-server/postman-microsoft-windows-server-web-sites-api/)
 
-#### Tags
+#### Governance rules (2)
 
-- Administration
-- Management
-- PowerShell
-- WMI
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [Microsoft Windows Server — jsonschema rules](https://apis.io/rules/microsoft-windows-server/microsoft-windows-server-jsonschema-spectral-rules/)
+- [Microsoft Windows Server API Rules](https://apis.io/rules/microsoft-windows-server/microsoft-windows-server-spectral-rules/)
 
-- [Documentation](https://docs.microsoft.com/powershell/windows/get-started)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### Windows Remote Management (WinRM)
+Authentication, trust centre, and vulnerability disclosure.
 
-WS-Management protocol implementation for remote management of Windows servers using SOAP-based web services for configuration and operations.
+- [Microsoft Windows Server Authentication](https://apis.io/security/microsoft-windows-server/microsoft-windows-server-authentication/)
+- [Microsoft Windows Server Domain Security](https://apis.io/security/microsoft-windows-server/microsoft-windows-server-domain-security/)
 
-- **Human URL:** [https://docs.microsoft.com/windows/win32/winrm/portal](https://docs.microsoft.com/windows/win32/winrm/portal)
-- **Base URL:** `http://localhost:5985`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- PowerShell Remoting
-- Remote Management
-- SOAP
-- WS-Management
+- [Microsoft Windows Server Plans Pricing](https://apis.io/plans/microsoft-windows-server/microsoft-windows-server-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.microsoft.com/windows/win32/winrm/windows-remote-management-portal)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Active Directory Domain Services API
+- [Microsoft Windows Server Rate Limits](https://apis.io/rate-limits/microsoft-windows-server/microsoft-windows-server-rate-limits/)
 
-LDAP and REST APIs for Active Directory management and authentication.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.microsoft.com/windows-server/identity/ad-ds/](https://docs.microsoft.com/windows-server/identity/ad-ds/)
-- **Base URL:** `ldap://localhost:389`
+What the API costs to run, by operation.
 
-#### Tags
+- [Microsoft Windows Server Finops](https://apis.io/finops/microsoft-windows-server/microsoft-windows-server-finops/)
 
-- Active Directory
-- Authentication
-- Directory Services
-- LDAP
+## Where to find this API
 
-#### Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- [Documentation](https://docs.microsoft.com/windows/win32/ad/active-directory-domain-services)
-- [SDK](https://docs.microsoft.com/dotnet/api/system.directoryservices)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Hyper-V Management API
-
-APIs for managing Hyper-V virtualization platform including virtual machines, virtual switches, and virtual storage.
-
-- **Human URL:** [https://docs.microsoft.com/virtualization/hyper-v-on-windows/](https://docs.microsoft.com/virtualization/hyper-v-on-windows/)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- Hyper-V
-- Virtual Machines
-- Virtualization
-
-#### Properties
-
-- [Documentation](https://docs.microsoft.com/virtualization/api/)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Windows Server Update Services (WSUS) API
-
-APIs for managing Windows updates across enterprise environments.
-
-- **Human URL:** [https://docs.microsoft.com/windows-server/administration/windows-server-update-services/](https://docs.microsoft.com/windows-server/administration/windows-server-update-services/)
-- **Base URL:** `https://localhost:8530`
-
-#### Tags
-
-- Patch Management
-- Updates
-- WSUS
-
-#### Properties
-
-- [Documentation](https://docs.microsoft.com/previous-versions/windows/desktop/aa354519(v=vs.85))
-- [SDK](https://docs.microsoft.com/dotnet/api/microsoft.updateservices.administration)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Windows Admin Center API
-
-Modern web-based management interface REST API for Windows Server that provides a gateway service for relaying commands and scripts to managed nodes.
-
-- **Human URL:** [https://docs.microsoft.com/windows-server/manage/windows-admin-center/](https://docs.microsoft.com/windows-server/manage/windows-admin-center/)
-- **Base URL:** `https://localhost:6516`
-
-#### Tags
-
-- Admin Center
-- Gateway
-- REST API
-- Web Management
-
-#### Properties
-
-- [Documentation](https://docs.microsoft.com/windows-server/manage/windows-admin-center/extend/extensibility-overview)
-- [GitHub Repository](https://github.com/Microsoft/windows-admin-center-sdk)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### DNS Server Management API
-
-APIs for managing Windows DNS Server services.
-
-- **Human URL:** [https://docs.microsoft.com/windows-server/networking/dns/](https://docs.microsoft.com/windows-server/networking/dns/)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- DNS
-- Name Resolution
-- Networking
-
-#### Properties
-
-- [Documentation](https://docs.microsoft.com/powershell/module/dnsserver/)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Windows Management Instrumentation (WMI) API
-
-Infrastructure for management data and operations on Windows-based operating systems providing COM, scripting, and .NET APIs for system administration and monitoring.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- COM
-- Management
-- Monitoring
-- Scripting
-- WMI
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page)
-- [API Reference](https://learn.microsoft.com/en-us/windows/win32/wmisdk/com-api-for-wmi)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### IIS Administration API
-
-REST API for managing Internet Information Services (IIS) web servers that enables configuration and monitoring from any HTTP client.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/iis-administration/](https://learn.microsoft.com/en-us/iis-administration/)
-- **Base URL:** `https://localhost:55539`
-
-#### Tags
-
-- IIS
-- REST API
-- Web Management
-- Web Server
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/iis-administration/)
-- [Getting Started](https://learn.microsoft.com/en-us/iis-administration/getting-started)
-- [GitHub Repository](https://github.com/microsoft/IIS.Administration)
-- [OpenAPI](openapi/iis-administration-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Remote Desktop Services API
-
-Win32 API for managing Remote Desktop Services including session management, virtual channels, user configuration, and the Remote Desktop Protocol.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal](https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- RDS
-- Remote Access
-- Remote Desktop
-- Terminal Services
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-portal)
-- [API Reference](https://learn.microsoft.com/en-us/windows/win32/termserv/terminal-services-api-reference)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Failover Clustering API
-
-APIs for defining and managing software and hardware components on failover clusters to increase application scalability and availability.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview](https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- Cluster Management
-- Failover Clustering
-- High Availability
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows-server/failover-clustering/failover-clustering-overview)
-- [API Reference](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/mscs/failover-cluster-apis-portal)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### DHCP Server Management API
-
-APIs and PowerShell cmdlets for managing Dynamic Host Configuration Protocol server services including leases, reservations, and scopes.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows-server/networking/technologies/dhcp/dhcp-deploy-wps](https://learn.microsoft.com/en-us/windows-server/networking/technologies/dhcp/dhcp-deploy-wps)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- DHCP
-- IP Address Management
-- Networking
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/dhcp/dhcp-server-management-api)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### SMB File Server API
-
-Server Message Block protocol APIs and WMI management classes for managing file shares, share access, and network file sharing across Windows Server environments.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview](https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- File Sharing
-- Network Storage
-- SMB
-- Storage
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows-server/storage/file-server/file-server-smb-overview)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Windows Event Log API
-
-API for instrumenting, querying, and consuming event logs on Windows Server for diagnostics, monitoring, and auditing.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log](https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- Diagnostics
-- Event Log
-- Logging
-- Monitoring
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log)
-- [API Reference](https://learn.microsoft.com/en-us/windows/win32/wes/windows-event-log-reference)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Storage Spaces Direct API
-
-APIs and PowerShell management for software-defined storage enabling clustering of servers with internal storage for hyper-converged infrastructure.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview](https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- Hyper-Converged
-- Software-Defined Storage
-- Storage
-- Storage Spaces Direct
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows-server/storage/storage-spaces/storage-spaces-direct-overview)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Network Policy Server (NPS) RADIUS API
-
-Network Policy Server providing centralized RADIUS authentication, authorization, and accounting for wireless, VPN, and dial-up connections.
-
-- **Human URL:** [https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top](https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top)
-- **Base URL:** `https://localhost`
-
-#### Tags
-
-- Authentication
-- Network Access
-- NPS
-- RADIUS
-- VPN
-
-#### Properties
-
-- [Documentation](https://learn.microsoft.com/en-us/windows-server/networking/technologies/nps/nps-top)
-- [Postman Collection](collections/iis-administration-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/iis-administration-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://portal.azure.com)
+- [Website](https://www.microsoft.com/)
 - [Documentation](https://docs.microsoft.com/windows-server/)
 - [Support](https://support.microsoft.com/windows-server)
 - [Blog](https://techcommunity.microsoft.com/t5/windows-server/bg-p/WindowsServer)
-- [Terms of Service](https://www.microsoft.com/licensing/terms/)
-- [Release Notes](https://learn.microsoft.com/en-us/windows-server/get-started/whats-new-windows-server-2025)
-- [Privacy Policy](https://privacy.microsoft.com/privacystatement)
-- [GitHub Repository](https://github.com/MicrosoftDocs/windowsserverdocs)
 - [Security](https://learn.microsoft.com/en-us/windows-server/security/tls/tls-ssl-schannel-ssp-overview)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Integrations](https://www.microsoft.com/en-us/marketplace)
+- [Terms of service](https://www.microsoft.com/licensing/terms/)
+- [Privacy policy](https://privacy.microsoft.com/privacystatement)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 46.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 55.2 |
+| Contract governance | 13.6 |
+| Operational transparency | 39.5 |
+| Developer ergonomics | 65.5 |
+| Access clarity | 28.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-windows-server/](https://apis.io/providers/microsoft-windows-server/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Windows Server: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-windows-server/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
